@@ -1,3 +1,6 @@
+[![buddy pipeline](https://app.buddy.works/nrrl99/website/pipelines/pipeline/390844/badge.svg?token=a5d8d986ef46f8118e18101fc6233d6cc91c2acf28d480c334b8ea5921176310 "buddy pipeline")](https://app.buddy.works/nrrl99/website/pipelines/pipeline/390844)
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

@@ -3,6 +3,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { AppBar, Container, Drawer, IconButton, Toolbar, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react'
+import Headerimg from "./headerimg";
 
 export default function Navbar() {
     const [open, setState] = useState(false);
@@ -14,11 +15,14 @@ export default function Navbar() {
     };
     return (
         <AppBar position="static">
+
+            <Headerimg src="/img/head2.jpg" alt="header" width="100%" height="350px" display={true} ></Headerimg>
+
             <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1, mx: {xs: 1, md: 3}, fontSize: { xs: "1.25rem", md:"1.6em"} }}>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1, mx: { xs: 1, md: 3 }, fontSize: { xs: "1.25rem", md: "1.6em" } }}>
                     Website
                 </Typography>
-                <Box sx={{ mr: { xs: 1, md: 3 }, display: { xs: 'none', sm: 'block' }}}>
+                <Box sx={{ mr: { xs: 1, md: 3 }, display: { xs: 'none', sm: 'block' } }}>
                     <Links />
                 </Box>
                 {/* hamburger icon shows the drawer on click */}
@@ -40,9 +44,9 @@ export default function Navbar() {
                     onOpen={toggleDrawer(true)} //function that is called when the drawer should open
                 >
 
-                    <Container sx={{ width: "80vw", height:"100vh", pt:"2vh", backgroundColor: theme => `${theme.palette.black.superlight}` }}>
-                        <Box sx={{mx:"0.5em",height:"100%"}}>
-                        {/* The inside of the drawer */}
+                    <Container sx={{ width: "80vw", height: "100vh", pt: "2vh", backgroundColor: theme => `${theme.palette.black.superlight}` }}>
+                        <Box sx={{ mx: "0.5em", height: "100%" }}>
+                            {/* The inside of the drawer */}
                             <Links />
                         </Box>
                     </Container>

@@ -1,8 +1,12 @@
+import { Container } from "@mui/material";
+import { LayoutOne } from "./template/LayoutOne";
 
+Home.PageTitle = 'Home | Website'
+Home.Layout = LayoutOne 
 export default function Home() {
   return (
-    <div>
+    <Container maxWidth="xl" sx={{mt:2}}>
         <h1>Hello</h1>
-    </div>
+    </Container>
   )
 }

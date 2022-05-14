@@ -2,8 +2,10 @@ import { createTheme, ThemeProvider } from '@mui/material'
 import Navbar from '../src/components/navbar'
 import '../src/styles/globals.css'
 import '../src/styles/css/app.min.css'
-
+import Head from 'next/head'
 export default function MyApp({ Component, pageProps: { session, ...pageProps }, }) {
+  const Layout = Component.Layout || LayoutEmpty
+  const PageTitle = Component.PageTitle
   const theme = createTheme({
     palette: {
       primary: {
@@ -14,7 +16,7 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps },
         transp: "504C6B"
       },
       white: {
-        main: "#b4b4df"
+        main: "#EBDEE9"
       },
       secondary: {
         superlight: "#F8F1F9",
@@ -35,13 +37,14 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps },
     },
     typography: { fontFamily: "Mohave", color: "#292524" },
   })
-  return (
-    <div>
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </div>
 
+  return (
+    <ThemeProvider theme={theme}>
+      <Layout>
+        {PageTitle ? (<Head><title>{PageTitle}</title></Head>) : ''}
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
   )
 }
+const LayoutEmpty = ({ children }) => <>{children}</>

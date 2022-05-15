@@ -1,7 +1,7 @@
 import React from 'react'
-import { LayoutOne } from './template/LayoutOne'
+import { LayoutOne } from './template/Layout'
 import LayoutBase from "./template/base";
-import Layout from "./template/LayoutOne";
+import Layout from "./template/Layout";
 
 About.PageTitle = 'About | Website'
 

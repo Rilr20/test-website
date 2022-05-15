@@ -3,7 +3,7 @@ import { Box } from '@mui/system'
 import React from 'react'
 import Link from "next/link";
 import LayoutBase from "./template/base";
-import Layout from "./template/LayoutOne";
+import Layout from "./template/Layout";
 
 Custom404.PageTitle = "404 | Website"
 

@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import OSRSTable from "../src/components/osrstable";
 import LayoutBase from "./template/base";
 // import { getOsrs } from "../src/api/getOsrs";
-import Layout from "./template/LayoutOne";
+import Layout from "./template/Layout";
 
 Home.PageTitle = 'Home | Website'
 // Home.Layout = LayoutOne

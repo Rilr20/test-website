@@ -312,7 +312,7 @@ const placeholder = [
         xhr.send();
     };
     return (
-        <Grid container spacing={0.1} sx={{ display:"grid", textAlign: "center", gap: 0.2, gridTemplateColumns: 'repeat(3, 50px)', p:"0.5em" }}>
+        <Grid className="osrs" container spacing={0.1} sx={{ display:"grid", textAlign: "center", gap: 0.2, gridTemplateColumns: 'repeat(3, 50px)', p:"0.5em" }}>
             {
                 stuffz.map(function (skill, i) {
                     // console.log(skill)

@@ -9,8 +9,9 @@ export default function OSRSCard(props) {
         return (
             <Box>
                 <Box sx={{ display: "flex", border: "#302d25", p: "0.2em" }} title={`${props.skill} XP: ${props.xp}`} >
-                    <Box sx={{ mt: "0.3em" }}>
-                        <Image className="img inline" width="20px" height="20px" src={"/img/skills/" + props.skill + ".png"} alt="attack"></Image>
+                    <Box sx={{ mt: "0.3em", width: "20px", height: "20px" }}>
+                        {/* <Image className="img inline" width="20px" height="20px" src={"/img/skills/" + props.skill + ".png"} alt="attack"></Image> */}
+                        <img className="skill-icon" src={"/img/skills/" + props.skill + ".png"} alt={props.skill}></img>
                     </Box>
                     <Box sx={{ mt: "0.3em", ml: "0.2em" }}>{props.lvl}</Box>
                 </Box>

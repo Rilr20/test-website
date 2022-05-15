@@ -1,6 +1,6 @@
 import Navbar from '../../src/components/navbar';
 
-export function LayoutOne({ children }) {
+export default function LayoutOne({ children }) {
     try {
         return (<>
             <Navbar />

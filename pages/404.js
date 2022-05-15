@@ -2,8 +2,8 @@ import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import Link from "next/link";
-import LayoutBase from "./template/base";
-import Layout from "./template/Layout";
+import LayoutBase from "./template/layoutbase";
+import Layout from "./template/layout";
 
 Custom404.PageTitle = "404 | Website"
 

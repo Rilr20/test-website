@@ -1,22 +1,28 @@
 import React from 'react'
-import { LayoutOne } from './template/layout'
-import LayoutBase from "./template/layoutbase";
-import Layout from "./template/layout";
+import { LayoutOne } from '../src/template/basiclayout'
+import LayoutBase from "../src/template/layoutbase";
+import BasicLayout from "../src/template/basiclayout";
 
 About.PageTitle = 'About | Website'
 
 export default function About() {
-  return (
-      <div>About</div>
-  )
+    return (
+        <div>
+            <p>About</p>
+            <p>About</p>
+            <p>About</p>
+            <p>About</p>
+            <p>About</p>
+        </div>
+    )
 }
 
 About.getLayout = function getLayout(page) {
     return (
         <LayoutBase>
-            <Layout>
+            <BasicLayout>
                 {page}
-            </Layout>
+            </BasicLayout>
         </LayoutBase>
     )
 }

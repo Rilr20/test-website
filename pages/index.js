@@ -1,9 +1,9 @@
 import { Container, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import OSRSTable from "../src/components/osrstable";
-import LayoutBase from "./template/layoutbase";
+import LayoutBase from "../src/template/layoutbase";
 // import { getOsrs } from "../src/api/getOsrs";
-import Layout from "./template/layout";
+import BasicLayout from "../src/template/basiclayout";
 
 Home.PageTitle = 'Home | Website'
 // Home.Layout = LayoutOne
@@ -30,9 +30,9 @@ export default function Home() {
 Home.getLayout = function getLayout(page) {
     return (
         <LayoutBase>
-            <Layout>
+            <BasicLayout>
                 {page}
-            </Layout>
+            </BasicLayout>
         </LayoutBase>
     )
 }

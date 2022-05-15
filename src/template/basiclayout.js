@@ -1,8 +1,8 @@
 import React from 'react'
-import Navbar from '../../src/components/navbar';
+import Navbar from '../components/navbar';
 import Head from 'next/head'
 
-export default function Layout({ children }) {
+export default function BasicLayout({ children }) {
     const PageTitle = children.type.PageTitle
 
     return (

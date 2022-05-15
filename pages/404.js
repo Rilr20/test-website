@@ -2,8 +2,8 @@ import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import Link from "next/link";
-import LayoutBase from "./template/layoutbase";
-import Layout from "./template/layout";
+import LayoutBase from "../src/template/layoutbase";
+import BasicLayout from "../src/template/basiclayout";
 
 Custom404.PageTitle = "404 | Website"
 
@@ -19,9 +19,9 @@ export default function Custom404() {
 Custom404.getLayout = function getLayout(page) {
     return (
         <LayoutBase>
-            <Layout>
+            <BasicLayout>
                 {page}
-            </Layout>
+            </BasicLayout>
         </LayoutBase>
     )
 }

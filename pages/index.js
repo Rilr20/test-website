@@ -15,12 +15,13 @@ export default function Home() {
                     <Typography variant="h3" sx={{ textAlign: "center" }}>Hello</Typography>
                 </Box>
                 <Box sx={{ width: "50%", backgroundColor: "orange", height: "400px", margin: "0.5em", padding: "0.5em", display: "flex" }}>
+                    <Box sx={{ backgroundColor: "blue", height: "200px", width: "100%" }}>
+
+                    </Box>
                     <Box sx={{ backgroundColor: "", height: "100%", width: "200px" }}>
                         <OSRSTable />
                     </Box>
-                    <Box sx={{ backgroundColor: "blue", height: "200px", width: "200px" }}>
 
-                    </Box>
                 </Box>
             </Box>
         </Container>

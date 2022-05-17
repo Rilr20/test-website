@@ -1,5 +1,8 @@
 [![buddy pipeline](https://app.buddy.works/nrrl99/website/pipelines/pipeline/390844/badge.svg?token=a5d8d986ef46f8118e18101fc6233d6cc91c2acf28d480c334b8ea5921176310 "buddy pipeline")](https://app.buddy.works/nrrl99/website/pipelines/pipeline/390844)
 [![CircleCI](https://circleci.com/gh/Rilr20/website/tree/main.svg?style=shield&circle-token=d7435e57d2c23bd1fcf84f1681970f52249cf2ab)](https://circleci.com/gh/Rilr20/website/tree/main)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Rilr20/website/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/Rilr20/website/?branch=main)
+[![Code Coverage](https://scrutinizer-ci.com/g/Rilr20/website/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/Rilr20/website/?branch=main)
+
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

@@ -6,7 +6,6 @@ import React from 'react'
 import { useEffect, useState } from "react";
 import OSRSCard from './osrscard';
 import {strong, placeholder} from './consts'
-
 export default function OSRSTable() {
 const [string, setString] = useState(null);
 
@@ -51,7 +50,7 @@ const [string, setString] = useState(null);
                 return this.responseText;
             }
         }
-        xhr.open("GET", "https://cors-anywhere.herokuapp.com/https://secure.runescape.com/m=hiscore_oldschool/index_lite.ws?player=" + player);
+        xhr.open("GET", "https://secure.runescape.com/m=hiscore_oldschool/index_lite.ws?player=" + player);
         xhr.setRequestHeader("Origin", 'runescape.com');
         xhr.send();
     };

@@ -4,10 +4,53 @@ import OSRSTable from "../src/components/osrstable";
 import LayoutBase from "../src/template/layoutbase";
 // import { getOsrs } from "../src/api/getOsrs";
 import BasicLayout from "../src/template/basiclayout";
+import externals from "../src/modules/externals";
+import { placeholder } from '../src/components/consts'
 
+
+
+function addToDict(params) {
+    // console.log("params")
+    // console.log(params)
+    // console.log("params")
+    // console.log(params)
+    params = params.split('\n')
+
+    let i = 0;
+    let shite = placeholder;
+    params.forEach(item => {
+        // console.log(item);
+        let itemArray = item.split(',')
+        if (itemArray.length == 3) {
+            shite[i].rank = itemArray[0]
+            shite[i].lvl = itemArray[1]
+            shite[i].xp = itemArray[2]
+        }
+        i++;
+    });
+    const newArr = []
+    for (let i = 0; i < shite.length; i++) {
+        newArr[shite[i].id] = shite[i]
+    }
+    return newArr
+    // setStuff(shite.sort(function(a, b) {
+    //     return a.id - b.id;
+    // }))
+}
+
+export async function getServerSideProps() {
+
+    const osrs = await externals.getOsrs("richpotato99")
+    const dict = addToDict(osrs)
+    return {
+        props: {
+            osrs: dict
+        }
+    }
+}
 Home.PageTitle = 'Home | Website'
 // Home.Layout = LayoutOne
-export default function Home() {
+export default function Home({ osrs }) {
     return (
         <Container maxWidth="xl" sx={{ height:"100%", pt: 2,mt:0.3,  }}>
             <Box cla sx={{ display: {md: "flex", xs:"block"}, justifyContent: "space-between" }}>
@@ -20,7 +63,7 @@ export default function Home() {
                     </Box>
                     <Card sx={{ height: "auto", p: "1rem", backgroundColor: theme => `${theme.palette.secondary.superlight}`, mx: 2  }}>
                         <Typography sx={{mx:1, textAlign:"center"}} variant="h5">OSRS Stats</Typography>
-                        <OSRSTable />
+                        <OSRSTable osrs={osrs} />
                     </Card>
 
                 </Box>

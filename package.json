@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "test": "istanbul cover --report html node_modules/mocha/bin/_mocha -r esm -- test/**/*.js --ui bdd -R spec",
     "style-min": "sass src/styles/scss/style.scss src/styles/css/app.min.css --no-source-map --style compressed --watch",

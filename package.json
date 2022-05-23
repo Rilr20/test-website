@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "istanbul cover --report clover node_modules/mocha/bin/_mocha",
+    "test": "nyc --reporter=clover --reporter=text mocha",
     "style-min": "sass src/styles/scss/style.scss src/styles/css/app.min.css --no-source-map --style compressed --watch",
     "style": "sass src/styles/scss/style.scss src/styles/css/app.css --no-source-map --watch",
     "lint": "next lint"
@@ -26,6 +26,7 @@
     "eslint-config-next": "12.1.6",
     "istanbul": "^0.4.5",
     "mocha": "^10.0.0",
+    "nyc": "^15.1.0",
     "sass": "^1.51.0"
   }
 }

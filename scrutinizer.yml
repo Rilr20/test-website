@@ -13,5 +13,5 @@ build:
             -
                 command: "npm run test"
                 coverage:
-                    file: "build/coverage.clover"
+                    file: "build/coverage.json"
                     format: "clover"

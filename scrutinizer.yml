@@ -11,7 +11,7 @@ build:
     tests:
         override:
             -
-                command: "npm run test"
+                command: "npm test"
                 coverage:
-                    file: "build/coverage.json"
-                    format: "clover"
+                    file: coverage/clover.xml
+                    format: clover

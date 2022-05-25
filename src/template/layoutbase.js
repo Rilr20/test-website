@@ -37,21 +37,21 @@ const sunTheme = createTheme({
     palette: {
         primary: {
             superlight: "#EBC1C7",
-            light: "#E7B1B9",
-            main: "#DF99A3",
-            dark: "#DD929E",
-            superdark: "#D88390",
+            light: "#DF99A3",
+            main: "#D88390",
+            dark: "#CE6474",
+            superdark: "#c64b5e",
         },
         white: {
             main: "#ab32cc"
         },
         secondary: {
-            superlight: "#FBF5EE",
-            light: "#F9EFE3",
-            main: "#F4E2CD",
-            dark: "#F1D9BC",
-            superdark: "#EDCFAB"
-        }, 
+            superlight: "#F4E2CD",
+            light: "#EDCEAB",
+            main: "#E5BB8A",
+            dark: "#DEA768",
+            superdark: "#D79447"
+        },
         black: {
             superlight: "#4A3F50",
             light: "#352D39",
@@ -59,31 +59,30 @@ const sunTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: {
-            main: "#000"
-        }
-    }
+        text: "#000"
+    },
+    typography: { fontFamily: "Mohave", color: "#292524" },
 })
 
 const thunderTheme = createTheme({
     palette: {
         primary: {
-            superlight: "#999070",
-            light: "#8F8666",
-            main: "#7C7458",
-            dark: "#777055",
-            superdark: "#6B654C",
+            superlight: "#EFDAA9",
+            light: "#E9CB86",
+            main: "#E3BD64",
+            dark: "#DCAE41",
+            superdark: "#CF9C26",
         },
         white: {
             main: "#fff"
-        },
-        secondary: {
-            superlight: "#E1BA66",
-            light: "#DDB255",
-            main: "#DDB155",
-            dark: "#DAAA44",
-            superdark: "#D7A333"
         }, 
+        secondary: {
+            superlight: "#EEDAFB",
+            light: "#DEB6F6",
+            main: "#CD91F2",
+            dark: "#BC6DEE",
+            superdark: "#AC48EA"
+        },
         black: {
             superlight: "#4A3F50",
             light: "#352D39",
@@ -91,11 +90,10 @@ const thunderTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: {
-            main: "#000"
-        }
-    }
-}) 
+        text: "#000"
+    },
+    typography: { fontFamily: "Mohave", color: "#292524" },
+})
 
 const cloudsTheme = createTheme({
     palette: {
@@ -110,11 +108,11 @@ const cloudsTheme = createTheme({
             main: "#fff"
         },
         secondary: {
-            superlight: "#5D9893",
-            light: "#558B87",
-            main: "#4C7D79",
-            dark: "#46726E",
-            superdark: "#3E6562"
+            superlight: "#A6C9C6",
+            light: "#8DB9B6",
+            main: "#74AAA5",
+            dark: "#5D9893",
+            superdark: "#4C7D79"
         },
         black: {
             superlight: "#4A3F50",
@@ -123,30 +121,29 @@ const cloudsTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: {
-            main: "#000"
-        }
-    }
+        text: "#000"
+    },
+    typography: { fontFamily: "Mohave", color: "#292524" },
 })
 
 const greyTheme = createTheme({
     palette: {
         primary: {
-            superlight: "#333333",
-            light: "#292929",
-            main: "#121212",
-            dark: "#1F1F1F",
+            superlight: "#666666",
+            light: "#525252",
+            main: "#3D3D3D",
+            dark: "#292929",
             superdark: "#121212",
         },
         white: {
             main: "#fff"
         },
         secondary: {
-            superlight: "#655353",
-            light: "#5A4949",
+            superlight: "#7B6565",
+            light: "#655353",
             main: "#4C3E3E",
-            dark: "#433737",
-            superdark: "#382E2E"
+            dark: "#382E2E",
+            superdark: "#221C1C",
         },
         black: {
             superlight: "#4A3F50",
@@ -155,10 +152,9 @@ const greyTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: {
-            main: "#fff"
-        }
-    }
+        text: "#fff"
+    },
+    typography: { fontFamily: "Mohave", color: "#292524" },
 })
 
 const transparentTheme = createTheme({
@@ -187,10 +183,9 @@ const transparentTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: {
-            main: "#000"
-        }
-    }
+        text: "#000"
+    },
+    typography: { fontFamily: "Mohave", color: "#292524" },
 })
 
 const blueTheme = createTheme({
@@ -206,11 +201,11 @@ const blueTheme = createTheme({
             main: "#fff"
         },
         secondary: {
-            superlight: "#93A7F0",
-            light: "#8199EE",
-            main: "#718CEC",
-            dark: "#6F8AEB",
-            superdark: "#5D7CE9"
+            superlight: "#496E97",
+            light: "#3C5A7C",
+            main: "#2E4660",
+            dark: "#213245",
+            superdark: "#141E29"
         },
         black: {
             superlight: "#4A3F50",
@@ -219,32 +214,30 @@ const blueTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: {
-            main: "#000"
-        }
-    }
+        text: "#fff"
+    },
+    typography: { fontFamily: "Mohave", color: "#292524" },
 })
-
 
 const whiteTheme = createTheme({
     palette: {
         primary: {
-            superlight: "#EFF9FA",
-            light: "#B0DFE8",
-            main: "#C0E6EC",
-            dark: "#D0ECF1",
-            superdark: "#DAF0F4",
+            superlight: "#E0F3F6",
+            light: "#C0E6EC",
+            main: "#A1DAE3",
+            dark: "#81CED9", 
+            superdark: "#62C1D0",
         },
         white: {
             main: "#fff"
         },
         secondary: {
-            superlight: "#ECF4F8",
-            light: "#E1EEF4",
-            main: "#D2E5EE",
-            dark: "#C3DCE9",
-            superdark: "#B5D4E3"
-        }, 
+            superlight: "#E1EEF4",
+            light: "#C4DDE9",
+            main: "#A6CCDD",
+            dark: "#89BBD2",
+            superdark: "#6BAAC7"
+        },
         black: {
             superlight: "#4A3F50",
             light: "#352D39",
@@ -252,11 +245,11 @@ const whiteTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: {
-            main: "#000"
-        }
-    }
+        text: "#000"
+    },
+    typography: { fontFamily: "Mohave", color: "#292524" },
 })
+
 export default function LayoutBase({ children }) {
     let theme;
     const themeName = children.props.children.props.data
@@ -266,21 +259,21 @@ export default function LayoutBase({ children }) {
             // console.log("sunny");
             theme = sunTheme
             break;
-        case "thunder": 
+        case "thunder":
             theme = thunderTheme
             break;
         case "cloudy":
             theme = cloudsTheme
             break;
-        case "overcast": 
+        case "overcast":
             theme = greyTheme
             break;
         case "fog":
-        case "mist": 
+        case "mist":
             theme = transparentTheme
             break;
         case "drizzle":
-        case "rain": 
+        case "rain":
             theme = blueTheme
             break;
         case "pellets":

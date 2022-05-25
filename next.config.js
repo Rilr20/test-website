@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
+  eslint: { ignoreDuringBuilds: true },
+  i18n: {
+    locales: ["sv"],
+    defaultLocale: "sv",
+  },
 }
-
-module.exports = nextConfig

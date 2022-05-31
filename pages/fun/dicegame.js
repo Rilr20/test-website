@@ -28,7 +28,14 @@ export default function Dicegame() {
                                 return <Box sx={{ display: "grid", gridTemplateColumns: "100px 20px 60px", justifyContent: "space-between", borderBottom: "1px solid black", py: 0.12 }} key={item.id}>
                                     <Typography sx={{ textAlign: "left", pl: 0.5, width: "100px" }} color="text">{item.text}</Typography>
                                     <Typography sx={{ textAlign: "center", width: "20px" }} color="text">{item.score}</Typography>
-                                    {!item.isSet ? <Button sx={{ height: "26px", width: "40px" }} color="text" onClick={() => { }}>Score</Button> : <></>}
+                                    {!item.isSet ? <Button sx={{ height: "26px", width: "40px" }} color="text" onClick={() => {
+                                        //check för att se man har slått tärnigen och resetta skitet så i left
+                                        let tempBoard = gameBoard;
+                                        tempBoard[item.id].isSet = true;
+                                        setGameBoard(tempBoard);
+                                        setChange([])
+                                        setLeft(3)
+                                     }}>Score</Button> : <></>}
 
                                 </Box>
 

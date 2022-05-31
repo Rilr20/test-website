@@ -3,7 +3,6 @@ filter:
 checks:
     javascript: true
 build:
-    environment: 17.6.0
     nodes:
         analysis:
             tests:

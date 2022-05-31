@@ -1,89 +1,3 @@
-export const strong = `162661,2020,128011410
-415103,90,5624200
-373169,90,5572081
-695914,90,5377000
-527040,94,8377182
-527332,92,6759609
-280524,80,2025583
-614880,88,4516430
-152243,99,13087086
-296440,84,3239182
-37767,99,13436954
-297317,84,3190062
-132652,99,13057431
-81748,99,13066339
-206842,83,2831366
-287909,80,2026254
-141037,90,5352838
-197661,80,2101524
-167757,86,3728089
-307672,88,4839659
-352766,83,2893225
-139055,82,2562532
-286559,78,1700445
-301323,82,2646339
--1,-1
--1,-1
--1,-1
-34989,674
-38276,44
-161330,23
-12915,502
-164135,95
-264855,5
-131632,5
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
-317715,11
--1,-1
--1,-1
-282850,209
--1,-1
--1,-1
-96608,1
--1,-1
--1,-1
--1,-1
-16968,34
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
--1,-1
-157148,295
-90506,576
-80574,62
--1,-1
-`
 export const placeholder = [
     {
         id: 23,
@@ -253,4 +167,130 @@ export const placeholder = [
         lvl: null,
         xp: null
     }
+]
+
+export const playerCard2 = {
+    ones: "", // sum of all dice
+    twos: "", // sum of all dice
+    threes: "", // sum of all dice
+    fours: "", // sum of all dice
+    fives: "", // sum of all dice
+    sixes: "", // sum of all dice
+    "bonus score": "", //if 63 or more bonus 35p
+    "three of a kind": "",//sum of all dice
+    "four of a kind": "", //sum of all dice
+    "full house": "", //25p
+    "small straight": "", //30p
+    "large straight": "", //40p
+    "five of a kind": "", //50p
+    chance: "",
+    "total score": ""
+}
+
+export const playerCard = [
+    {
+        id: 0,
+        text: "ones",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 1,
+        text: "twos",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 2,
+        text: "threes",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 3,
+        text: "fours",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 4,
+        text: "fives",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 5,
+        text: "sixes",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 6,
+        text: "bonus score",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 7,
+        text: "three of a kind",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 8,
+        text: "four of a kind",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 9,
+        text: "full house",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 10,
+        text: "small straight",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 11,
+        text: "large straight",
+        score: 0,
+        preview: false,
+        isSet: false
+    }, 
+    {
+        id: 12,
+        text: "five of a kind",
+        score: 0,
+        preview: false,
+        isSet: false
+    }, 
+    {
+        id: 13,
+        text: "chance",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
+    {
+        id: 14,
+        text: "total score",
+        score: 0,
+        preview: false,
+        isSet: false
+    },
 ]

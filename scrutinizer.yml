@@ -9,8 +9,3 @@ build:
             tests:
                 override:
                     - js-scrutinizer-run
-    tests:
-        override:
-              coverage:
-                  file: coverage/clover.xml
-                  format: "clover"

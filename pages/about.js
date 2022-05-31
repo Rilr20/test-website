@@ -26,16 +26,9 @@ export async function getServerSideProps() {
 export default function About({data}) {
     useEffect(() => {
     }, []);
-    //coolt om stylen ändrades beroende på vädret hur funkar det 🤔
     return (
         <div>
             {data}
-            {/* {data.current.condition.text} */}
-            {/* <p>About</p>
-            <p>About</p>
-            <p>About</p>
-            <p>About</p>
-            <p>About</p> */}
             <Grid sx={{ display: "grid", textAlign: "center", gridTemplateColumns: 'repeat(2, 150px)', justifyContent: "center" }}>
 
                 <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.primary.superlight}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
@@ -76,16 +69,13 @@ export default function About({data}) {
     )
 }
 function trimResult(params) {
-    // console.log(params);
     const text = params.toLowerCase()
     const match = text.match(/(sunny|clear|cloudy|overcast|fog|mist|drizzle|rain|pellets|snow|sleet|blizzard|thunder)/gmi)
     if (match instanceof Array && match.length > 1) {
         return match[1]
     } 
-    // console.log(match);
     return match
 }
-// http://api.weatherapi.com/v1/forecast.json?key=d24851f0ead347a698f203014221805&q=lund&days=1&aqi=no&alerts=no
 About.getLayout = function  getLayout(page) {
     const currentCondition = "Sunny and the moon".toLowerCase()
     // const currentCondition = page.props.data.current.condition.text
@@ -99,42 +89,41 @@ About.getLayout = function  getLayout(page) {
     const trimmed = trimResult(currentCondition)
     let weather;
     switch (trimmed[0]) {
-        case "sunny": //ljus och skön
+        case "sunny": 
         case "clear":
             weather = "sunny"
             break;
 
-        case"thunder": //gul som accentfärg 
+        case"thunder":
             weather = "thunder"
             break;
 
-        case "cloudy": //ljus och mindre skön
+        case "cloudy": 
             weather = "clouds"
             break;
 
-        case "overcast": // grå och trist
+        case "overcast": 
             weather = "grey"
             break;
 
         case "fog":
-        case "mist": //transparant?
+        case "mist":
             weather = "transparent"
             break;
 
         case "drizzle":
-        case "rain": //blåa färger
+        case "rain": 
             weather = "blue"
             break;
 
         case "pellets":
         case "snow":
         case "sleet":
-        case "blizzard": //vita färger
+        case "blizzard": 
             weather = "white"
             break;
 
         default:
-            // console.log("DEULFAUFLÖASFJHAKSL");
             weather = "default"
             break;
     }

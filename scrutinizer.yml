@@ -3,8 +3,14 @@ filter:
 checks:
     javascript: true
 build:
+    enviroment: 17.6.0
     nodes:
         analysis:
             tests:
                 override:
                     - js-scrutinizer-run
+    tests:
+        override:
+              coverage:
+                  file: coverage/clover.xml
+                  format: "clover"

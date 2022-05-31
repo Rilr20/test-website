@@ -7,7 +7,7 @@ import Headerimg from "./headerimg";
 
 export default function Navbar(props) {
     // console.log("props");
-    console.log(props.img);
+    // console.log(props.img);
     const [open, setState] = useState(false);
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -46,7 +46,7 @@ export default function Navbar(props) {
                     onOpen={toggleDrawer(true)} //function that is called when the drawer should open
                 >
 
-                    <Container sx={{ width: "80vw", height: "100vh", pt: "2vh", backgroundColor: theme => `${theme.palette.black.superlight}` }}>
+                    <Container sx={{ width: "80vw", height: "100vh", pt: "2vh", backgroundColor: theme => `${theme.palette.secondary.light}` }}>
                         <Box sx={{ mx: "0.5em", height: "100%" }}>
                             {/* The inside of the drawer */}
                             <Links />

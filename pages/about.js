@@ -2,12 +2,13 @@ import React, { useEffect } from 'react'
 import LayoutBase from "../src/template/layoutbase";
 import BasicLayout from "../src/template/basiclayout";
 import externals from '../src/modules/externals';
+import { Container, Typography, Card, Grid } from "@mui/material";
 
 About.PageTitle = 'About | Website'
 export async function getServerSideProps() {
 
     // const data = await externals.getWeather()
-    const data ="thunder"
+    const data ="sleet"
     // const data = null;
     // if (!data ) {
     //     return {
@@ -30,11 +31,47 @@ export default function About({data}) {
         <div>
             {data}
             {/* {data.current.condition.text} */}
+            {/* <p>About</p>
             <p>About</p>
             <p>About</p>
             <p>About</p>
-            <p>About</p>
-            <p>About</p>
+            <p>About</p> */}
+            <Grid sx={{ display: "grid", textAlign: "center", gridTemplateColumns: 'repeat(2, 150px)', justifyContent: "center" }}>
+
+                <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.primary.superlight}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
+                    <Typography color="text">superlight</Typography>
+                    </Card>
+                <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.secondary.superlight}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
+                    <Typography color="text">superlight</Typography>
+                    </Card>
+                <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.primary.light}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
+                    <Typography color="text">light</Typography>
+                    </Card>
+                <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.secondary.light}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
+                    <Typography color="text">light</Typography>
+                    </Card>
+
+                <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.primary.main}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
+                    <Typography color="text">main</Typography>
+                    </Card>
+                <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.secondary.main}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
+                    <Typography color="text">main</Typography>
+                    </Card>
+
+                <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.primary.dark}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
+                    <Typography color="text">dark</Typography>
+                    </Card>
+                <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.secondary.dark}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
+                    <Typography color="text">dark</Typography>
+                    </Card>
+
+                <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.primary.superdark}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
+                    <Typography color="text">superdark</Typography>
+                    </Card>
+                <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.secondary.superdark}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
+                    <Typography color="text">superdark</Typography>
+                    </Card>
+            </Grid>
         </div>
     )
 }

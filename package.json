@@ -2,11 +2,18 @@
   "name": "website",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "clover",
+      "html"
+    ]
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "nyc --reporter=clover --reporter=text mocha",
+    "test": "jest --coverage",
     "style-min": "sass src/styles/scss/style.scss src/styles/css/app.min.css --no-source-map --style compressed --watch",
     "style": "sass src/styles/scss/style.scss src/styles/css/app.css --no-source-map --watch",
     "lint": "next lint"
@@ -21,12 +28,10 @@
     "react-dom": "^18.1.0"
   },
   "devDependencies": {
-    "chai": "^4.3.6",
+    "babel-jest": "^28.1.0",
     "eslint": "8.15.0",
     "eslint-config-next": "12.1.6",
-    "istanbul": "^0.4.5",
-    "mocha": "^10.0.0",
-    "nyc": "^15.1.0",
+    "jest": "^28.1.0",
     "sass": "^1.51.0"
   }
 }

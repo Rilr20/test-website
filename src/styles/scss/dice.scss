@@ -1,0 +1,42 @@
+.diceface {
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    grid-template-areas: 
+        "a . c"
+        "e g f"
+        "d . b";
+    padding:0.125rem;
+    border-radius: 5px;
+    box-shadow: inset 0 5px lighten(#dedace, 5%),
+    inset 0 -5px darken(#dedace, 15%),
+    inset 5px 0 darken(#dedace, 5%),
+    inset -5px 0 darken(#dedace, 5%);
+}
+
+.pip {
+    background-color: black;
+    border-radius: 50%;
+    margin:0.125rem;
+}
+.pip:nth-child(2) {
+    grid-area: b;
+}
+
+.pip:nth-child(3) {
+    grid-area: c;
+}
+
+.pip:nth-child(4) {
+    grid-area: d;
+}
+
+.pip:nth-child(5) {
+    grid-area: e;
+}
+
+.pip:nth-child(6) {
+    grid-area: f;
+}
+.pip:nth-child(odd):last-child {
+    grid-area: g;
+}

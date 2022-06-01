@@ -203,6 +203,15 @@ const dicegamelogic = {
         //lägg till points
 
         //sätt alla previews till 0
+    },
+    bonusPoints: function(setGameBoard, gameBoard) {
+        for (let i = 0; i < gameBoard.length; i++) {
+            
+        }
+        return
+    },
+    gameOver: function(setGameState, gameBoard) {
+        return
     }
 }
 export default dicegamelogic

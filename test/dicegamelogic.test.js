@@ -57,11 +57,7 @@ describe('X of A Kind', () => {
 })
 
 describe('points checks', () => {
-    test('length of lower points res', () => {
-        let dice = [2, 1, 3, 5, 1]
-        let res = dicegamelogic.lowerPoints(dice, 3)
-        expect(res.length).toBe(7)
-    })
+
 });
 
 jest.mock('react', () => ({
@@ -80,7 +76,7 @@ describe('dice Throws', () => {
         jest.spyOn(dicegamelogic, "throwDie").mockImplementation(
             jest.fn().mockReturnValue(62)
         )
-        let res = dicegamelogic.throwDice(testState,change, dice)
+        let res = dicegamelogic.throwDice(testState, change, dice)
         expect(res.length).toEqual(5)
         // expect(res).toEqual(expect.arrayContaining([2, 2, 2, 2, 2]))
     })
@@ -91,7 +87,7 @@ describe('dice Throws', () => {
         // jest.spyOn(dicegamelogic, "throwDie").mockImplementation(
         //     jest.fn().mockReturnValue(2)
         // )
-        let res = dicegamelogic.throwDice(testState,change, dice)
+        let res = dicegamelogic.throwDice(testState, change, dice)
         expect(res.length).toEqual(5)
         expect(res).toEqual(dice)
     })
@@ -102,7 +98,7 @@ describe('dice Throws', () => {
         // jest.spyOn(dicegamelogic, "throwDie").mockImplementation(
         //     jest.fn().mockReturnValue(2)
         // )
-        let res = dicegamelogic.throwDice(testState,change, dice)
+        let res = dicegamelogic.throwDice(testState, change, dice)
         expect(res.length).toEqual(5)
         expect(res).toEqual(expect.arrayContaining([31, 54]))
         expect(res).toEqual(expect.not.arrayContaining([12]))
@@ -150,4 +146,142 @@ describe('dice Throws', () => {
     // afterAll(() => {
     //     dieSpy.mockRestore()
     // })
+});
+
+describe('Game Board tests', () => {
+    const testState = jest.fn();
+    test('length of lower points res', () => {
+        let dice = [2, 1, 3, 5, 1]
+        let res = dicegamelogic.lowerPoints(dice, 3)
+        expect(res.length).toBe(7)
+    })
+
+    test('get bonus points', () => {
+        let gameBoard = [{
+            score: 6,
+            isSet: false
+        }, {
+            score: 12,
+            isSet: false
+        }, {
+            score: 15,
+            isSet: false
+        }, {
+            score: 20,
+            isSet: false
+        }, {
+            score: 25,
+            isSet: false
+        }, {
+            score: 30,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }]
+        let res = dicegamelogic.bonusPoints(testState, gameBoard)
+        expect(res[-1].score).toBe(35)
+    })
+    test('no bonus points is zero', () => {
+        let gameBoard = [{
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }]
+        let res = dicegamelogic.bonusPoints(testState, gameBoard)
+        expect(res[-1].score).toBe(0)
+    })
+
+    test('total points is twenty and object', () => {
+        let gameBoard = [{
+            score: 2,
+            isSet: false
+        }, {
+            score: 5,
+            isSet: false
+        }, {
+            score: 3,
+            isSet: false
+        }, {
+            score: 5,
+            isSet: false
+        }, {
+            score: 5,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }]
+        let res = dicegamelogic.totalSum(gameBoard)
+        expect(res[-1].score).toBe(20)
+    })
+    test('total points is 0 and object', () => {
+        let gameBoard = [{
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }, {
+            score: 0,
+            isSet: false
+        }]
+        let res = dicegamelogic.totalSum(gameBoard)
+        expect(res[-1].score).toBe(0)
+    })
+
+    test('total points is twenty and array', () => {
+        let gameBoard = [2,8,2,3,5]
+        let res = dicegamelogic.totalSum(gameBoard)
+        expect(res[-1].score).toBe(20)
+    })
+    test('total points is 0 and array', () => {
+        let gameBoard = []
+        let res = dicegamelogic.totalSum(gameBoard)
+        expect(res[-1].score).toBe(0)
+    })
+
+    test('game is over', () => {
+        let gameBoard = [{ isSet: true }, { isSet: true }]
+        let res = dicegamelogic.gameOver(testState, gameBoard)
+        expect(res).toBe(true)
+    })
+    test('game is not over', () => {
+        let gameBoard = [{ isSet: true }, { isSet: false }]
+        let res = dicegamelogic.gameOver(testState, gameBoard)
+        expect(res).toBe(false)
+    })
+
 });

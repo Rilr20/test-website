@@ -1,9 +1,9 @@
 const externals = {
     getWeather: async function() {
-        const url = "http://api.weatherapi.com/v1/forecast.json?key=d24851f0ead347a698f203014221805&q=lund&days=1&aqi=no&alerts=no"
-        const weather = null;
-        // const weather = await fetch(url)
-        // .then(res => res.json())
+        const url = "http://api.weatherapi.com/v1/forecast.json?key=" + process.env.weather_api + "&q=lund&days=1&aqi=no&alerts=no"
+        // const weather = null;
+        const weather = await fetch(url)
+        .then(res => res.json())
         // console.log(weather)
         return weather
     },

@@ -265,12 +265,12 @@ describe('Game Board tests', () => {
     test('total points is twenty and array', () => {
         let gameBoard = [2,8,2,3,5]
         let res = dicegamelogic.totalSum(gameBoard)
-        expect(res[-1].score).toBe(20)
+        expect(res).toBe(20)
     })
     test('total points is 0 and array', () => {
         let gameBoard = []
         let res = dicegamelogic.totalSum(gameBoard)
-        expect(res[-1].score).toBe(0)
+        expect(res).toBe(0)
     })
 
     test('game is over', () => {

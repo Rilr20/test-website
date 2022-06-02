@@ -8,7 +8,7 @@ build:
       tests:
         override:
           - js-scrutinizer-run
-      tests:
+      testss:
         coverage:
           file: coverage/clover.xml
           format: clover

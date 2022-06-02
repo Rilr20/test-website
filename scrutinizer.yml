@@ -7,8 +7,8 @@ build:
     analysis:
       tests:
         override:
-          - js-scrutinizer-run
-      testss:
-        coverage:
-          file: coverage/clover.xml
-          format: clover
+          -
+            command: "npm run test"
+            coverage:
+              file: coverage/clover.xml
+              format: clover

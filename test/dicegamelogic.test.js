@@ -180,7 +180,7 @@ describe('Game Board tests', () => {
             isSet: false
         }]
         let res = dicegamelogic.bonusPoints(testState, gameBoard)
-        expect(res[-1].score).toBe(35)
+        expect(res[gameBoard.length-1].score).toBe(35)
     })
     test('no bonus points is zero', () => {
         let gameBoard = [{
@@ -206,34 +206,34 @@ describe('Game Board tests', () => {
             isSet: false
         }]
         let res = dicegamelogic.bonusPoints(testState, gameBoard)
-        expect(res[-1].score).toBe(0)
+        expect(res[gameBoard.length-1].score).toBe(0)
     })
 
     test('total points is twenty and object', () => {
         let gameBoard = [{
             score: 2,
-            isSet: false
+            isSet: true
         }, {
             score: 5,
-            isSet: false
+            isSet: true
         }, {
             score: 3,
-            isSet: false
+            isSet: true
         }, {
             score: 5,
-            isSet: false
+            isSet: true
         }, {
             score: 5,
-            isSet: false
+            isSet: true
         }, {
             score: 0,
-            isSet: false
+            isSet: true
         }, {
             score: 0,
             isSet: false
         }]
         let res = dicegamelogic.totalSum(gameBoard)
-        expect(res[-1].score).toBe(20)
+        expect(res[gameBoard.length-1].score).toBe(20)
     })
     test('total points is 0 and object', () => {
         let gameBoard = [{
@@ -259,7 +259,7 @@ describe('Game Board tests', () => {
             isSet: false
         }]
         let res = dicegamelogic.totalSum(gameBoard)
-        expect(res[-1].score).toBe(0)
+        expect(res[gameBoard.length-1].score).toBe(0)
     })
 
     test('total points is twenty and array', () => {

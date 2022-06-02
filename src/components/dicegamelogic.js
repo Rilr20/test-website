@@ -1,7 +1,6 @@
 import { playerCard } from "./consts";
 import Dice from "./dice";
 
-//  export default  function throwDie() { } export defaultfunction throwDice(diceArray) { }
 const dicegamelogic = {
     throwDie: function () {
         return Math.floor(Math.random() * 6) + 1
@@ -20,61 +19,24 @@ const dicegamelogic = {
         if (change.length == 0) {
             return dice
         }
-
-        // for (let i = 0; i < 5; i++) {
-        //     if (i < change.length) {
-        //         diceArray[i] = throwDie()
-        //     } else {
-        //         diceArray[i] = dice[i]
-        //     }
-        // }
-        // change.forEach(changeNum => {
-        //     console.log("NUM is " + changeNum);
-        //     for (let i = 0; i < 5; i++) {
-        //         // console.log("loop " + i);
-        //         console.log("looperion");
-        //         console.log(i);
-        //         console.log(changeNum == i);
-        //         console.log("looperion stopperino");
-        //         if (changeNum == i) {
-        //             // console.log("DICE THREW!");
-        //             diceArray[i] = throwDie()
-        //             break;
-        //         } else {
-        //             // console.log("OLD dice kept :)");
-        //             diceArray[i] = dice[i]
-        //         }
-        //     }
-        // });
         change.forEach(changeNum => {
             diceArray[changeNum] = throwDie()
         });
 
-        // console.log(diceArray);
         setDice(diceArray)
         return diceArray
     },
     pointsPreview: function (diceArray, setGameBoard, gameBoard) {
         let fullArray = []
-        // console.log(diceArray);
         const upperArray = upperPoints(diceArray)
         const lowerArray = lowerPoints(diceArray)
         const newPlayerCard = gameBoard
-        // console.log(playerCard);
         fullArray = [].concat(upperArray, lowerArray)
-        // console.log("array time lolrwerpoaw");
-        // console.log(lowerArray);
-        // console.log(upperArray);
-        // console.log(fullArray);
         for (let i = 0; i < fullArray.length; i++) {
-            // console.log(i);
             if (!newPlayerCard[i].isSet) {
                 newPlayerCard[i].score = fullArray[i]
             }
         }
-        // console.log(playerCard[6]);
-
-        // console.log(playerCard[6]);
         totalSum(playerCard)
         setGameBoard(newPlayerCard)
         return
@@ -106,25 +68,18 @@ const dicegamelogic = {
         });
         const sum = ones + twos + threes + fours + fives + sixes
         const bonus = sum >= 63 ? 35 : 0
-        // console.log("bonus");
-        // console.log(bonus);
-        // console.log("bonus");
         returnArray = [ones, twos, threes, fours, fives, sixes, bonus]
         return returnArray
     },
     lowerPoints: function (diceArray) {
-        const testArray = [5, 2, 3, 4, 6]
         const fullArray = []
         fullArray.push(xOfAKind(diceArray, 3))
         fullArray.push(xOfAKind(diceArray, 4))
         fullArray.push(fullHouse(diceArray))
         fullArray.push(straight(diceArray, false))
         fullArray.push(straight(diceArray, true))
-        // fullArray.push(straight(diceArray))
         fullArray.push(xOfAKind(diceArray, 5))
         fullArray.push(totalSum(diceArray))
-        // console.log("fullArray");
-        // console.log(fullArray);
         return fullArray
     },
     xOfAKind: function (diceArray, num) {
@@ -146,7 +101,6 @@ const dicegamelogic = {
         let res = 0
 
         for (const key in obj) {
-            // console.log(obj[key]);
             if (obj[key] == 3 || obj[key] == 2) {
                 prev = prev - obj[key];
             }
@@ -172,6 +126,14 @@ const dicegamelogic = {
         switch (typeof (diceArray[0]) == "object") {
             case true:
                 console.log("OJ ETT OBJECT");
+                diceArray.forEach(element => {
+                    console.log(element.score);
+
+                    element.isSet ? total += element.score : total += 0
+                });
+                diceArray[diceArray.length - 1].score = total
+                diceArray[diceArray.length - 1].isSet = true
+                total = diceArray
                 break;
             case false:
                 for (let i = 0; i < diceArray.length; i++) {
@@ -180,10 +142,6 @@ const dicegamelogic = {
                 break;
         }
         return total
-        // Object.keys(diceArray).forEach(key => {
-        //     // console.log(playerCard[key]);
-        //     total = total + diceArray[key] == "" ? 0 : parseInt(diceArray[key])
-        // });//VA=?!=!=!=!
     },
     // drawDice: function () {
     //     // const diceArray = throwDice()
@@ -199,19 +157,30 @@ const dicegamelogic = {
     // drawDie: function (number) {
     //     return <Dice pips={number} />
     // },
-    addPoints: function (gameBoard, points, boardId) {
-        //lägg till points
-
-        //sätt alla previews till 0
-    },
     bonusPoints: function(setGameBoard, gameBoard) {
-        for (let i = 0; i < gameBoard.length; i++) {
-            
+        let totalScore = 0
+        for (let i = 0; i < 6; i++) {
+            totalScore += gameBoard[i].score
         }
-        return
+        if (totalScore >= 63) {
+            gameBoard[6].score = 35
+            gameBoard[6].isSet = true
+        } else {
+            gameBoard[6].score = 0
+            gameBoard[6].isSet = true
+        }
+        setGameBoard(gameBoard)
+        return gameBoard
     },
     gameOver: function(setGameState, gameBoard) {
-        return
+        let isGameOver = true
+        for (let i = 0; i < gameBoard.length; i++) {
+            if (!gameBoard[i].isSet) {
+                isGameOver = false
+            }
+            setGameState("finished")
+        }
+        return isGameOver
     }
 }
 export default dicegamelogic

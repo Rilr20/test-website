@@ -16,7 +16,7 @@ const dicegamelogic = {
         change = change.sort()
         let splicedDice = []
         const diceArray = dice
-        if (change.length == 0) {
+        if (change.length === 0) {
             return dice
         }
         change.forEach(changeNum => {
@@ -105,7 +105,7 @@ const dicegamelogic = {
                 prev = prev - obj[key];
             }
         }
-        prev == 0 ? res = 25 : res = 0
+        prev === 0 ? res = 25 : res = 0
         return res
     },
     straight: function (diceArray, large) {
@@ -125,10 +125,7 @@ const dicegamelogic = {
         let total = 0;
         switch (typeof (diceArray[0]) == "object") {
             case true:
-                console.log("OJ ETT OBJECT");
                 diceArray.forEach(element => {
-                    console.log(element.score);
-
                     element.isSet ? total += element.score : total += 0
                 });
                 diceArray[diceArray.length - 1].score = total

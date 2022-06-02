@@ -1,13 +1,13 @@
 filter:
-    excluded_paths: [test/*]
+  excluded_paths: [test/*]
 checks:
-    javascript: true
+  javascript: true
 build:
-    nodes:
-        analysis:
-            tests:
-                override:
-                    - js-scrutinizer-run
-                    coverage:
-                    file: coverage
-                    format: clover
+  nodes:
+    analysis:
+      tests:
+        override:
+          - js-scrutinizer-run
+            coverage:
+              file: coverage
+              format: clover

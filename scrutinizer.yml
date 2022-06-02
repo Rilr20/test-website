@@ -8,7 +8,7 @@ build:
       tests:
         override:
           -
-            command: ""
+            command: "npm run build"
             coverage:
               file: coverage/clover.xml
               format: clover

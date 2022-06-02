@@ -1,5 +1,5 @@
 filter:
-  excluded_paths: [test/*]
+  excluded_paths: [test/*, node_modules/*]
 checks:
   javascript: true
 build:
@@ -8,7 +8,6 @@ build:
       tests:
         override:
           -
-            command: "npm run test"
             coverage:
               file: coverage/clover.xml
               format: clover

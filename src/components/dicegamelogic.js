@@ -14,7 +14,6 @@ const dicegamelogic = {
      */
     throwDice: function (setDice, change, dice) {
         change = change.sort()
-        let splicedDice = []
         const diceArray = dice
         if (change.length === 0) {
             return dice
@@ -27,11 +26,10 @@ const dicegamelogic = {
         return diceArray
     },
     pointsPreview: function (diceArray, setGameBoard, gameBoard) {
-        let fullArray = []
         const upperArray = upperPoints(diceArray)
         const lowerArray = lowerPoints(diceArray)
         const newPlayerCard = gameBoard
-        fullArray = [].concat(upperArray, lowerArray)
+        let fullArray = [].concat(upperArray, lowerArray)
         for (let i = 0; i < fullArray.length; i++) {
             if (!newPlayerCard[i].isSet) {
                 newPlayerCard[i].score = fullArray[i]
@@ -43,7 +41,6 @@ const dicegamelogic = {
     },
     upperPoints: function (diceArray) {
         let ones = 0, twos = 0, threes = 0, fours = 0, fives = 0, sixes = 0
-        let returnArray = []
         diceArray.forEach(die => {
             switch (die) {
                 case 1:
@@ -68,7 +65,7 @@ const dicegamelogic = {
         });
         const sum = ones + twos + threes + fours + fives + sixes
         const bonus = sum >= 63 ? 35 : 0
-        returnArray = [ones, twos, threes, fours, fives, sixes, bonus]
+        let returnArray = [ones, twos, threes, fours, fives, sixes, bonus]
         return returnArray
     },
     lowerPoints: function (diceArray) {

@@ -1,17 +1,10 @@
 filter:
-  excluded_paths: [test/*]
+    excluded_paths: [test/*]
 checks:
-  javascript: true
+    javascript: true
 build:
-  nodes:
-    analysis:
-      tests:
-        override:
-          - js-scrutinizer-run
-      my-tests:
-        override:
-          -
-            command: "npm run test"
-            coverage:
-              file: coverage/clover.xml
-              format: clover
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - js-scrutinizer-run

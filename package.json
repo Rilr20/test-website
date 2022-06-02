@@ -5,7 +5,8 @@
   "jest": {
     "collectCoverage": true,
     "coverageReporters": [
-      "clover"
+      "clover",
+      "html"
     ]
   },
   "scripts": {

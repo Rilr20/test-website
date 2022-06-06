@@ -37,8 +37,8 @@ const dicegamelogic = {
         }
         totalSum(playerCard)
         setGameBoard(newPlayerCard)
-        return
     },
+
     upperPoints: function (diceArray) {
         let ones = 0, twos = 0, threes = 0, fours = 0, fives = 0, sixes = 0
         diceArray.forEach(die => {
@@ -122,9 +122,9 @@ const dicegamelogic = {
         let total = 0;
         switch (typeof (diceArray[0]) == "object") {
             case true:
-                diceArray.forEach(element => {
-                    element.isSet ? total += element.score : total += 0
-                });
+                for (let i = 0; i < diceArray.length - 1; i++) {
+                    diceArray[i].isSet ? total += diceArray[i].score : total += 0
+                }
                 diceArray[diceArray.length - 1].score = total
                 diceArray[diceArray.length - 1].isSet = true
                 total = diceArray
@@ -172,6 +172,8 @@ const dicegamelogic = {
             if (!gameBoard[i].isSet) {
                 isGameOver = false
             }
+        }
+        if (isGameOver) {
             setGameState("finished")
         }
         return isGameOver
@@ -189,3 +191,5 @@ export const xOfAKind = dicegamelogic.xOfAKind
 // export const drawDie = dicegamelogic.drawDie
 export const fullHouse = dicegamelogic.fullHouse
 export const straight = dicegamelogic.straight
+export const bonusPoints = dicegamelogic.bonusPoints
+export const gameOver = dicegamelogic.gameOver

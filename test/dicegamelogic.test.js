@@ -238,10 +238,10 @@ describe('Game Board tests', () => {
     test('total points is 0 and object', () => {
         let gameBoard = [{
             score: 0,
-            isSet: false
+            isSet: true
         }, {
             score: 0,
-            isSet: false
+            isSet: true
         }, {
             score: 0,
             isSet: false
@@ -261,7 +261,23 @@ describe('Game Board tests', () => {
         let res = dicegamelogic.totalSum(gameBoard)
         expect(res[gameBoard.length-1].score).toBe(0)
     })
-
+    test('total points is 15 and object', () => {
+        let gameBoard = [{
+            score: 5,
+            isSet: true
+        }, {
+            score: 5,
+            isSet: true
+        }, {
+            score: 5,
+            isSet: true
+        }, {
+            score: 15,
+            isSet: true
+        }]
+        let res = dicegamelogic.totalSum(gameBoard)
+        expect(res[gameBoard.length - 1].score).toBe(15)
+    })
     test('total points is twenty and array', () => {
         let gameBoard = [2,8,2,3,5]
         let res = dicegamelogic.totalSum(gameBoard)

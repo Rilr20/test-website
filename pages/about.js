@@ -7,18 +7,18 @@ import { Container, Typography, Card, Grid } from "@mui/material";
 About.PageTitle = 'About | Website'
 export async function getServerSideProps() {
 
-    // const data = await externals.getWeather()
-    const data ="sleet"
+    const data = await externals.getWeather()
+    // const data ="sleet"
     // const data = null;
-    // if (!data ) {
-    //     return {
-    //         notFound: true
-    //     }
-    // }
-    
+    if (!data ) {
+        return {
+            notFound: true
+        }
+    }
+    let res = trimResult(data.current.condition.text)
     return {
         props: {
-            data: data
+            data: res[0]
         }
     }
 }
@@ -77,18 +77,21 @@ function trimResult(params) {
     return match
 }
 About.getLayout = function  getLayout(page) {
-    const currentCondition = "Sunny and the moon".toLowerCase()
+    // const currentCondition = "Sunny and the moon".toLowerCase()
     // const currentCondition = page.props.data.current.condition.text
-    const res = {
-        "current": {
-            "condition": {
-                text: "default"
-            }
-        }
-    }
-    const trimmed = trimResult(currentCondition)
+    const currentCondition = page.props.data
+    console.log(page.props.data);
+    // const res = {
+    //     "current": {
+    //         "condition": {
+    //             text: "default"
+    //         }
+    //     }
+    // }
+    // const trimmed = trimResult(currentCondition)
     let weather;
-    switch (trimmed[0]) {
+    console.log(page.props.data);
+    switch (page.props.data) {
         case "sunny": 
         case "clear":
             weather = "sunny"

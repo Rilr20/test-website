@@ -3,10 +3,8 @@ const bowlinglogic = {
         let points = 0
         let check;
         let checkAgain;
-        let looptimes = 0;
         for (let i = 0; i < bowlingArray.length; i++) {
             checkAgain = ""
-            looptimes = 0
             check = checkNext(bowlingArray[i])
             switch (check) {
                 case "strike":
@@ -23,10 +21,8 @@ const bowlinglogic = {
                                 }
                             }
                             if (i < bowlingArray.length - 2 && checkAgain == "strike") {
-                                console.log("real shit");
                                 points += bowlingArray[i + 2][0]
-
-                            }
+                                }
                         }
                     break;
                 case "spare":
@@ -48,7 +44,7 @@ const bowlinglogic = {
         return points
     },
     displayScoreBoardPoints: function (bowlingArray) {
-        let returnArray
+        let returnArray = []
         // [["", "X"], ["5", "/"]]
         return returnArray
     },

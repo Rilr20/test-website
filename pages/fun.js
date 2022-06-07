@@ -5,9 +5,16 @@ import React from 'react'
 Fun.PageTitle = 'Fun | Website'
 
 export default function Fun() {
-  return (
-    <div>Fun Stuff incoming</div>
-  )
+    return (
+        <div>
+            Fun Stuff incoming
+            <div className="circle large">
+                <div className="circle small"></div>
+                <div className="circle small"></div>
+                <div className="circle small"></div>
+            </div>
+        </div>
+    )
 }
 Fun.getLayout = function getLayout(page) {
     return (

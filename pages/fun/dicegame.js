@@ -23,9 +23,12 @@ export default function Dicegame() {
             {gameStatus == "unstarted" ?
                 <Box sx={{ display: "flex", justfyContent: "space-between", flexDirection: "column" }}>
                     <Typography variant="h1" sx={{ fontSize: "28pt", textAlign: "center", m: "auto", mt: 2 }}>Start the game</Typography>
-                    <Button variant="contained" sx={{height:"50px", width:"200px", m:"auto", mt:2}} onClick={() => {
+                    <Typography sx={{ width: "180px", m: "auto",p:2 }}>Game rules <br/>
+                    Throw dice; choose where to put points
+                    </Typography>
+                    <Button variant="contained" sx={{height:"50px", width:"200px", m:"auto",mt:2, pt:1.5,fontSize:"22pt"}} onClick={() => {
                         setGameStatus("started")
-                    }}>button press to start</Button>
+                    }}>Start</Button>
                 </Box>
                 : <></>}
             {gameStatus == "started" ?

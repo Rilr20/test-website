@@ -23,10 +23,10 @@ export default function Dicegame() {
             {gameStatus == "unstarted" ?
                 <Box sx={{ display: "flex", justfyContent: "space-between", flexDirection: "column" }}>
                     <Typography variant="h1" sx={{ fontSize: "28pt", textAlign: "center", m: "auto", mt: 2 }}>Start the game</Typography>
-                    <Typography sx={{ width: "180px", m: "auto",p:2 }}>Game rules <br/>
-                    Throw dice; choose where to put points
+                    <Typography sx={{ width: "180px", m: "auto", p: 2 }}>Game rules <br />
+                        Throw dice; choose where to put points
                     </Typography>
-                    <Button variant="contained" sx={{height:"50px", width:"200px", m:"auto",mt:2, pt:1.5,fontSize:"22pt"}} onClick={() => {
+                    <Button variant="contained" sx={{ height: "50px", width: "200px", m: "auto", mt: 2, pt: 1.5, fontSize: "22pt" }} onClick={() => {
                         setGameStatus("started")
                     }}>Start</Button>
                 </Box>
@@ -42,19 +42,18 @@ export default function Dicegame() {
                                         <Typography sx={{ textAlign: "center", width: "20px" }} color="text">{item.score}</Typography>
                                         {dice.length !== 0 && item.isSet == false && !item.text.includes("score") ? (
                                             <Button sx={{ pt: 1, height: "23px", width: "40px" }} color="text" onClick={() => {
-                                                if (dice.length !== 0) {
-                                                    let tmpBoard = gameBoard;
-                                                    tmpBoard[item.id].isSet = true;
-                                                    setGameBoard(tmpBoard);
-                                                    setChange([])
-                                                    setLeft(3)
-                                                    setDice([])
-                                                    setChange([0, 1, 2, 3, 4])
-                                                    bonusPoints(setGameBoard, gameBoard)
-                                                    gameOver(setGameStatus, gameBoard)
-                                                }
+                                                let tmpBoard = gameBoard;
+                                                tmpBoard[item.id].isSet = true;
+                                                setGameBoard(tmpBoard);
+                                                setChange([])
+                                                setLeft(3)
+                                                setDice([])
+                                                setChange([0, 1, 2, 3, 4])
+                                                bonusPoints(setGameBoard, gameBoard)
+                                                pointsPreview([], setGameBoard, gameBoard)
+                                                gameOver(setGameStatus, gameBoard)
                                             }}>Score</Button>
-                                        ):""}
+                                        ) : ""}
                                     </Box>
                                 })
                             }
@@ -93,6 +92,7 @@ export default function Dicegame() {
                                             let array = throwDice(setDice, change, dice)
                                             setDice(array)
                                             pointsPreview(array, setGameBoard, gameBoard)
+                                            setLeft(left-1)
                                             setChange([])
                                         }
                                     }}>
@@ -105,8 +105,8 @@ export default function Dicegame() {
                 </Box> : <></>
             }
             {gameStatus == "finished" ?
-                <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection:"column" }}>
-                    <Typography variant="h1" sx={{fontSize:"28pt", textAlign:"center", m:"auto", mt:2}}>You got {gameBoard[gameBoard.length - 1].score} points :D</Typography>
+                <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
+                    <Typography variant="h1" sx={{ fontSize: "28pt", textAlign: "center", m: "auto", mt: 2 }}>You got {gameBoard[gameBoard.length - 1].score} points :D</Typography>
                     {/* <Button variant="contained" sx={{height:"50px", width:"100px", m:"auto", mt:2}} onClick={() => {
                         // setGameBoard(playerCard)
                         // setGameStatus("started")

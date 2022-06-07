@@ -11,6 +11,12 @@ describe('straights', () => {
         expect(dicegamelogic.straight(straight, false)).toBe(0)
     });
 
+    test('straight empty array', () => {
+        let straight = []
+        expect(dicegamelogic.straight(straight, true)).toBe(0)
+        expect(dicegamelogic.straight(straight, false)).toBe(0)
+    });
+
     test('large straight has large straight', () => {
         let straight = [5, 2, 3, 4, 6]
         expect(dicegamelogic.straight(straight, true)).toBe(40)

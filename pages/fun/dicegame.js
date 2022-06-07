@@ -21,9 +21,9 @@ export default function Dicegame() {
     return (
         <Container sx={{ width: "96%", height: "100%", pt: 2, mt: 0.3, }}>
             {gameStatus == "unstarted" ?
-                <Box sx={{ display: "flex", justfyContent: "space-between" }}>
-                    <Typography>Start the game</Typography>
-                    <Button onClick={() => {
+                <Box sx={{ display: "flex", justfyContent: "space-between", flexDirection: "column" }}>
+                    <Typography variant="h1" sx={{ fontSize: "28pt", textAlign: "center", m: "auto", mt: 2 }}>Start the game</Typography>
+                    <Button variant="contained" sx={{height:"50px", width:"200px", m:"auto", mt:2}} onClick={() => {
                         setGameStatus("started")
                     }}>button press to start</Button>
                 </Box>
@@ -37,24 +37,22 @@ export default function Dicegame() {
                                     return <Box sx={{ display: "grid", gridTemplateColumns: "100px 20px 60px", justifyContent: "space-between", borderBottom: "1px solid black", py: 0.12 }} key={item.id}>
                                         <Typography sx={{ textAlign: "left", pl: 0.5, width: "100px" }} color="text">{item.text}</Typography>
                                         <Typography sx={{ textAlign: "center", width: "20px" }} color="text">{item.score}</Typography>
-                                        {dice.length !== 0 ? <Button sx={{ pt:1, height: "23px", width: "40px" }} color="text" onClick={() => {
-                                            if (dice.length !== 0) {
-                                                let tmpBoard = gameBoard;
-                                                tmpBoard[item.id].isSet = true;
-                                                setGameBoard(tmpBoard);
-                                                setChange([])
-                                                setLeft(3)
-                                                setDice([])
-                                                setChange([0, 1, 2, 3, 4])
-                                                bonusPoints(setGameBoard, gameBoard)
-                                                gameOver(setGameStatus, gameBoard)
-                                            }
-                                            //check för att se man har slått tärnigen, sätt tärning till tom?
-                                            //check if game is over
-                                        }}>Score</Button> : <></>}
-
+                                        {dice.length !== 0 && item.isSet == false && !item.text.includes("score") ? (
+                                            <Button sx={{ pt: 1, height: "23px", width: "40px" }} color="text" onClick={() => {
+                                                if (dice.length !== 0) {
+                                                    let tmpBoard = gameBoard;
+                                                    tmpBoard[item.id].isSet = true;
+                                                    setGameBoard(tmpBoard);
+                                                    setChange([])
+                                                    setLeft(3)
+                                                    setDice([])
+                                                    setChange([0, 1, 2, 3, 4])
+                                                    bonusPoints(setGameBoard, gameBoard)
+                                                    gameOver(setGameStatus, gameBoard)
+                                                }
+                                            }}>Score</Button>
+                                        ):""}
                                     </Box>
-
                                 })
                             }
                         </Card>
@@ -104,8 +102,12 @@ export default function Dicegame() {
                 </Box> : <></>
             }
             {gameStatus == "finished" ?
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                    <Typography>You got {gameBoard[gameBoard.length - 1].score} points :D</Typography>
+                <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection:"column" }}>
+                    <Typography variant="h1" sx={{fontSize:"28pt", textAlign:"center", m:"auto", mt:2}}>You got {gameBoard[gameBoard.length - 1].score} points :D</Typography>
+                    {/* <Button variant="contained" sx={{height:"50px", width:"100px", m:"auto", mt:2}} onClick={() => {
+                        // setGameBoard(playerCard)
+                        // setGameStatus("started")
+                    }}>Play Again</Button> */}
                 </Box>
                 : <></>}
         </Container>

@@ -62,3 +62,14 @@ $times: 1;
     top: 4px*$times;
     left: 22px*$times;
 }
+
+.bowling-score:nth-child(odd) {
+    // background-color: fon;
+    border-left: 1px solid #1c1c1c;
+    border-right: 1px solid #1c1c1c;
+}
+.bowling-score:nth-child(even) {
+    // background-color: fon;
+    border-left: 1px solid #1c1c1c;
+    // border-right: 1px solid black;
+}

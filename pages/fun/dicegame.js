@@ -3,7 +3,6 @@ import BasicLayout from "../../src/template/basiclayout";
 import { throwDice, pointsPreview, bonusPoints, gameOver } from '../../src/components/dicegamelogic'
 import React, { useState, useEffect } from 'react'
 import { Container, Typography, Card, Button, Box, Checkbox, chipClasses } from "@mui/material";
-// import Gametable from "../../src/components/gametable";
 import { playerCard } from "../../src/components/consts";
 import Dice from "../../src/components/dice";
 Dicegame.PageTitle = 'Dicegame | Website'
@@ -15,7 +14,6 @@ export default function Dicegame() {
     const [change, setChange] = useState([0, 1, 2, 3, 4]);
     const [left, setLeft] = useState(3);
     useEffect(() => {
-        console.log("woop");
         setGameBoard(playerCard)
     }, []);
     return (

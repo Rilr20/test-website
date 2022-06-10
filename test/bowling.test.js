@@ -42,6 +42,7 @@ describe('bowling table frame tests', () => {
         expect(res).toBe(15)
     })
 });
+
 describe('bowling frame scoretable test', () => {
     test('max score', () => {
         let scoretable = [[10], [10], [10], [10], [10], [10], [10], [10], [10], [10, 10, 10]]
@@ -56,12 +57,12 @@ describe('bowling frame scoretable test', () => {
         expect(res).toBe(156)
     })
     test('full game only spares', () => {
-        let scoretable = [[9,1], [9,1], [9,1], [9,1], [9,1], [9,1], [9,1], [9,1], [9, 1], [9, 1, 9]]
+        let scoretable = [[9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1, 9]]
         let res = bowlinglogic.calculateScore(scoretable)
         expect(res).toBe(190)
     })
     test('last three with spare', () => {
-        let scoretable = [[0,10,5]]
+        let scoretable = [[0, 10, 5]]
         let res = bowlinglogic.calculateScore(scoretable)
         expect(res).toBe(15)
     })
@@ -76,8 +77,29 @@ describe('bowling frame scoretable test', () => {
         expect(res).toBe(30)
     });
     test('three strikes in row', () => {
-        let scoretable = [[10],[10],[10]]
+        let scoretable = [[10], [10], [10]]
         let res = bowlinglogic.calculateScore(scoretable)
         expect(res).toBe(60)
     });
 });
+
+describe('Bowling score table for frontend', () => {
+    test('converts to special characters', () => {
+        let scoretable = [[6, 2], [6, 4], [10]]
+        let expected = [[6, 2], [6, "/"], ["", "X"]]
+        let res = bowlinglogic.displayScoreBoardPoints(scoretable)
+        expect(res).toStrictEqual(expected)
+    });
+    test('calculate score for each frame', () => {
+        let scoretable = [[6, 2], [6, 4], [10]]
+        let expected = [8, 18, 38]
+        let res = bowlinglogic.bottomRow(scoretable)
+        expect(res).toStrictEqual(expected)
+    })
+    test('create array with scores and total for that frame', () => {
+        let scoretable = [[6, 2], [6, 4], [10]]
+        let expected = [[6, 2, 8], [6, "/", 18], ["", "X", 38]]
+        let res = bowlinglogic.arrayCombine(scoretable)
+        expect(res).toStrictEqual(expected)
+    })
+})

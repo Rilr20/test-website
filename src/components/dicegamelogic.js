@@ -108,7 +108,7 @@ const dicegamelogic = {
     straight: function (diceArray, large) {
         let points = large ? 40 : 30
         let check = large ? 2 : 1
-        points = diceArray.length == 0 ? 0 : points
+        points = diceArray.length === 0 ? 0 : points
         for (let i = 0; i < diceArray.length; i++) {
             if (!diceArray.includes(check)) {
 

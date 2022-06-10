@@ -106,11 +106,8 @@ const bowlinglogic = {
         return returnArray
     },
     arrayCombine: function (bowlingArray) {
-        let bottomRowRes = []
-        let displayScoreBoardRes = []
-        let returnArray = []
-        bottomRowRes = bottomRow(bowlingArray)
-        displayScoreBoardRes = displayScoreBoardPoints(bowlingArray)
+        let bottomRowRes = bottomRow(bowlingArray)
+        let displayScoreBoardRes = displayScoreBoardPoints(bowlingArray)
         for (let i = 0; i < bottomRowRes.length; i++) {
             displayScoreBoardRes[i].push(bottomRowRes[i])
         }

@@ -63,7 +63,11 @@ describe('X of A Kind', () => {
 })
 
 describe('points checks', () => {
-
+    test('upper points check', () => {
+        let diceArray = [1,1,2,2,3,3,4,4,5,5,6,6]
+        expect(dicegamelogic.upperPoints(diceArray)).toStrictEqual([2,4,6,8,10,12,0])
+    });
+    
 });
 
 jest.mock('react', () => ({

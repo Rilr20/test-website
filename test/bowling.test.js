@@ -96,14 +96,37 @@ describe('Bowling score table for frontend', () => {
         let res = bowlinglogic.bottomRow(scoretable)
         expect(res).toStrictEqual(expected)
     })
-    test('create array with scores and total for that frame', () => {
+    test('create array with scores and total for each frame', () => {
         let scoretable = [[6, 2], [6, 4], [10]]
         let expected = [[6, 2, 8], [6, "/", 18], ["", "X", 38]]
         let res = bowlinglogic.arrayCombine(scoretable)
         expect(res).toStrictEqual(expected)
     })
-
-    test('With full array', () => {
+    test('last frame with 3 strikes', () => {
+        let scoreTable = [[10, 10, 10]]
+        let expected = [["X", "X", "X"]]
+        let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
+        expect(res).toStrictEqual(expected)
+    })
+    test('last frame with 1 strike spare', () => {
+        let scoreTable = [[10, 6, 4]]
+        let expected = [["X", 6, "/"]]
+        let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
+        expect(res).toStrictEqual(expected)
+    })
+    test('last frame with 1 spare strike', () => {
+        let scoreTable = [[6, 4, 10]]
+        let expected = [[6, "/", "X"]]
+        let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
+        expect(res).toStrictEqual(expected)
+    })
+    test('last frame with 8 points', () => {
+        let scoreTable = [[6, 2, ""]]
+        let expected = [[6, 2, ""]]
+        let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
+        expect(res).toStrictEqual(expected)
+    })
+    test('With full array and empty slots', () => {
         let scoretable = [["2", "3", ""],
         ["6", "4", ""],
         ["10", "", ""],

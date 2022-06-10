@@ -46,19 +46,25 @@ const bowlinglogic = {
     displayScoreBoardPoints: function (bowlingArray) {
         let returnArray = []
         let check = ""
-        console.log(bowlingArray);
         // [["", "X"], ["5", "/"]]
         for (let i = 0; i < bowlingArray.length; i++) {
             check = checkNext(bowlingArray[i])
             switch (check) {
                 case "strike":
                     if (bowlingArray[i].length === 3) {
-                        console.log("wow this sucks1");
+                        let secondItem = bowlingArray[i][1]
+                        let thirdItem = bowlingArray[i][2] === 10 ? "X" : bowlingArray[i][2]
+                        if (bowlingArray[i][1] === 10) {
+                            secondItem = "X"
+                        }
+                        if (bowlingArray[i][1] + bowlingArray[i][2] === 10) {
+                            thirdItem = "/"
+                        }
                         returnArray.push(
                             [
                                 "X",
-                                bowlingArray[i][1] === 10 ? "X" : bowlingArray[i][1],
-                                bowlingArray[i][2] === 10 ? "X" : bowlingArray[i][2]
+                                secondItem,
+                                thirdItem
                             ]
                         )
                     } else {
@@ -67,9 +73,6 @@ const bowlinglogic = {
                     break
                 case "spare":
                     if (bowlingArray[i].length === 3) {
-                        console.log("wow this sucks2");
-                        console.log(bowlingArray[i]);
-                        console.log(bowlingArray[i][0]);
                         returnArray.push(
                             [
                                 bowlingArray[i][0],
@@ -78,13 +81,11 @@ const bowlinglogic = {
                             ]
                         )
                     } else {
-                        console.log(bowlingArray[i][0]);
                         returnArray.push([bowlingArray[i][0], "/"])
                     }
                     break
                 default:
                     if (bowlingArray[i].length === 3) {
-                        console.log("wow this sucks");
                         returnArray.push([bowlingArray[i][0], bowlingArray[i][1], ""])
                     } else {
                         returnArray.push(bowlingArray[i])
@@ -92,7 +93,6 @@ const bowlinglogic = {
                     break
             }
         }
-        // console.log(returnArray);
         return returnArray
     },
     checkNext: function (bowlingArray) {
@@ -138,7 +138,9 @@ const bowlinglogic = {
         return returnArray
     },
     arrayCombine: function (bowlingArray) {
+        console.log(bowlingArray);
         let bottomRowRes = bottomRow(bowlingArray)
+        console.log(bottomRowRes);
         let displayScoreBoardRes = displayScoreBoardPoints(bowlingArray)
         for (let i = 0; i < bottomRowRes.length; i++) {
             displayScoreBoardRes[i].push(bottomRowRes[i])

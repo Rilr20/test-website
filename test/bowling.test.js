@@ -102,6 +102,12 @@ describe('Bowling score table for frontend', () => {
         let res = bowlinglogic.arrayCombine(scoretable)
         expect(res).toStrictEqual(expected)
     })
+    test('create array with scores and total for three strikes', () => {
+        let scoretable = [[10, ""], [10, ""], [10, ""]]
+        let expected = [["", "X",30], ["", "X",50], ["", "X",60]]
+        let res = bowlinglogic.arrayCombine(scoretable)
+        expect(res).toStrictEqual(expected)
+    })
     test('last frame with 3 strikes', () => {
         let scoreTable = [[10, 10, 10]]
         let expected = [["X", "X", "X"]]
@@ -127,16 +133,16 @@ describe('Bowling score table for frontend', () => {
         expect(res).toStrictEqual(expected)
     })
     test('With full array and empty slots', () => {
-        let scoretable = [["2", "3", ""],
-        ["6", "4", ""],
-        ["10", "", ""],
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", ""],
-        ["", "", "", ""]]
+        let scoretable = [["2", "3"],
+        ["6", "4"],
+        ["10", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", "", ""]]
         let expected = [["2", "3", ""],
         ["6", "/", "25"],
         ["", "X", "35"],
@@ -147,20 +153,20 @@ describe('Bowling score table for frontend', () => {
         ["", "", ""],
         ["", "", ""],
         ["", "", "", ""]]
-        let res = bowlinglogic.displayScoreBoardPoints(scoretable)
+        let res = bowlinglogic.arrayCombine(scoretable)
         expect(res).toBe(expected)
     });
     test('With full array filled', () => {
-        let scoretable = [[10, "", ""],
-        [10, "", ""],
-        [10, "", ""],
-        [10, "", ""],
-        [10, "", ""],
-        [10, "", ""],
-        [10, "", ""],
-        [10, "", ""],
-        [10, "", ""],
-        [10, 10, 10, ""]]
+        let scoretable = [[10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, 10, 10]]
         let expected = [["", "X", 30],
         ["", "X", 60],
         ["", "X", 90],
@@ -171,7 +177,7 @@ describe('Bowling score table for frontend', () => {
         ["", "X", 240],
         ["", "X", 270],
         ["X", "X", "X", 300]]
-        let res = bowlinglogic.displayScoreBoardPoints(scoretable)
+        let res = bowlinglogic.arrayCombine(scoretable)
         expect(res).toStrictEqual(expected)
     });
 

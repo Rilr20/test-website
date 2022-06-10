@@ -6,13 +6,15 @@ import { Container, Typography, Card, Grid, Box } from "@mui/material";
 
 About.PageTitle = 'About | Website'
 export async function getServerSideProps() {
-
-    const data = await externals.getWeather()
+    let data = null
+    data = await externals.getWeather()
     // const data ="sleet"
     // const data = null;
-    if (!data) {
+    if (!data instanceof Object) {
         return {
-            notFound: true
+            props: {
+                data: "error"
+            }
         }
     }
     let res = trimResult(data.current.condition.text)

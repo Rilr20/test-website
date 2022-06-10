@@ -112,6 +112,27 @@ const bowlinglogic = {
             displayScoreBoardRes[i].push(bottomRowRes[i])
         }
         return displayScoreBoardRes
+    },
+    addToArray: function (number, setBowlingScore, bowlingScore) {
+        let tmpArray = bowlingScore;
+        let stop = false;
+        for (let i = 0; i < tmpArray.length; i++) {
+            for (let index = 0; index < tmpArray[i].length - 1; index++) {
+                if (tmpArray[i][index] == "") {
+                    tmpArray[i][index] = parseInt(number)
+                    stop = true
+                    break;
+                }
+            }
+            if (stop) {
+                break
+            }
+        }
+        console.log(tmpArray);
+        let res = arrayCombine(tmpArray)
+        console.log(res);
+
+        setBowlingScore(res)
     }
 }
 
@@ -121,3 +142,5 @@ export const calculateFrame = bowlinglogic.calculateFrame
 export const checkNext = bowlinglogic.checkNext
 export const displayScoreBoardPoints = bowlinglogic.displayScoreBoardPoints
 export const bottomRow = bowlinglogic.bottomRow
+export const addToArray = bowlinglogic.addToArray
+export const arrayCombine = bowlinglogic.arrayCombine

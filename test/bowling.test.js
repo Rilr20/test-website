@@ -102,4 +102,54 @@ describe('Bowling score table for frontend', () => {
         let res = bowlinglogic.arrayCombine(scoretable)
         expect(res).toStrictEqual(expected)
     })
+
+    test('With full array', () => {
+        let scoretable = [["2", "3", ""],
+        ["6", "4", ""],
+        ["10", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", "", ""]]
+        let expected = [["2", "3", ""],
+        ["6", "/", "25"],
+        ["", "X", "35"],
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", "", ""]]
+        let res = bowlinglogic.displayScoreBoardPoints(scoretable)
+        expect(res).toBe(expected)
+    });
+    test('With full array filled', () => {
+        let scoretable = [[10, "", ""],
+        [10, "", ""],
+        [10, "", ""],
+        [10, "", ""],
+        [10, "", ""],
+        [10, "", ""],
+        [10, "", ""],
+        [10, "", ""],
+        [10, "", ""],
+        [10, 10, 10, ""]]
+        let expected = [["", "X", 30],
+        ["", "X", 60],
+        ["", "X", 90],
+        ["", "X", 120],
+        ["", "X", 150],
+        ["", "X", 180],
+        ["", "X", 210],
+        ["", "X", 240],
+        ["", "X", 270],
+        ["X", "X", "X", 300]]
+        let res = bowlinglogic.displayScoreBoardPoints(scoretable)
+        expect(res).toStrictEqual(expected)
+    });
+
 })

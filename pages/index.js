@@ -54,7 +54,7 @@ export default function Home({ osrs }) {
     return (
         <Container  sx={{ width:"96%", height:"100%", pt: 2, mt:0.3, }}>
             <Box cla sx={{ display: {md: "flex", xs:"block"}, justifyContent: "space-between" }}>
-                <Box sx={{ width: {md:"50%", xs:"100%"}, backgroundColor: "", height: "auto", margin: "0.5em", padding: "0.5em" }}>
+                <Box sx={{ width: {md:"50%", xs:"100%"}, backgroundColor: "", height: "auto"}}>
                     <Typography variant="h3" sx={{ textAlign: "center" }}>Hello</Typography>
                 </Box>
                 <Box sx={{ justifyContent:"center", width: { md: "50%", xs: "100%" }, backgroundColor: "", height: "400px", margin: "0.5em", padding: "0.5em", display: {md: "flex", xs:"initial"} }}>

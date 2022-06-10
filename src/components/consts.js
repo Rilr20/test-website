@@ -169,23 +169,18 @@ export const placeholder = [
     }
 ]
 
-export const playerCard2 = {
-    ones: "", // sum of all dice
-    twos: "", // sum of all dice
-    threes: "", // sum of all dice
-    fours: "", // sum of all dice
-    fives: "", // sum of all dice
-    sixes: "", // sum of all dice
-    "bonus score": "", //if 63 or more bonus 35p
-    "three of a kind": "",//sum of all dice
-    "four of a kind": "", //sum of all dice
-    "full house": "", //25p
-    "small straight": "", //30p
-    "large straight": "", //40p
-    "five of a kind": "", //50p
-    chance: "",
-    "total score": ""
-}
+export const bowlingCard = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", "", ""]
+]
 
 export const playerCard = [
     {
@@ -271,14 +266,14 @@ export const playerCard = [
         score: 0,
         preview: false,
         isSet: false
-    }, 
+    },
     {
         id: 12,
         text: "five of a kind",
         score: 0,
         preview: false,
         isSet: false
-    }, 
+    },
     {
         id: 13,
         text: "chance",

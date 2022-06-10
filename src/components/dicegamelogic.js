@@ -63,9 +63,9 @@ const dicegamelogic = {
                     break;
             }
         });
-        const sum = ones + twos + threes + fours + fives + sixes
-        const bonus = sum >= 63 ? 35 : 0
-        let returnArray = [ones, twos, threes, fours, fives, sixes, bonus]
+        // const sum = ones + twos + threes + fours + fives + sixes
+        // const bonus = sum >= 63 ? 35 : 0
+        let returnArray = [ones, twos, threes, fours, fives, sixes, 0]
         return returnArray
     },
     lowerPoints: function (diceArray) {
@@ -108,10 +108,9 @@ const dicegamelogic = {
     straight: function (diceArray, large) {
         let points = large ? 40 : 30
         let check = large ? 2 : 1
-        points = diceArray.length == 0 ? 0 : points
+        points = diceArray.length === 0 ? 0 : points
         for (let i = 0; i < diceArray.length; i++) {
             if (!diceArray.includes(check)) {
-
                 points = 0
                 break
             }

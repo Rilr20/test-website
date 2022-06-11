@@ -86,8 +86,8 @@ function trimResult(params) {
 About.getLayout = function getLayout(page) {
     // const currentCondition = "Sunny and the moon".toLowerCase()
     // const currentCondition = page.props.data.current.condition.text
-    const currentCondition = page.props.data
-    console.log(page.props.data);
+    // const currentCondition = page.props.data
+    // console.log(page.props.data);
     // const res = {
     //     "current": {
     //         "condition": {

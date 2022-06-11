@@ -154,7 +154,7 @@ const bowlinglogic = {
     findEmptySlot: function(bowlingArray) {
         let i = 0
         for (i; i < bowlingArray.length; i++) {
-            if (bowlingArray[i][0].length == 0 && bowlingArray[i][1].length == 0) {
+            if (bowlingArray[i][0].length === 0 && bowlingArray[i][1].length === 0) {
                 break
             }
         }

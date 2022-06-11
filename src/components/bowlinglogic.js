@@ -1,6 +1,6 @@
 const bowlinglogic = {
     calculateScore: function (bowlingArray) {
-        console.log("CALCULATE SCORE");
+        // console.log("CALCULATE SCORE");
 
         let points = 0
         let check;
@@ -8,34 +8,35 @@ const bowlinglogic = {
         for (let i = 0; i < bowlingArray.length; i++) {
             checkAgain = ""
             check = checkNext(bowlingArray[i])
-            console.log(check);
+            // console.log(check);
             switch (check) {
                 case "strike":
-                    console.log("HJERE");
+                    // console.log("HJERE");
                     if (bowlingArray[i].length === 3) {
-                        points += calculateFrame(bowlingArray[i])
+                        points = parseInt(points) + parseInt(calculateFrame(bowlingArray[i]))
                     } else {
-                        console.log("HÄRHÄR tack :)");
-                        console.log(bowlingArray);
-                        console.log(bowlingArray[i]);
+                        // console.log("HÄRHÄR tack :)");
+                        // console.log(bowlingArray);
+                        // console.log(bowlingArray[i]);
 
-                        points = points + 10
-                        console.log(points);
+                        points = parseInt(points) + 10
+                        // console.log(points);
                         if (i < bowlingArray.length - 1) {
-                            console.log("oui");
+                            // console.log("oui");
                             if (bowlingArray[i + 1].length === 3) {
-                                points = points + bowlingArray[i + 1][0] + bowlingArray[i + 1][1]
-                                console.log(points);
+                                points = parseInt(points) + parseInt(bowlingArray[i + 1][0]) + parseInt(bowlingArray[i + 1][1])
+                                // console.log(points);
                             } else {
-                                points += calculateFrame(bowlingArray[i + 1])
+                                let frame = calculateFrame(bowlingArray[i + 1])
+                                points = parseInt(points) + parseInt(frame)
                                 checkAgain = checkNext(bowlingArray[i + 1])
-                                console.log(points);
+                                // console.log(points);
                             }
                         }
                         if (i < bowlingArray.length - 2 && checkAgain == "strike") {
-                            console.log("oui times two");
-                            points += bowlingArray[i + 2][0]
-                            console.log(points);
+                            // console.log("oui times two");
+                            points = parseInt(points) + parseInt(bowlingArray[i + 2][0])
+                            // console.log(points);
                         }
                     }
                     break;
@@ -51,12 +52,12 @@ const bowlinglogic = {
                     break;
                 default:
                     // console.log(calculateFrame(bowlingArray[i]));
-                    points += calculateFrame(bowlingArray[i])
+                    points = parseInt(points) + parseInt(calculateFrame(bowlingArray[i]))
                     break;
             }
         }
-        console.log(points);
-        console.log("END");
+        // console.log(points);
+        // console.log("END");
         return points
     },
     displayScoreBoardPoints: function (bowlingArray) {
@@ -149,6 +150,7 @@ const bowlinglogic = {
         for (let i = 0; i < bowlingArray.length; i++) {
             tmpArray.push(bowlingArray[i])
             console.log(bowlingArray[i]);
+            console.log(tmpArray);
             res = calculateScore(tmpArray)
             returnArray.push(res)
         }

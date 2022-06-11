@@ -46,39 +46,37 @@ describe('bowling table frame tests', () => {
 describe('bowling frame scoretable test', () => {
     test('max score', () => {
         let scoretable = [[10], [10], [10], [10], [10], [10], [10], [10], [10], [10, 10, 10]]
-        let res = bowlinglogic.calculateScore(scoretable)
+        let res = bowlinglogic.calculateTotalScore(scoretable)
         expect(res).toBe(300)
     });
     test('full game scoring two scores last round', () => {
         let scoretable = [[2, 4], [9, 1], [10], [7, 2], [0, 10], [10], [10], [10], [4, 1], [3, 5]]
-        // let scoretable = [[2,4],[9,1],[10], [7,2]]
-        // let scoretable = [[0, 10], [10], [10], [10], [4, 1]]
-        let res = bowlinglogic.calculateScore(scoretable)
+        let res = bowlinglogic.calculateTotalScore(scoretable)
         expect(res).toBe(156)
     })
     test('full game only spares', () => {
         let scoretable = [[9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1, 9]]
-        let res = bowlinglogic.calculateScore(scoretable)
+        let res = bowlinglogic.calculateTotalScore(scoretable)
         expect(res).toBe(190)
     })
     test('last three with spare', () => {
         let scoretable = [[0, 10, 5]]
-        let res = bowlinglogic.calculateScore(scoretable)
+        let res = bowlinglogic.calculateTotalScore(scoretable)
         expect(res).toBe(15)
     })
     test('one strikes in row', () => {
         let scoretable = [[10]]
-        let res = bowlinglogic.calculateScore(scoretable)
+        let res = bowlinglogic.calculateTotalScore(scoretable)
         expect(res).toBe(10)
     });
     test('two strikes in row', () => {
         let scoretable = [[10], [10]]
-        let res = bowlinglogic.calculateScore(scoretable)
+        let res = bowlinglogic.calculateTotalScore(scoretable)
         expect(res).toBe(30)
     });
     test('three strikes in row', () => {
         let scoretable = [[10, ""], [10, ""], [10, ""]]
-        let res = bowlinglogic.calculateScore(scoretable)
+        let res = bowlinglogic.calculateTotalScore(scoretable)
         expect(res).toBe(60)
     });
 });
@@ -92,13 +90,13 @@ describe('Bowling score table for frontend', () => {
     });
     test('calculate score for each frame', () => {
         let scoretable = [[6, 2], [6, 4], [10]]
-        let expected = [8, 18, 38]
+        let expected = [8, 28, 38]
         let res = bowlinglogic.bottomRow(scoretable)
         expect(res).toStrictEqual(expected)
     })
     test('create array with scores and total for each frame', () => {
         let scoretable = [[6, 2], [6, 4], [10]]
-        let expected = [[6, 2, 8], [6, "/", 18], ["", "X", 38]]
+        let expected = [[6, 2, 8], [6, "/", 28], ["", "X", 38]]
         let res = bowlinglogic.arrayCombine(scoretable)
         expect(res).toStrictEqual(expected)
     })
@@ -132,53 +130,52 @@ describe('Bowling score table for frontend', () => {
         let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
         expect(res).toStrictEqual(expected)
     })
-    // test('With full array and empty slots', () => {
-    //     let scoretable = [["2", "3"],
-    //     ["6", "4"],
-    //     ["10", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", "", ""]]
-    //     let expected = [["2", "3", ""],
-    //     ["6", "/", "25"],
-    //     ["", "X", "35"],
-    //     ["", "", ""],
-    //     ["", "", ""],
-    //     ["", "", ""],
-    //     ["", "", ""],
-    //     ["", "", ""],
-    //     ["", "", ""],
-    //     ["", "", "", ""]]
-    //     let res = bowlinglogic.arrayCombine(scoretable)
-    //     expect(res).toBe(expected)
-    // });
-    // test('With full array filled', () => {
-    //     let scoretable = [[10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, 10, 10]]
-    //     let expected = [["", "X", 30],
-    //     ["", "X", 60],
-    //     ["", "X", 90],
-    //     ["", "X", 120],
-    //     ["", "X", 150],
-    //     ["", "X", 180],
-    //     ["", "X", 210],
-    //     ["", "X", 240],
-    //     ["", "X", 270],
-    //     ["X", "X", "X", 300]]
-    //     let res = bowlinglogic.arrayCombine(scoretable)
-    //     expect(res).toStrictEqual(expected)
-    // });
-
+    test('With full array and empty slots', () => {
+        let scoretable = [[2, 3],
+        [6, 4],
+        [10, ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", "", ""]]
+        let expected = [[2, 3, 5],
+        [6, "/", 25],
+        ["", "X", 35],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", "", ""]]
+        let res = bowlinglogic.arrayCombine(scoretable)
+        expect(res).toStrictEqual(expected)
+    });
+    test('With full array filled', () => {
+        let scoretable = [[10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, 10, 10]]
+        let expected = [["", "X", 30],
+        ["", "X", 60],
+        ["", "X", 90],
+        ["", "X", 120],
+        ["", "X", 150],
+        ["", "X", 180],
+        ["", "X", 210],
+        ["", "X", 240],
+        ["", "X", 270],
+        ["X", "X", "X", 300]]
+        let res = bowlinglogic.arrayCombine(scoretable)
+        expect(res).toStrictEqual(expected)
+    });
 })

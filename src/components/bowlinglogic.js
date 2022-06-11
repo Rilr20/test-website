@@ -1,42 +1,30 @@
 const bowlinglogic = {
-    calculateScore: function (bowlingArray) {
-        // console.log("CALCULATE SCORE");
-
+    calculateScore: function (bowlingArray, stop=bowlingArray.length) {
         let points = 0
+        let returnArray = []
         let check;
         let checkAgain;
-        for (let i = 0; i < bowlingArray.length; i++) {
+        for (let i = 0; i < stop; i++) {
+            points = 0
             checkAgain = ""
             check = checkNext(bowlingArray[i])
-            // console.log(check);
             switch (check) {
                 case "strike":
-                    // console.log("HJERE");
                     if (bowlingArray[i].length === 3) {
                         points = parseInt(points) + parseInt(calculateFrame(bowlingArray[i]))
                     } else {
-                        // console.log("HÄRHÄR tack :)");
-                        // console.log(bowlingArray);
-                        // console.log(bowlingArray[i]);
-
                         points = parseInt(points) + 10
-                        // console.log(points);
                         if (i < bowlingArray.length - 1) {
-                            // console.log("oui");
                             if (bowlingArray[i + 1].length === 3) {
                                 points = parseInt(points) + parseInt(bowlingArray[i + 1][0]) + parseInt(bowlingArray[i + 1][1])
-                                // console.log(points);
                             } else {
-                                let frame = calculateFrame(bowlingArray[i + 1])
-                                points = parseInt(points) + parseInt(frame)
+                                // let frame = calculateFrame(bowlingArray[i + 1])
+                                points = parseInt(points) + parseInt(calculateFrame(bowlingArray[i + 1]))
                                 checkAgain = checkNext(bowlingArray[i + 1])
-                                // console.log(points);
                             }
                         }
                         if (i < bowlingArray.length - 2 && checkAgain == "strike") {
-                            // console.log("oui times two");
                             points = parseInt(points) + parseInt(bowlingArray[i + 2][0])
-                            // console.log(points);
                         }
                     }
                     break;
@@ -51,14 +39,13 @@ const bowlinglogic = {
                     }
                     break;
                 default:
-                    // console.log(calculateFrame(bowlingArray[i]));
-                    points = parseInt(points) + parseInt(calculateFrame(bowlingArray[i]))
+                    points = parseInt(points) + calculateFrame(bowlingArray[i])
                     break;
             }
+            // console.log(points);
+            returnArray.push(points)
         }
-        // console.log(points);
-        // console.log("END");
-        return points
+        return returnArray
     },
     displayScoreBoardPoints: function (bowlingArray) {
         let returnArray = []
@@ -128,38 +115,55 @@ const bowlinglogic = {
                 return frame[0]
             case 2:
                 for (let i = 0; i < frame.length; i++) {
-                    points += frame[i];
+                    points = points + frame[i];
                 }
                 break;
-
             case 3:
                 for (let i = 0; i < frame.length - 1; i++) {
-                    points += frame[i]
+                    points = points +  frame[i]
                 }
                 if (points >= 10) {
-                    points += frame[2]
+                    points = points +  frame[2]
                 }
                 break;
         }
         return points
     },
-    bottomRow: function (bowlingArray) {
+    bottomRow: function (bowlingArray, stop=bowlingArray.length) {
         let returnArray = []
         let res
-        let tmpArray = []
-        for (let i = 0; i < bowlingArray.length; i++) {
-            tmpArray.push(bowlingArray[i])
-            console.log(bowlingArray[i]);
-            console.log(tmpArray);
-            res = calculateScore(tmpArray)
+        for (let i = 0; i < stop; i++) {
+            res = calculateScore(bowlingArray)
+            res = sumArray(res, i+1, 0)
             returnArray.push(res)
         }
         return returnArray
     },
+    sumArray: function (bowlingArray, stop = bowlingArray.length, startPosition = 0) {
+        let points = 0
+        for (let i = startPosition; i < stop; i++) {
+            points = points + bowlingArray[i];
+        }
+        return points
+    },
+    calculateTotalScore: function (bowlingArray) {
+        let res = calculateScore(bowlingArray)
+        res = sumArray(res)
+        return res
+    },
+    findEmptySlot: function(bowlingArray) {
+        let i = 0
+        for (i; i < bowlingArray.length; i++) {
+            if (bowlingArray[i][0].length == 0 && bowlingArray[i][1].length == 0) {
+                break
+            }
+        }
+        return i
+    },
     arrayCombine: function (bowlingArray) {
-        console.log("start");
-        let bottomRowRes = bottomRow(bowlingArray)
-        let displayScoreBoardRes = displayScoreBoardPoints(bowlingArray)
+        let emptyIndex = findEmptySlot(bowlingArray)
+        let bottomRowRes = bottomRow(bowlingArray, emptyIndex)
+        let displayScoreBoardRes = displayScoreBoardPoints(bowlingArray, emptyIndex)
         for (let i = 0; i < bottomRowRes.length; i++) {
             displayScoreBoardRes[i].push(bottomRowRes[i])
         }
@@ -188,8 +192,11 @@ const bowlinglogic = {
 export default bowlinglogic
 export const calculateScore = bowlinglogic.calculateScore
 export const calculateFrame = bowlinglogic.calculateFrame
+export const calculateTotalScore = bowlinglogic.calculateTotalScore
 export const checkNext = bowlinglogic.checkNext
 export const displayScoreBoardPoints = bowlinglogic.displayScoreBoardPoints
 export const bottomRow = bowlinglogic.bottomRow
 export const addToArray = bowlinglogic.addToArray
 export const arrayCombine = bowlinglogic.arrayCombine
+export const sumArray = bowlinglogic.sumArray
+export const findEmptySlot = bowlinglogic.findEmptySlot

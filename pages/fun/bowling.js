@@ -11,22 +11,25 @@ Bowling.PageTitle = 'Bowling | Website'
 
 
 export default function Bowling() {
+    // const [bowlingArray, setbowlingArray] = useState([]);
     const [bowlingScore, setBowlingScore] = useState(bowlingCard);
     useEffect(() => {
         setBowlingScore(bowlingCard)
     }, []);
-    console.log(bowlingScore);
     return (
         <Container sx={{ width: "96%", height: "100%", pt: 2, mt: 0.3, }}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 {
                     bowlingScore.map((item, key) => {
-                        return <BowlingFrame key={key} frames={item.length - 1} total={item[-1]} framePoints={item} />
+                        let length = 2
+                        if (key == 9) {
+                            length = 3
+                        }
+                        return <BowlingFrame key={key} frames={length} total={item[-1]} framePoints={item} />
                     })
                 }
             </Box>
             <Box sx={{ display: "flex", justifyContent: "center" }} >
-
                 <Button variant="contained" sx={{ mx: 1 }} onClick={((e) => {
                     bowlinglogic.addToArray(e.target.innerText, setBowlingScore, bowlingScore)
                 })}>1</Button>

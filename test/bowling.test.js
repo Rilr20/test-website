@@ -179,3 +179,75 @@ describe('Bowling score table for frontend', () => {
         expect(res).toStrictEqual(expected)
     });
 })
+
+describe('Add to Array Tests', () => {
+    const testState = jest.fn();
+
+    test('add three items to array', () => {
+        let array = [2, 3]
+        let res
+        let bowlingCard = [
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", "", ""]
+        ]
+
+        let expected = [
+            [2, 3, 5],
+            [4, ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", "", ""]
+        ]
+        for (let i = 0; i < array.length; i++) {
+            res = bowlinglogic.addToArray(array[i], testState, bowlingCard)
+        }
+        expect(res).toBe(expected)
+    })
+
+    // test('add one items to array', () => {
+    //     let array = [2]
+    //     let res
+    //     let bowlingCard = [
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", "", ""]
+    //     ]
+
+    //     let expected = [
+    //         [2, "", 2],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", ""],
+    //         ["", "", ""]
+    //     ]
+    //     for (let i = 0; i < array.length; i++) {
+    //         res = bowlinglogic.addToArray(array[i], testState, bowlingCard)
+    //     }
+    //     expect(res).toStrictEqual(expected)
+    // })
+})

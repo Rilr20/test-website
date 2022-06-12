@@ -39,7 +39,7 @@ const bowlinglogic = {
                     }
                     break;
                 default:
-                    points = parseInt(points) + calculateFrame(bowlingArray[i])
+                    points = parseInt(points) + parseInt(calculateFrame(bowlingArray[i]))
                     break;
             }
             // console.log(points);
@@ -163,29 +163,52 @@ const bowlinglogic = {
     arrayCombine: function (bowlingArray) {
         let emptyIndex = findEmptySlot(bowlingArray)
         let bottomRowRes = bottomRow(bowlingArray, emptyIndex)
+        console.log("bottomrowres " + bottomRowRes);
         let displayScoreBoardRes = displayScoreBoardPoints(bowlingArray, emptyIndex)
         for (let i = 0; i < bottomRowRes.length; i++) {
-            displayScoreBoardRes[i].push(bottomRowRes[i])
+            // console.log("IAD)APODHIOASd");
+            // if (displayScoreBoardRes.length === 3 && i !== 9 
+            //     || displayScoreBoardRes.length === 4 && i === 9) {
+            //     console.log("argjrgjoragjo");
+            //     displayScoreBoardRes[-1] = bottomRowRes[i]
+            // } else {
+            console.log("BEFORe ");
+            console.log(displayScoreBoardRes[i]);
+                displayScoreBoardRes[i].push(bottomRowRes[i])
+            // }
+            console.log("AFTER");
+            console.log(displayScoreBoardRes[i]);
+
         }
         return displayScoreBoardRes
     },
     addToArray: function (number, setBowlingScore, bowlingScore) {
         let tmpArray = bowlingScore;
+        // console.log(bowlingScore);
         let stop = false;
         for (let i = 0; i < tmpArray.length; i++) {
+            // console.log(tmpArray[i] + " " + i);
             for (let index = 0; index < tmpArray[i].length - 1; index++) {
+                // console.log(tmpArray[i][index] + " " + index);
                 if (tmpArray[i][index] == "") {
+                    // console.log(parseInt(number));
                     tmpArray[i][index] = parseInt(number)
+                    // console.log("stop time");
                     stop = true
-                    break;
+                    // break;
                 }
             }
             if (stop) {
                 break
             }
         }
+        // console.log(tmpArray);
         let res = arrayCombine(tmpArray)
+        // console.log("res");
+        // console.log(res);
+        // console.log("res");
         setBowlingScore(res)
+        return res
     }
 }
 

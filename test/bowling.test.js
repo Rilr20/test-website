@@ -107,26 +107,90 @@ describe('Bowling score table for frontend', () => {
         expect(res).toStrictEqual(expected)
     })
     test('last frame with 3 strikes', () => {
-        let scoreTable = [[10, 10, 10]]
-        let expected = [["X", "X", "X"]]
+        let scoreTable = [["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""], [10, 10, 10]]
+        let expected = [["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""], ["X", "X", "X"]]
         let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
         expect(res).toStrictEqual(expected)
     })
     test('last frame with 1 strike spare', () => {
-        let scoreTable = [[10, 6, 4]]
-        let expected = [["X", 6, "/"]]
+        let scoreTable = [["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""], [10, 6, 4]]
+        let expected = [    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],["X", 6, "/"]]
         let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
         expect(res).toStrictEqual(expected)
     })
     test('last frame with 1 spare strike', () => {
-        let scoreTable = [[6, 4, 10]]
-        let expected = [[6, "/", "X"]]
+        let scoreTable = [["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""], [6, 4, 10]]
+        let expected = [    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],[6, "/", "X"]]
         let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
         expect(res).toStrictEqual(expected)
     })
     test('last frame with 8 points', () => {
-        let scoreTable = [[6, 2, ""]]
-        let expected = [[6, 2, ""]]
+        let scoreTable = [["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""], [6, 2, ""]]
+        let expected = [    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],
+    ["", ""],[6, 2, ""]]
         let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
         expect(res).toStrictEqual(expected)
     })
@@ -184,7 +248,7 @@ describe('Add to Array Tests', () => {
     const testState = jest.fn();
 
     test('add three items to array', () => {
-        let array = [2, 3]
+        let array = [2, 3, 4]
         let res
         let bowlingCard = [
             ["", ""],
@@ -201,7 +265,7 @@ describe('Add to Array Tests', () => {
 
         let expected = [
             [2, 3, 5],
-            [4, ""],
+            [4, "", 9],
             ["", ""],
             ["", ""],
             ["", ""],
@@ -214,40 +278,40 @@ describe('Add to Array Tests', () => {
         for (let i = 0; i < array.length; i++) {
             res = bowlinglogic.addToArray(array[i], testState, bowlingCard)
         }
-        expect(res).toBe(expected)
+        expect(res).toStrictEqual(expected)
     })
 
-    // test('add one items to array', () => {
-    //     let array = [2]
-    //     let res
-    //     let bowlingCard = [
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", "", ""]
-    //     ]
+    test('add one items to array', () => {
+        let array = [2]
+        let res
+        let bowlingCard = [
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", "", ""]
+        ]
 
-    //     let expected = [
-    //         [2, "", 2],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", ""],
-    //         ["", "", ""]
-    //     ]
-    //     for (let i = 0; i < array.length; i++) {
-    //         res = bowlinglogic.addToArray(array[i], testState, bowlingCard)
-    //     }
-    //     expect(res).toStrictEqual(expected)
-    // })
+        let expected = [
+            [2, "", 2],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", "", ""]
+        ]
+        for (let i = 0; i < array.length; i++) {
+            res = bowlinglogic.addToArray(array[i], testState, bowlingCard)
+        }
+        expect(res).toStrictEqual(expected)
+    })
 })

@@ -53,6 +53,9 @@ const bowlinglogic = {
         // [["", "X"], ["5", "/"]]
         for (let i = 0; i < bowlingArray.length; i++) {
             check = checkNext(bowlingArray[i])
+            if(bowlingArray[i].length === 3 && i !== 9 || i===9 && bowlingArray[i].length === 4) {
+                bowlingArray[i].pop()
+            }
             switch (check) {
                 case "strike":
                     if (bowlingArray[i].length === 3) {
@@ -160,10 +163,12 @@ const bowlinglogic = {
         }
         return i
     },
+    cleanArray: function (bowlingArray) {
+        return "arg"
+    },
     arrayCombine: function (bowlingArray) {
         let emptyIndex = findEmptySlot(bowlingArray)
         let bottomRowRes = bottomRow(bowlingArray, emptyIndex)
-        console.log("bottomrowres " + bottomRowRes);
         let displayScoreBoardRes = displayScoreBoardPoints(bowlingArray, emptyIndex)
         for (let i = 0; i < bottomRowRes.length; i++) {
             // console.log("IAD)APODHIOASd");
@@ -172,12 +177,8 @@ const bowlinglogic = {
             //     console.log("argjrgjoragjo");
             //     displayScoreBoardRes[-1] = bottomRowRes[i]
             // } else {
-            console.log("BEFORe ");
-            console.log(displayScoreBoardRes[i]);
                 displayScoreBoardRes[i].push(bottomRowRes[i])
             // }
-            console.log("AFTER");
-            console.log(displayScoreBoardRes[i]);
 
         }
         return displayScoreBoardRes
@@ -202,11 +203,7 @@ const bowlinglogic = {
                 break
             }
         }
-        // console.log(tmpArray);
         let res = arrayCombine(tmpArray)
-        // console.log("res");
-        // console.log(res);
-        // console.log("res");
         setBowlingScore(res)
         return res
     }
@@ -223,3 +220,4 @@ export const addToArray = bowlinglogic.addToArray
 export const arrayCombine = bowlinglogic.arrayCombine
 export const sumArray = bowlinglogic.sumArray
 export const findEmptySlot = bowlinglogic.findEmptySlot
+export const cleanArray = bowlinglogic.cleanArray

@@ -53,9 +53,6 @@ const bowlinglogic = {
         // [["", "X"], ["5", "/"]]
         for (let i = 0; i < bowlingArray.length; i++) {
             check = checkNext(bowlingArray[i])
-            if(bowlingArray[i].length === 3 && i !== 9 || i===9 && bowlingArray[i].length === 4) {
-                bowlingArray[i].pop()
-            }
             switch (check) {
                 case "strike":
                     if (bowlingArray[i].length === 3) {
@@ -144,8 +141,9 @@ const bowlinglogic = {
     },
     sumArray: function (bowlingArray, stop = bowlingArray.length, startPosition = 0) {
         let points = 0
+        console.log(bowlingArray);
         for (let i = startPosition; i < stop; i++) {
-            points = points + bowlingArray[i];
+            points = points + parseInt(bowlingArray[i]);
         }
         return points
     },
@@ -164,12 +162,20 @@ const bowlinglogic = {
         return i
     },
     cleanArray: function (bowlingArray) {
-        return "arg"
+        bowlingArray.forEach(item => {
+            // item.pop()
+            if (item.length === 3 && (item[0] !== "" && item[1] !== "X")|| item.length === 4) {
+                item.pop()
+            }
+        });
+        return bowlingArray
     },
     arrayCombine: function (bowlingArray) {
-        let emptyIndex = findEmptySlot(bowlingArray)
-        let bottomRowRes = bottomRow(bowlingArray, emptyIndex)
-        let displayScoreBoardRes = displayScoreBoardPoints(bowlingArray, emptyIndex)
+        let tmpArray = cleanArray(bowlingArray) 
+        let emptyIndex = findEmptySlot(tmpArray)
+        let bottomRowRes = bottomRow(tmpArray, emptyIndex)
+        console.log(bottomRowRes);
+        let displayScoreBoardRes = displayScoreBoardPoints(tmpArray, emptyIndex)
         for (let i = 0; i < bottomRowRes.length; i++) {
             // console.log("IAD)APODHIOASd");
             // if (displayScoreBoardRes.length === 3 && i !== 9 
@@ -185,7 +191,7 @@ const bowlinglogic = {
     },
     addToArray: function (number, setBowlingScore, bowlingScore) {
         let tmpArray = bowlingScore;
-        // console.log(bowlingScore);
+        console.log(tmpArray);
         let stop = false;
         for (let i = 0; i < tmpArray.length; i++) {
             // console.log(tmpArray[i] + " " + i);

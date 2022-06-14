@@ -16,7 +16,7 @@ export default function Fun() {
                     <Card sx={{ minHeight: "150px", textAlign: "center", backgroundColor: "secondary.light",pb:2 }}>
                         <Box>
                             <Typography variant="h1" sx={{ fontSize: "22pt", mt: 2 }}>
-                                <Link href="fun/dicegame">DiceGame</Link><br />
+                                <Link href="/fun/dicegame">DiceGame</Link><br />
                             </Typography>
                         </Box>
                         <Box sx={{ display: "flex" }}>
@@ -35,7 +35,7 @@ export default function Fun() {
                     <Card sx={{ minHeight: "150px", textAlign: "center", backgroundColor: "secondary.light",pb:2 }}>
                         <Box>
                             <Typography variant="h1" sx={{ fontSize: "22pt", mt: 2 }}>
-                                <Link href="fun/bowling">Bowling</Link><br />
+                                <Link href="/fun/bowling">Bowling</Link><br />
                             </Typography>
                         </Box>
                         <Box sx={{ display: "flex" }}>

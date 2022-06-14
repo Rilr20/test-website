@@ -1,5 +1,5 @@
 const bowlinglogic = {
-    calculateScore: function (bowlingArray, stop=bowlingArray.length) {
+    calculateScore: function (bowlingArray, stop = bowlingArray.length) {
         let points = 0
         let returnArray = []
         let check;
@@ -29,6 +29,7 @@ const bowlinglogic = {
                     }
                     break;
                 case "spare":
+                    //tror denna är trasig om man får spare sedan strike
                     if (bowlingArray[i].length === 3) {
                         points += calculateFrame(bowlingArray[i])
                     } else {
@@ -37,6 +38,23 @@ const bowlinglogic = {
                             points = points + bowlingArray[i + 1][0]
                         }
                     }
+                    // if (bowlingArray[i].length === 3) {
+                    //     points += calculateFrame(bowlingArray[i])
+                    // } else {
+                    //     console.log(points);
+                    //     points = points + 10
+                    //     console.log(points);
+                    //     if (i + 1 < bowlingArray.length) {
+                    //         if (bowlingArray[i][0].length !== undefined) {
+                    //             console.log(bowlingArray[i][1].length);
+                    //             points = points + parseInt(bowlingArray[i + 1][0])
+                    //         } else if (bowlingArray[i][1].length !== undefined) {
+                    //             console.log(bowlingArray[i][1].length);
+                    //             points = points + parseInt(bowlingArray[i + 1][1])
+                    //         }
+                    //         console.log(points);
+                    //     }
+                    // }
                     break;
                 default:
                     points = parseInt(points) + parseInt(calculateFrame(bowlingArray[i]))
@@ -120,30 +138,47 @@ const bowlinglogic = {
                 break;
             case 3:
                 for (let i = 0; i < frame.length - 1; i++) {
-                    points = points +  frame[i]
+                    points = points + frame[i]
                 }
                 if (points >= 10) {
-                    points = points +  frame[2]
+                    points = points + frame[2]
                 }
                 break;
         }
         return points
     },
-    bottomRow: function (bowlingArray, stop=bowlingArray.length) {
+    bottomRow: function (bowlingArray, stop = bowlingArray.length) {
+        // console.log("BOTTOMROW FUNCTION ASS");
+        // console.log(bowlingArray);
         let returnArray = []
         let res
         for (let i = 0; i < stop; i++) {
             res = calculateScore(bowlingArray)
-            res = sumArray(res, i+1, 0)
+            // console.log("calculate sciore result");
+            // console.log(res);
+            res = sumArray(res, i + 1, 0)
             returnArray.push(res)
         }
         return returnArray
     },
     sumArray: function (bowlingArray, stop = bowlingArray.length, startPosition = 0) {
         let points = 0
-        console.log(bowlingArray);
+        // console.log("-----------------------------------------------------------");
+        // console.log("SUMARRAY");
+        // console.log(bowlingArray);
         for (let i = startPosition; i < stop; i++) {
-            points = points + parseInt(bowlingArray[i]);
+            // console.log("starterion");
+            // console.log(bowlingArray[i] instanceof String);
+            // console.log(bowlingArray[i] !== "");
+            // console.log(bowlingArray[i]);
+            if (bowlingArray[i] instanceof String && bowlingArray[i] !== "") {
+                // console.log("AIDAIOHHIOASDIHOIOADHOASDOIHASDIOHASDoih");
+                let tmpPoints = parseInt(bowlingArray[i - 1]) - 10
+                points = points + tmpPoints
+            } else {
+                points = points + parseInt(bowlingArray[i]);
+
+            }
         }
         return points
     },
@@ -152,7 +187,7 @@ const bowlinglogic = {
         res = sumArray(res)
         return res
     },
-    findEmptySlot: function(bowlingArray) {
+    findEmptySlot: function (bowlingArray) {
         let i = 0
         for (i; i < bowlingArray.length; i++) {
             if (bowlingArray[i][0].length === 0 && bowlingArray[i][1].length === 0) {
@@ -164,54 +199,119 @@ const bowlinglogic = {
     cleanArray: function (bowlingArray) {
         bowlingArray.forEach(item => {
             // item.pop()
-            if (item.length === 3 && (item[0] !== "" && item[1] !== "X")|| item.length === 4) {
+            // switch (item.length) {
+            //     case 3:
+            //         if (bowlingArray.indexOf(item) != 10) {
+            //             item.pop()
+            //         }
+            //         break;
+            //     case 4:
+            //         item.pop()
+            //         break;
+            //     default:
+            //         break;
+            // }
+            if (item.length === 3 && (item[0] !== "" && item[1] !== "X") || item.length === 4) {
                 item.pop()
             }
         });
+        // for (let i = 0; i < bowlingArray.length; i++) {
+        //     if (i === 9) {
+        //         if (bowlingArray[i].length === 4) {
+        //             bowlingArray[i].pop()
+
+        //         }
+        //     } else {
+        //         if (bowlingArray[i].length === 3) {
+        //             bowlingArray[i].pop()
+        //         }
+        //     }
+
+        // }
         return bowlingArray
     },
     arrayCombine: function (bowlingArray) {
-        let tmpArray = cleanArray(bowlingArray) 
+        // let tmpArray = cleanArray(bowlingArray)
+        let tmpArray = bowlingArray
         let emptyIndex = findEmptySlot(tmpArray)
         let bottomRowRes = bottomRow(tmpArray, emptyIndex)
-        console.log(bottomRowRes);
+        // console.log("bottomRowResasdasdasd");
+        // console.log(bowlingArray);
         let displayScoreBoardRes = displayScoreBoardPoints(tmpArray, emptyIndex)
-        for (let i = 0; i < bottomRowRes.length; i++) {
+        for (let i = 0; i < 1; i++) {
             // console.log("IAD)APODHIOASd");
             // if (displayScoreBoardRes.length === 3 && i !== 9 
             //     || displayScoreBoardRes.length === 4 && i === 9) {
             //     console.log("argjrgjoragjo");
             //     displayScoreBoardRes[-1] = bottomRowRes[i]
             // } else {
-                displayScoreBoardRes[i].push(bottomRowRes[i])
+            // // console.log(displayScoreBoardRes);
+            displayScoreBoardRes[i].push(bottomRowRes[i])
+            // // console.log(displayScoreBoardRes);
             // }
 
         }
         return displayScoreBoardRes
     },
-    addToArray: function (number, setBowlingScore, bowlingScore) {
-        let tmpArray = bowlingScore;
-        console.log(tmpArray);
-        let stop = false;
-        for (let i = 0; i < tmpArray.length; i++) {
-            // console.log(tmpArray[i] + " " + i);
-            for (let index = 0; index < tmpArray[i].length - 1; index++) {
-                // console.log(tmpArray[i][index] + " " + index);
-                if (tmpArray[i][index] == "") {
-                    // console.log(parseInt(number));
-                    tmpArray[i][index] = parseInt(number)
-                    // console.log("stop time");
+    addToArray: function (number, setBowlingScore, bowlingScore, setBottomRow, setDisplayScore) {
+        number = parseInt(number)
+        // console.log(bowlingScore);
+        // console.log("START __--_-_--_____---_");
+        // let tmpArray = bowlingScore;
+        // // console.log(tmpArray);
+        // // console.log(number);
+        // let stop = false;
+        // for (let i = 0; i < tmpArray.length; i++) {
+        //     // console.log(tmpArray[i] + " " + i);
+        //     for (let index = 0; index < tmpArray[i].length - 1; index++) {
+        //         // console.log(tmpArray[i][index] + " " + index);
+        //         // console.log(tmpArr   ay[i].length);
+        //         if (tmpArray[i][index] == "") {
+        //             // console.log("arghora");
+        //             // console.log(parseInt(number));
+        //             tmpArray[i][index] = parseInt(number)
+        //             console.log(tmpArray);
+        //             // console.log("stop time");
+        //             stop = true
+        //             // break;
+        //         }
+        //     }
+        //     if (stop) {
+        //         break
+        //     }
+        // }
+        // let res = arrayCombine(tmpArray)
+        // // console.log("OSAJKASDKJLASDJKLASDKJLASDJKLDAS");
+        // // console.log(tmpArray);
+        let stop = false
+        for (let i = 0; i < bowlingScore.length; i++) {
+            for (let j = 0; j < bowlingScore[i].length; j++) {
+                if (bowlingScore[i][j] == "") {
+                    bowlingScore[i][j] = number
                     stop = true
-                    // break;
+                    break
                 }
             }
             if (stop) {
                 break
             }
         }
-        let res = arrayCombine(tmpArray)
-        setBowlingScore(res)
-        return res
+        let res = displayScoreBoardPoints(bowlingScore)
+        let stopInt = findEmptySlot(bowlingScore)
+        let score = calculateScore(bowlingScore, stopInt)
+        // console.log("frameScore");
+        // console.log("frameScore");
+        // console.log("frameScore");
+        // console.log(score);
+        let frameScore = bottomRow(bowlingScore, stopInt)
+        // console.log("frameScore");
+        // console.log(frameScore);
+        // console.log("frameScore");
+        setBottomRow(frameScore)
+        setDisplayScore(res)
+        setBowlingScore(bowlingScore)
+        // console.log(res);
+        return [res, frameScore]
     }
 }
 

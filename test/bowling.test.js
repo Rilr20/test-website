@@ -195,56 +195,56 @@ describe('Bowling score table for frontend', () => {
         let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
         expect(res).toStrictEqual(expected)
     })
-    // test('With full array and empty slots', () => {
-    //     let scoretable = [[2, 3],
-    //     [6, 4],
-    //     [10, ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", "", ""]]
-    //     let expected = [[2, 3, 5],
-    //     [6, "/", 25],
-    //     ["", "X", 35],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", ""],
-    //     ["", "", ""]]
-    //     let res = bowlinglogic.arrayCombine(scoretable)
-    //     expect(res).toStrictEqual(expected)
-    // });
-    // test('With full array filled', () => {
-    //     let scoretable = [[10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, ""],
-    //     [10, 10, 10]]
-    //     let expected = [["", "X", 30],
-    //     ["", "X", 60],
-    //     ["", "X", 90],
-    //     ["", "X", 120],
-    //     ["", "X", 150],
-    //     ["", "X", 180],
-    //     ["", "X", 210],
-    //     ["", "X", 240],
-    //     ["", "X", 270],
-    //     ["X", "X", "X", 300]]
+    test('With full array and empty slots', () => {
+        let scoretable = [[2, 3],
+        [6, 4],
+        [10, ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", "", ""]]
+        let expected = [[2, 3, 5],
+        [6, "/", 25],
+        ["", "X", 35],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", "", ""]]
+        let res = bowlinglogic.arrayCombine(scoretable)
+        expect(res).toStrictEqual(expected)
+    });
+    test('With full array filled', () => {
+        let scoretable = [[10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, ""],
+        [10, 10, 10]]
+        let expected = [["", "X", 30],
+        ["", "X", 60],
+        ["", "X", 90],
+        ["", "X", 120],
+        ["", "X", 150],
+        ["", "X", 180],
+        ["", "X", 210],
+        ["", "X", 240],
+        ["", "X", 270],
+        ["X", "X", "X", 300]]
 
 
-    //     let res = bowlinglogic.arrayCombine(scoretable)
-    //     expect(res).toStrictEqual(expected)
-    // });
+        let res = bowlinglogic.arrayCombine(scoretable)
+        expect(res).toStrictEqual(expected)
+    });
 })
 
 describe('Add to Array Tests', () => {
@@ -286,8 +286,7 @@ describe('Add to Array Tests', () => {
         expect(res[0]).toStrictEqual(expected)
         expect(res[1]).toStrictEqual(expected2)
     })
-    test('add three strikes to array', () => {
-        let array = [2, 3, 4]
+    test('add strikes to array', () => {
         let res
         let bowlingCard = [
             ["", ""],
@@ -306,6 +305,28 @@ describe('Add to Array Tests', () => {
             ["", "X"],
             ["", "X"],
             ["", "X"],
+            ["", "X"],
+            ["", "X"],
+            ["", "X"],
+            ["", "X"],
+            ["", "X"],
+            ["", "X"],
+            ["X", "X", "X"]
+        ]
+        for (let i = 0; i < 13; i++) {
+            res = bowlinglogic.addToArray(10, testState, bowlingCard, testState, testState)
+        }
+        let expected2 = [30,60,90,120,150,180,210,240,270,300]
+
+        expect(res[0]).toStrictEqual(expected)
+        expect(res[1]).toStrictEqual(expected2)
+    })
+    test('check points from each strike', () => {
+        let expected2 = [[10],[20,30],[30,50,60]]
+        let bowlingCard = [
+            ["", ""],
+            ["", ""],
+            ["", ""],
             ["", ""],
             ["", ""],
             ["", ""],
@@ -314,13 +335,11 @@ describe('Add to Array Tests', () => {
             ["", ""],
             ["", "", ""]
         ]
+        let res
         for (let i = 0; i < 3; i++) {
             res = bowlinglogic.addToArray(10, testState, bowlingCard, testState, testState)
+            expect(res[1]).toStrictEqual(expected2[i])
         }
-        let expected2 = [30,20,10]
-
-        expect(res[0]).toStrictEqual(expected)
-        expect(res[1]).toStrictEqual(expected2)
     })
     test('add one items to array', () => {
         let array = [2]

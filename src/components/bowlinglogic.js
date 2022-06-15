@@ -16,7 +16,9 @@ const bowlinglogic = {
                         points = parseInt(points) + 10
                         if (i < bowlingArray.length - 1) {
                             if (bowlingArray[i + 1].length === 3) {
-                                points = parseInt(points) + parseInt(bowlingArray[i + 1][0]) + parseInt(bowlingArray[i + 1][1])
+                                //onödig kod? kanske flyttas
+                                // points = parseInt(points) + parseInt(bowlingArray[i + 1][0]) + parseInt(bowlingArray[i + 1][1])
+                                points = parseInt(points) + parseInt(bowlingArray[i + 1][0] == "" ? 0 : bowlingArray[i + 1][0]) + parseInt(bowlingArray[i + 1][1] == "" ? 0 : bowlingArray[i + 1][0])
                             } else {
                                 // let frame = calculateFrame(bowlingArray[i + 1])
                                 points = parseInt(points) + parseInt(calculateFrame(bowlingArray[i + 1]))
@@ -24,7 +26,7 @@ const bowlinglogic = {
                             }
                         }
                         if (i < bowlingArray.length - 2 && checkAgain == "strike") {
-                            points = parseInt(points) + parseInt(bowlingArray[i + 2][0])
+                            points = parseInt(points) + parseInt(bowlingArray[i + 2][0] == "" ? 0 : bowlingArray[i + 2][0])
                         }
                     }
                     break;
@@ -286,6 +288,9 @@ const bowlinglogic = {
         let stop = false
         for (let i = 0; i < bowlingScore.length; i++) {
             for (let j = 0; j < bowlingScore[i].length; j++) {
+                if (bowlingScore[i][j] === 10 && bowlingScore[i].length !== 3) {
+                    break
+                }
                 if (bowlingScore[i][j] == "") {
                     bowlingScore[i][j] = number
                     stop = true

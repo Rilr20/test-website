@@ -303,7 +303,7 @@ const bowlinglogic = {
         }
         let res = displayScoreBoardPoints(bowlingScore)
         let stopInt = findEmptySlot(bowlingScore)
-        let score = calculateScore(bowlingScore, stopInt)
+        // let score = calculateScore(bowlingScore, stopInt)
         // console.log("frameScore");
         // console.log("frameScore");
         // console.log("frameScore");

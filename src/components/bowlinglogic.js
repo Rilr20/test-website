@@ -184,11 +184,11 @@ const bowlinglogic = {
         }
         return points
     },
-    calculateTotalScore: function (bowlingArray) {
-        let res = calculateScore(bowlingArray)
-        res = sumArray(res)
-        return res
-    },
+    // calculateTotalScore: function (bowlingArray) {
+    //     let res = calculateScore(bowlingArray)
+    //     res = sumArray(res)
+    //     return res
+    // },
     findEmptySlot: function (bowlingArray) {
         let i = 0
         for (i; i < bowlingArray.length; i++) {
@@ -198,63 +198,63 @@ const bowlinglogic = {
         }
         return i
     },
-    cleanArray: function (bowlingArray) {
-        bowlingArray.forEach(item => {
-            // item.pop()
-            // switch (item.length) {
-            //     case 3:
-            //         if (bowlingArray.indexOf(item) != 10) {
-            //             item.pop()
-            //         }
-            //         break;
-            //     case 4:
-            //         item.pop()
-            //         break;
-            //     default:
-            //         break;
-            // }
-            if (item.length === 3 && (item[0] !== "" && item[1] !== "X") || item.length === 4) {
-                item.pop()
-            }
-        });
-        // for (let i = 0; i < bowlingArray.length; i++) {
-        //     if (i === 9) {
-        //         if (bowlingArray[i].length === 4) {
-        //             bowlingArray[i].pop()
+    // // cleanArray: function (bowlingArray) {
+    // //     bowlingArray.forEach(item => {
+    // //         // item.pop()
+    // //         // switch (item.length) {
+    // //         //     case 3:
+    // //         //         if (bowlingArray.indexOf(item) != 10) {
+    // //         //             item.pop()
+    // //         //         }
+    // //         //         break;
+    // //         //     case 4:
+    // //         //         item.pop()
+    // //         //         break;
+    // //         //     default:
+    // //         //         break;
+    // //         // }
+    // //         if (item.length === 3 && (item[0] !== "" && item[1] !== "X") || item.length === 4) {
+    // //             item.pop()
+    // //         }
+    // //     });
+    // //     // for (let i = 0; i < bowlingArray.length; i++) {
+    // //     //     if (i === 9) {
+    // //     //         if (bowlingArray[i].length === 4) {
+    // //     //             bowlingArray[i].pop()
 
-        //         }
-        //     } else {
-        //         if (bowlingArray[i].length === 3) {
-        //             bowlingArray[i].pop()
-        //         }
-        //     }
+    // //     //         }
+    // //     //     } else {
+    // //     //         if (bowlingArray[i].length === 3) {
+    // //     //             bowlingArray[i].pop()
+    // //     //         }
+    // //     //     }
 
-        // }
-        return bowlingArray
-    },
-    arrayCombine: function (bowlingArray) {
-        // let tmpArray = cleanArray(bowlingArray)
-        let tmpArray = bowlingArray
-        let emptyIndex = findEmptySlot(tmpArray)
-        let bottomRowRes = bottomRow(tmpArray, emptyIndex)
-        // console.log("bottomRowResasdasdasd");
-        // console.log(bowlingArray);
-        let displayScoreBoardRes = displayScoreBoardPoints(tmpArray, emptyIndex)
-        for (let i = 0; i < 1; i++) {
-            // console.log("IAD)APODHIOASd");
-            // if (displayScoreBoardRes.length === 3 && i !== 9 
-            //     || displayScoreBoardRes.length === 4 && i === 9) {
-            //     console.log("argjrgjoragjo");
-            //     displayScoreBoardRes[-1] = bottomRowRes[i]
-            // } else {
-            // // console.log(displayScoreBoardRes);
-            displayScoreBoardRes[i].push(bottomRowRes[i])
-            // // console.log(displayScoreBoardRes);
-            // }
+    // //     // }
+    // //     return bowlingArray
+    // // },
+    // arrayCombine: function (bowlingArray) {
+    //     // let tmpArray = cleanArray(bowlingArray)
+    //     let tmpArray = bowlingArray
+    //     let emptyIndex = findEmptySlot(tmpArray)
+    //     let bottomRowRes = bottomRow(tmpArray, emptyIndex)
+    //     // console.log("bottomRowResasdasdasd");
+    //     // console.log(bowlingArray);
+    //     let displayScoreBoardRes = displayScoreBoardPoints(tmpArray, emptyIndex)
+    //     for (let i = 0; i < 1; i++) {
+    //         // console.log("IAD)APODHIOASd");
+    //         // if (displayScoreBoardRes.length === 3 && i !== 9 
+    //         //     || displayScoreBoardRes.length === 4 && i === 9) {
+    //         //     console.log("argjrgjoragjo");
+    //         //     displayScoreBoardRes[-1] = bottomRowRes[i]
+    //         // } else {
+    //         // // console.log(displayScoreBoardRes);
+    //         displayScoreBoardRes[i].push(bottomRowRes[i])
+    //         // // console.log(displayScoreBoardRes);
+    //         // }
 
-        }
-        return displayScoreBoardRes
-    },
+    //     }
+    //     return displayScoreBoardRes
+    // },
     addToArray: function (number, setBowlingScore, bowlingScore, setBottomRow, setDisplayScore) {
         number = parseInt(number)
         // console.log(bowlingScore);
@@ -323,12 +323,12 @@ const bowlinglogic = {
 export default bowlinglogic
 export const calculateScore = bowlinglogic.calculateScore
 export const calculateFrame = bowlinglogic.calculateFrame
-export const calculateTotalScore = bowlinglogic.calculateTotalScore
+// export const calculateTotalScore = bowlinglogic.calculateTotalScore
 export const checkNext = bowlinglogic.checkNext
 export const displayScoreBoardPoints = bowlinglogic.displayScoreBoardPoints
 export const bottomRow = bowlinglogic.bottomRow
 export const addToArray = bowlinglogic.addToArray
-export const arrayCombine = bowlinglogic.arrayCombine
+// export const arrayCombine = bowlinglogic.arrayCombine
 export const sumArray = bowlinglogic.sumArray
 export const findEmptySlot = bowlinglogic.findEmptySlot
-export const cleanArray = bowlinglogic.cleanArray
+// export const cleanArray = bowlinglogic.cleanArray

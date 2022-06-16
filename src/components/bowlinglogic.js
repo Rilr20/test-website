@@ -190,14 +190,13 @@ const bowlinglogic = {
                 if (bowlingScore[i][j] === 10 && bowlingScore[i].length !== 3) {
                     break
                 }
-                if (bowlingScore[i][j].length == 0) {
+                if (bowlingScore[i][j].length === 0) {
                     if (bowlingScore[i].length === 3 && bowlingScore[i][0].length !== 0 && bowlingScore[i][1].length !== 0 && bowlingScore[i][0] + bowlingScore[i][1] < 10) {
                         // bowlingScore[i][j] = number
                         stop = true
                         break
-                    } else {
-                        bowlingScore[i][j] = number
                     }
+                    bowlingScore[i][j] = number
                     // console.log(bowlingScore[i][j]);
                     stop = true
                     break

@@ -23,6 +23,12 @@ export default function Bowling() {
     const runCallback = (cb) => {
         return cb();
     };
+    function doesstuff() {
+        let index= bowlinglogic.findEmptySlot(bowlingScore)
+        if (bowlingScore[index-1][1].length !== 0) {
+            setLastPoint(0)
+        }
+    }
     return (
         <Container sx={{ width: "96%", height: "100%", pt: 2, mt: 0.3, }}>
             <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -50,6 +56,7 @@ export default function Bowling() {
                                 // setLastPoint(parseInt(e.target.innerText == "10" ? 0 : e.target.innerText))
                                 let num = lastPoint + parseInt(e.target.innerText)
                                 setLastPoint(parseInt(num == 10 ? 0 : num))
+                                doesstuff()
                             })}>{i}</Button>)
                         }
                         return elements

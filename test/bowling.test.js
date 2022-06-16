@@ -1,504 +1,211 @@
-// import { AbcSharp } from "@mui/icons-material";
-// import bowlinglogic, { calculateFrame, cleanArray } from "../src/components/bowlinglogic";
+import bowlinglogic from "../src/components/bowlinglogic";
 
-// describe('bowling table frame tests', () => {
-//     test('calculate frame normal', () => {
-//         let frame = [2, 3]
-//         let res = bowlinglogic.calculateFrame(frame)
-//         expect(res).toBe(5)
-//     });
-//     test('calculate frame spare 2 8', () => {
-//         let frame = [2, 8]
-//         let res = bowlinglogic.calculateFrame(frame)
-//         expect(res).toBe(10)
-//     });
-//     test('calculate frame 0 10', () => {
-//         let frame = [0, 10]
-//         let res = bowlinglogic.calculateFrame(frame)
-//         expect(res).toBe(10)
-//     })
-//     test('calcuate frame strike', () => {
-//         let frame = [10]
-//         let res = bowlinglogic.calculateFrame(frame)
-//         expect(res).toBe(10)
-//     });
-//     test('calculate frame misses', () => {
-//         let frame = [0, 0]
-//         let res = bowlinglogic.calculateFrame(frame)
-//         expect(res).toBe(0)
-//     })
-//     test('calclate last frame three strikes', () => {
-//         let frame = [10, 10, 10]
-//         let res = bowlinglogic.calculateFrame(frame)
-//         expect(res).toBe(30)
-//     })
-//     test('calculate last frame impossible', () => {
-//         let frame = [2, 5, 2]
-//         let res = bowlinglogic.calculateFrame(frame)
-//         expect(res).toBe(7)
-//     })
-//     test('calculate last frame spare', () => {
-//         let frame = [2, 8, 5]
-//         let res = bowlinglogic.calculateFrame(frame)
-//         expect(res).toBe(15)
-//     })
-// });
+describe('Calculate Frame Function', () => {
+    test('calculate frame length 2', () => {
+        let frame = [5, 2]
+        let res = bowlinglogic.calculateFrame(frame)
+        expect(res).toBe(7)
+    });
+    test('calculate frame length 2 with empty', () => {
+        let frame = [10, ""]
+        let res = bowlinglogic.calculateFrame(frame)
+        expect(res).toBe(10)
+    });
+    test('calculate frame length 3 points is 9', () => {
+        let frame = [5, 4, 2]
+        let res = bowlinglogic.calculateFrame(frame)
+        expect(res).toBe(9)
 
-// describe('bowling frame scoretable test', () => {
-//     test('max score', () => {
-//         let scoretable = [[10], [10], [10], [10], [10], [10], [10], [10], [10], [10, 10, 10]]
-//         let res = bowlinglogic.calculateTotalScore(scoretable)
-//         expect(res).toBe(300)
-//     });
-//     test('full game scoring two scores last round', () => {
-//         let scoretable = [[2, 4], [9, 1], [10], [7, 2], [0, 10], [10, ""], [10], [10], [4, 1], [3, 5]]
-//         let res = bowlinglogic.calculateTotalScore(scoretable)
-//         expect(res).toBe(156)
-//     })
-//     test('full game only spares', () => {
-//         let scoretable = [[9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1], [9, 1, 9]]
-//         let res = bowlinglogic.calculateTotalScore(scoretable)
-//         expect(res).toBe(190)
-//     })
-//     test('last three with spare', () => {
-//         let scoretable = [[0, 10, 5]]
-//         let res = bowlinglogic.calculateTotalScore(scoretable)
-//         expect(res).toBe(15)
-//     })
-//     test('one strikes in row', () => {
-//         let scoretable = [[10]]
-//         let res = bowlinglogic.calculateTotalScore(scoretable)
-//         expect(res).toBe(10)
-//     });
-//     test('two strikes in row', () => {
-//         let scoretable = [[10], [10]]
-//         let res = bowlinglogic.calculateTotalScore(scoretable)
-//         expect(res).toBe(30)
-//     });
-//     test('three strikes in row', () => {
-//         let scoretable = [[10, ""], [10, ""], [10, ""]]
-//         let res = bowlinglogic.calculateTotalScore(scoretable)
-//         expect(res).toBe(60)
-//     });
-// });
+    });
+    test('calculate frame length 3 points is 12', () => {
+        let frame = [6, 4, 2]
+        let res = bowlinglogic.calculateFrame(frame)
+        expect(res).toBe(12)
+    });
+});
 
-// describe('Bowling score table for frontend', () => {
-//     test('converts to special characters', () => {
-//         let scoretable = [[6, 2], [6, 4], [10]]
-//         let expected = [[6, 2], [6, "/"], ["", "X"]]
-//         let res = bowlinglogic.displayScoreBoardPoints(scoretable)
-//         expect(res).toStrictEqual(expected)
-//     });
-//     test('calculate score for each frame', () => {
-//         let scoretable = [[6, 2], [6, 4], [10]]
-//         let expected = [8, 28, 38]
-//         let res = bowlinglogic.bottomRow(scoretable)
-//         expect(res).toStrictEqual(expected)
-//     })
-//     // test('create array with scores and total for each frame', () => {
-//     //     let scoretable = [[6, 2], [6, 4], [10]]
-//     //     let expected = [[6, 2, 8], [6, "/", 28], ["", "X", 38]]
-//     //     let res = bowlinglogic.arrayCombine(scoretable)
-//     //     expect(res).toStrictEqual(expected)
-//     // })
-//     // test('create array with scores and total for three strikes', () => {
-//     //     let scoretable = [[10, ""], [10, ""], [10, ""]]
-//     //     let expected = [["", "X", 30], ["", "X", 50], ["", "X", 60]]
-//     //     let res = bowlinglogic.arrayCombine(scoretable)
-//     //     expect(res).toStrictEqual(expected)
-//     // })
-//     test('last frame with 3 strikes', () => {
-//         let scoreTable = [["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""], [10, 10, 10]]
-//         let expected = [["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""], ["X", "X", "X"]]
-//         let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
-//         expect(res).toStrictEqual(expected)
-//     })
-//     test('last frame with 1 strike spare', () => {
-//         let scoreTable = [["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""], [10, 6, 4]]
-//         let expected = [["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""], ["X", 6, "/"]]
-//         let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
-//         expect(res).toStrictEqual(expected)
-//     })
-//     test('last frame with 1 spare strike', () => {
-//         let scoreTable = [["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""], [6, 4, 10]]
-//         let expected = [["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""], [6, "/", "X"]]
-//         let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
-//         expect(res).toStrictEqual(expected)
-//     })
-//     test('last frame with 8 points', () => {
-//         let scoreTable = [["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""], [6, 2, ""]]
-//         let expected = [["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""], [6, 2, ""]]
-//         let res = bowlinglogic.displayScoreBoardPoints(scoreTable)
-//         expect(res).toStrictEqual(expected)
-//     })
-//     test('With full array and empty slots', () => {
-//         let scoretable = [[2, 3],
-//         [6, 4],
-//         [10, ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", "", ""]]
-//         let expected = [[2, 3, 5],
-//         [6, "/", 25],
-//         ["", "X", 35],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", ""],
-//         ["", "", ""]]
-//         let res = bowlinglogic.arrayCombine(scoretable)
-//         expect(res).toStrictEqual(expected)
-//     });
-//     test('With full array filled', () => {
-//         let scoretable = [[10, ""],
-//         [10, ""],
-//         [10, ""],
-//         [10, ""],
-//         [10, ""],
-//         [10, ""],
-//         [10, ""],
-//         [10, ""],
-//         [10, ""],
-//         [10, 10, 10]]
-//         let expected = [["", "X", 30],
-//         ["", "X", 60],
-//         ["", "X", 90],
-//         ["", "X", 120],
-//         ["", "X", 150],
-//         ["", "X", 180],
-//         ["", "X", 210],
-//         ["", "X", 240],
-//         ["", "X", 270],
-//         ["X", "X", "X", 300]]
+describe('Sum Array Funciton', () => {
+    test('sum total of 10', () => {
+        let array = [1, 2, 3, 4, 5, 6]
+        let res = bowlinglogic.sumArray(array)
+        expect(res).toBe(21)
+    });
+    test('sum array with stop set', () => {
+        let array = [1, 2, 3, 4, 5, 6]
+        let res = bowlinglogic.sumArray(array, 4)
+        expect(res).toBe(10)
+    });
+    test('sum array with start position set', () => {
+        let array = [1, 2, 3, 4, 5, 6]
+        let res = bowlinglogic.sumArray(array, undefined, 4)
+        expect(res).toBe(11)
+    });
 
+})
 
-//         let res = bowlinglogic.arrayCombine(scoretable)
-//         expect(res).toStrictEqual(expected)
-//     });
-// })
+describe('Calculate Score Function', () => {
+    test('calculate score three strikes in row', () => {
+        let bowlingArray = [[10, ""], [10, ""], [10, ""]]
+        let res = bowlinglogic.calculateScore(bowlingArray)
+        expect(res).toStrictEqual([30, 20, 10])
+    });
+    test('two strikes next frame one empty', () => {
+        let bowlingArray = [[10, ""], [10, ""], ["", "", ""]]
+        let res = bowlinglogic.calculateScore(bowlingArray)
+        expect(res).toStrictEqual([20, 10, 0])
+    });
+    test('one strike in last frame', () => {
+        let bowlingArray = [[10, ""], [10, 5, ""]]
+        let res = bowlinglogic.calculateScore(bowlingArray)
+        expect(res).toStrictEqual([25, 15])
+    })
+    test('two spare', () => {
+        let bowlingArray = [[4, 6], [5, 5]]
+        let res = bowlinglogic.calculateScore(bowlingArray)
+        expect(res).toStrictEqual([15, 10])
+    })
+    test('spare last frame', () => {
+        let bowlingArray = [[4, 6, 5]]
+        let res = bowlinglogic.calculateScore(bowlingArray)
+        expect(res).toStrictEqual([15])
+    })
+    test('normal add', () => {
+        let bowlingArray = [[4, 2]]
+        let res = bowlinglogic.calculateScore(bowlingArray)
+        expect(res).toStrictEqual([6])
+    });
+});
 
-// describe('Add to Array Tests', () => {
-//     const testState = jest.fn();
+describe('Bottom Row Function', () => {
+    test('testing bottom row with stop', () => {
+        let bowlingArray = [[4,2],[10,0],[5,2]]
+        let res = bowlinglogic.bottomRow(bowlingArray, 2)
+        expect(res).toStrictEqual([6, 23])
+    });
+    test('testing bottom row no stop', () => {
+    let bowlingArray = [[4, 2], [7, 2]]
+        let res = bowlinglogic.bottomRow(bowlingArray)
+        expect(res).toStrictEqual([6, 15])
+    });
+});
 
-//     test('add three items to array', () => {
-//         let array = [2, 3, 4]
-//         let res
-//         let bowlingCard = [
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", "", ""]
-//         ]
+describe('check next test', () => {
+    test('check next strike', () => {
+        let bowlingArray = [10, ""]
+        let res = bowlinglogic.checkNext(bowlingArray)
+        expect(res).toBe("strike")
+    })
+    test('check next spare', () => {
+        let bowlingArray = [4, 6]
+        let res = bowlinglogic.checkNext(bowlingArray)
+        expect(res).toBe("spare")
+    });
+    test('check next none', () => {
+        let bowlingArray = [2, 3]
+        let res = bowlinglogic.checkNext(bowlingArray)
+        expect(res).toBe(null)
+    });
+})
 
-//         let expected = [
-//             [2, 3],
-//             [4, ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", "", ""]
-//         ]
-//         for (let i = 0; i < array.length; i++) {
-//             res = bowlinglogic.addToArray(array[i], testState, bowlingCard, testState, testState)
-//         }
-//         let expected2 = [5,9]
+describe('findEmptySlot function', () => {
+    test('test find empty slot', () => {
+        let bowlingArray = [[2, 3], [3, ""]]
+        let res = bowlinglogic.findEmptySlot(bowlingArray)
+        expect(res).toBe(2)
+    });
+    test('test find no slot', () => {
+        let bowlingArray = [[2, 3], [3, 4]]
+        let res = bowlinglogic.findEmptySlot(bowlingArray)
+        expect(res).toBe(2)
+    });
+    test('test find slot both empty', () => {
+        let bowlingArray = [[2, 3], ["", ""]]
+        let res = bowlinglogic.findEmptySlot(bowlingArray)
+        expect(res).toBe(1)
+    })
+})
 
-//         expect(res[0]).toStrictEqual(expected)
-//         expect(res[1]).toStrictEqual(expected2)
-//     })
-//     test('add strikes to array', () => {
-//         let res
-//         let bowlingCard = [
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", "", ""]
-//         ]
+describe('add to Array', () => {
+    const testState = jest.fn();
+    test('Add to last frame three times only keep two', () => {
+        let res 
+        let bowlingCard = [["","",""]]
+        for (let i = 0; i < 3; i++) {
+            res = bowlinglogic.addToArray(4, testState, bowlingCard, testState, testState)
+        }
+        expect(res[0]).toStrictEqual([[4, 4, ""]])
+    });
+    test('Add to last frame three strikes', () => {
+        let res
+        let bowlingCard = [["", "", ""]]
+        for (let i = 0; i < 3; i++) {
+            res = bowlinglogic.addToArray(10, testState, bowlingCard, testState, testState)
+        }
+        expect(res[0]).toStrictEqual([["X","X","X"]])
+    });
+    test('Add to last frame with spare', () => {
+        let res
+        let bowlingCard = [["", "", ""]]
+        // for (let i = 0; i < 3; i++) {
+        res = bowlinglogic.addToArray(4, testState, bowlingCard, testState, testState)
+        res = bowlinglogic.addToArray(6, testState, bowlingCard, testState, testState)
+        res = bowlinglogic.addToArray(8, testState, bowlingCard, testState, testState)
+        // }
+        expect(res[0]).toStrictEqual([[4, "/", 8]])
+    });
+    test('Add zero ten spare', () => {
+        let res
+        let bowlingCard = [["", ""]]
+        bowlinglogic.addToArray(0, testState, bowlingCard, testState, testState)
+        res = bowlinglogic.addToArray(10, testState, bowlingCard, testState, testState)
+        expect(res[0]).toStrictEqual([[0, "/"]])
+    });
+    test('Add two numbers five three', () => {
+        let res
+        let bowlingCard = [["", ""]]
+        res = bowlinglogic.addToArray(5, testState, bowlingCard, testState, testState)
+        res = bowlinglogic.addToArray(3, testState, bowlingCard, testState, testState)
+        expect(res[0]).toStrictEqual([[5, 3]])
+    });
+    test('Add two numbers ten five', () => {
+        let res
+        let bowlingCard = [["", ""], ["",""]]
+        res = bowlinglogic.addToArray(10, testState, bowlingCard, testState, testState)
+        res = bowlinglogic.addToArray(5, testState, bowlingCard, testState, testState)
+        expect(res[0]).toStrictEqual([["", "X"], [5,""]])
+    });
+    test('add to full array', ()=> {
+        let res
+        let bowlingCard = [[10, ""]]
+        res = bowlinglogic.addToArray(8, testState, bowlingCard, testState, testState)
+        expect(res[0]).toStrictEqual([["", "X"]])
+    })
+});
 
-//         let expected = [
-//             ["", "X"],
-//             ["", "X"],
-//             ["", "X"],
-//             ["", "X"],
-//             ["", "X"],
-//             ["", "X"],
-//             ["", "X"],
-//             ["", "X"],
-//             ["", "X"],
-//             ["X", "X", "X"]
-//         ]
-//         for (let i = 0; i < 13; i++) {
-//             res = bowlinglogic.addToArray(10, testState, bowlingCard, testState, testState)
-//         }
-//         let expected2 = [30,60,90,120,150,180,210,240,270,300]
-
-//         expect(res[0]).toStrictEqual(expected)
-//         expect(res[1]).toStrictEqual(expected2)
-//     })
-//     test('check points from each strike', () => {
-//         let expected2 = [[10],[20,30],[30,50,60]]
-//         let bowlingCard = [
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", "", ""]
-//         ]
-//         let res
-//         for (let i = 0; i < 3; i++) {
-//             res = bowlinglogic.addToArray(10, testState, bowlingCard, testState, testState)
-//             expect(res[1]).toStrictEqual(expected2[i])
-//         }
-//     })
-//     test('add one items to array', () => {
-//         let array = [2]
-//         let res
-//         let bowlingCard = [
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", "", ""]
-//         ]
-
-//         let expected = [
-//             [2, ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", "", ""]
-//         ]
-//         let expected2 = [2]
-
-//         for (let i = 0; i < array.length; i++) {
-//             res = bowlinglogic.addToArray(array[i], testState, bowlingCard, testState, testState)
-//         }
-//         expect(res[0]).toStrictEqual(expected)
-//         expect(res[1]).toStrictEqual(expected2)
-//     })
-//     test('add two items to array', () => {
-//         let array = [5, 5]
-//         let res
-//         let bowlingCard = [
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", "", ""]
-//         ]
-
-//         let expected = [
-//             [5, "/"],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", "", ""]
-//         ]
-//         let expected2 = [10]
-
-//         for (let i = 0; i < array.length; i++) {
-//             res = bowlinglogic.addToArray(array[i], testState, bowlingCard, testState, testState)
-//         }
-//         expect(res[0]).toStrictEqual(expected)
-//         expect(res[1]).toStrictEqual(expected2)
-//     })
-//     test('adding 5 to all', () => {
-//         let res
-//         let bowlingCard = [
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", "", ""]
-//         ]
-
-//         let expected = [
-//             [5, "/"],
-//             [5, "/"],
-//             [5, "/"],
-//             [5, "/"],
-//             [5, "/"],
-//             [5, "/"],
-//             [5, "/"],
-//             [5, "/"],
-//             [5, "/"],
-//             [5, "/", 5]
-//         ]
-//         let expected2 = [15,30,45,60,75,90,105,120,135,150]
-//         for (let i = 0; i < bowlingCard.length * 2 + 1; i++) {
-//             res = bowlinglogic.addToArray("5", testState, bowlingCard, testState, testState)
-//         }
-//         expect(res[0]).toStrictEqual(expected)
-//         expect(res[1]).toStrictEqual(expected2)
-//     })
-// })
-
-// describe('clean array tests', () => {
-
-//     test('clean array', () => {
-//         let array = [[5, 2, ""],
-//         ["", ""],
-//         ["", "", ""],
-//         [1, "", "", ""],
-//         [1, 2, "", ""],
-//         [1, 2, 3, ""],
-//         ["", "", "", ""]]
-//         let expected = [[5, 2],
-//         ["", ""],
-//         ["", "", ""],
-//         [1, "", ""],
-//         [1, 2, ""],
-//         [1, 2, 3],
-//         ["", "", ""]]
-//         let res = cleanArray(array)
-//         expect(res).toStrictEqual(expected)
-//     });
-
-// });
-
-// describe('aaids test', () => {
-//     const testState = jest.fn();
-//     test('woop', () => {
-//         let bowlingCard = [
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", ""],
-//             ["", "", ""]
-//         ]
-//         let expected = [
-//             [5], 
-//             [10], 
-//             [15, 20],
-//             [15, 25],
-//             [15, 30, 35],
-//             [15, 30, 40]
-//         ]
-//         let res
-//         for (let i = 0; i < 3; i++) {
-//             res = bowlinglogic.addToArray("5", testState, bowlingCard, testState, testState)
-//                 expect(res[1]).toStrictEqual(expected[i])
-//         }
-//     })
-// })
+describe('Display Scoreboard Points', () => {
+    test('Display test', () => {
+        let bowlingArray = [[10, "",], [4, 6], [5, 0], [10, 4, 6]]
+        let res = bowlinglogic.displayScoreboardPoints(bowlingArray)
+        expect(res).toStrictEqual([["", "X"], [4, "/"], [5, 0], ["X", 4, "/"]])
+    });
+    test('last frame three strikes', () => {
+        let bowlingArray = [[10, 10, 10]]
+        let res = bowlinglogic.displayScoreboardPoints(bowlingArray)
+        expect(res).toStrictEqual([["X", "X", "X"]])
+    })
+    test('last frame no strikes', () => {
+        let bowlingArray = [[5, 4, ""]]
+        let res = bowlinglogic.displayScoreboardPoints(bowlingArray)
+        expect(res).toStrictEqual([[5, 4, ""]])
+    })
+    test('last frame with spare', () => {
+        let bowlingArray = [[5, 5, 8]]
+        let res = bowlinglogic.displayScoreboardPoints(bowlingArray)
+        expect(res).toStrictEqual([[5, "/", 8]])
+    })
+    test('zero ten spare', () => {
+        let bowlingArray = [[0, 10]]
+        let res = bowlinglogic.displayScoreboardPoints(bowlingArray)
+        expect(res).toStrictEqual([[0, "/"]])
+    })
+});

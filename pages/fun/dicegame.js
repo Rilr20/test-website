@@ -60,7 +60,7 @@ export default function Dicegame() {
                     <Box sx={{ width: "auto" }}>
                         <Box sx={{ width: "700px", height: "88%", backgroundColor: "", position: "relative" }}>
                             <Typography sx={{ textAlign: "center", fontSize: "16pt" }}>Choose the ones to reroll</Typography>
-                            <Box sx={{ height: "25%", width: "100%", backgroundColor: "green", display: "flex", justifyContent: "space-around", py: 2 }}>
+                            <Box sx={{ height: "25%", width: "100%", backgroundColor: "green", display: "flex", justifyContent: "space-around", pb: 2, pt: "36px" }}>
                                 {
                                     dice.map((die, index) => {
                                         return <div key={index} onClick={(e) => {
@@ -76,7 +76,7 @@ export default function Dicegame() {
                                                 setChange(change.filter(x => x !== index));
                                             }
                                         }}>
-                                            <Dice pips={die} />
+                                            <Dice  pips={die} />
                                             {change.includes(index) ? <Typography>Selected</Typography> : null}
                                             {/* <Checkbox sx={{width: "100%;"}}  color="black" /> */}
                                         </div>
@@ -90,7 +90,7 @@ export default function Dicegame() {
                                             let array = throwDice(setDice, change, dice)
                                             setDice(array)
                                             pointsPreview(array, setGameBoard, gameBoard)
-                                            setLeft(left-1)
+                                            setLeft(left - 1)
                                             setChange([])
                                         }
                                     }}>
@@ -105,13 +105,37 @@ export default function Dicegame() {
             {gameStatus == "finished" ?
                 <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
                     <Typography variant="h1" sx={{ fontSize: "28pt", textAlign: "center", m: "auto", mt: 2 }}>You got {gameBoard[gameBoard.length - 1].score} points :D</Typography>
-                    {/* <Button variant="contained" sx={{height:"50px", width:"100px", m:"auto", mt:2}} onClick={() => {
-                        // setGameBoard(playerCard)
-                        // setGameStatus("started")
-                    }}>Play Again</Button> */}
+                    <Button variant="contained" sx={{ height: "50px", width: "100px", m: "auto", mt: 2 }} onClick={() => {
+                        let newPlayerCard = []
+                        // playerCard.forEach(score, key => {
+                        for (let i = 0; i < playerCard.length; i++) {
+                            // console.log(score);
+                            // if (!playerCard[i].text.includes("score")) {
+                                newPlayerCard.push({
+                                    id: i,
+                                    text: playerCard[i].text,
+                                    score: 0,
+                                    isSet: false,
+                                    preview: false,
+                                })
+                            // } else {
+                            //     newPlayerCard.push({
+                            //         id: i,
+                            //         isSet: false,
+                            //         preview: false,
+                            //         score: 0,
+                            //         text: playerCard[i].text
+                            //     })
+                            // }
+                        };
+                        // console.log(playerCard);
+                        setGameBoard(newPlayerCard)
+                        setGameStatus("unstarted")
+                    }}>Play Again</Button>
                 </Box>
-                : <></>}
-        </Container>
+                : <></>
+            }
+        </Container >
 
     )
 }

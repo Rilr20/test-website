@@ -44,7 +44,7 @@ export default function Bowling() {
                 }
             </Box>
 
-            <Box sx={{ display: "flex", justifyContent: "center" }} >
+            <Box sx={{ display: "grid", gridTemplateColumns: "100px 100px 100px 100px 100px 100px ", gridRowGap:"1em", justifyContent: "center" }} >
                 {
                     runCallback(() => {
                         const elements = []
@@ -64,7 +64,8 @@ export default function Bowling() {
                 }
                 {/* new game button */}
             </Box>
-            <Button variant="contained"  onClick={(()=> {
+            <Box sx={{display:"flex", justifyContent:"space-around", mt:2}}>
+            <Button variant="contained" sx={{m:""}}  onClick={(()=> {
                 let newBowlingCard = []
                 bowlingCard.forEach(frame => {
                     if (frame.length == 2) {
@@ -78,6 +79,8 @@ export default function Bowling() {
                 setBottomRow([])
                 setLastPoint(0)
             })}>New Game</Button>
+
+            </Box>
         </Container>
     )
 }

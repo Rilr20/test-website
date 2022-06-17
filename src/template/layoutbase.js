@@ -283,8 +283,6 @@ export default function LayoutBase({ children }) {
             theme = whiteTheme
             break;
         default:
-            console.log("default");
-
             theme = defaultTheme
             break;
     }

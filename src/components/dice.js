@@ -7,7 +7,7 @@ export default function Dice(props) {
     pips[i] = i
   }
   return (
-    <Box className='diceface' sx={{ height: "50px", width: "50px", backgroundColor:"#dedace", mt:"1.25em", mb:"0.25em"}}>
+    <Box className='diceface' sx={{ height: "50px", width: "50px", backgroundColor:"#dedace", mb:"0.25em"}}>
         {
           pips.map((item) => {
             return <div key={item} className="pip"></div>

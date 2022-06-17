@@ -4,7 +4,7 @@ import { Box } from '@mui/system';
 export default function BowlingFrame(props) {
     if (props.frames === 2) {
         return (
-            <Box sx={{ width: "78px", height: "200px", display: "flex", mx: "0px" }}>
+            <Box sx={{ width: "78px", height: "110px", display: "flex", mx: "0px" }}>
                 <Box sx={{ mr: 0.3, backgroundColor: "#fff", width: "76px", height: "78px", display: "grid", gridTemplateColumns: "1fr 1fr" }}>
                     <Box sx={{ backgroundColor: "secondary.superlight", width: "37px", height: "30px", textAlign: "center", pt: "10px", borderLeft: "1px solid #1c1c1c", borderTop: "1px solid #1c1c1c" }}>
                         <Typography sx={{ lineHeight: "initial", fontSize: "14pt" }}>{props.framePoints[0]}</Typography>
@@ -21,7 +21,7 @@ export default function BowlingFrame(props) {
     }
     if (props.frames === 3) {
         return (
-            <Box sx={{ width: "118px", height: "200px", display: "flex", }}>
+            <Box sx={{ width: "118px", height: "110px", display: "flex", }}>
                 <Box sx={{ mr: 0.3, backgroundColor: "#fff", width: "118px", height: "78px", display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
                     <Box sx={{ backgroundColor: "secondary.superlight", width: "36px", height: "30px", textAlign: "center", pt: "10px", borderLeft: "1px solid #1c1c1c", borderTop: "1px solid #1c1c1c" }}>
                         <Typography sx={{ lineHeight: "initial", fontSize: "14pt" }}>{props.framePoints[0]}</Typography>

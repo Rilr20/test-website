@@ -35,7 +35,7 @@ const dicegamelogic = {
                 newPlayerCard[i].score = fullArray[i]
             }
         }
-        totalSum(playerCard)
+        totalSum(newPlayerCard)
         setGameBoard(newPlayerCard)
     },
 
@@ -137,20 +137,6 @@ const dicegamelogic = {
         }
         return total
     },
-    // drawDice: function () {
-    //     // const diceArray = throwDice()
-    //     const diceArray = [1, 2, 2, 3, 4]
-    //     let newDice = []
-    //     diceArray.forEach(die => {
-    //         let res = drawDie(die)
-    //         newDice.push(res)
-    //     });
-    //     // setDice(newDice)
-    //     return newDice
-    // },
-    // drawDie: function (number) {
-    //     return <Dice pips={number} />
-    // },
     bonusPoints: function(setGameBoard, gameBoard) {
         let totalScore = 0
         for (let i = 0; i < 6; i++) {
@@ -187,8 +173,6 @@ export const totalSum = dicegamelogic.totalSum
 export const upperPoints = dicegamelogic.upperPoints
 export const lowerPoints = dicegamelogic.lowerPoints
 export const xOfAKind = dicegamelogic.xOfAKind
-// export const drawDice = dicegamelogic.drawDice
-// export const drawDie = dicegamelogic.drawDie
 export const fullHouse = dicegamelogic.fullHouse
 export const straight = dicegamelogic.straight
 export const bonusPoints = dicegamelogic.bonusPoints

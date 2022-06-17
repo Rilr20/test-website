@@ -97,7 +97,7 @@ About.getLayout = function getLayout(page) {
     // }
     // const trimmed = trimResult(currentCondition)
     let weather;
-    console.log(page.props.data);
+    // console.log(page.props.data);
     switch (page.props.data) {
         case "sunny":
         case "clear":

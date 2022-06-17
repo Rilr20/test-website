@@ -65,20 +65,14 @@ export default function Dicegame() {
                                     dice.map((die, index) => {
                                         return <div key={index} onClick={(e) => {
                                             if (!change.includes(index)) {
-                                                //add to array
                                                 let newArr = [index]
-
                                                 setChange([].concat(newArr, change))
-                                                // console.log(e.target.checked);
                                             } else {
-                                                // console.log(e.target.checked);
-                                                // remove from array
                                                 setChange(change.filter(x => x !== index));
                                             }
                                         }}>
                                             <Dice  pips={die} />
                                             {change.includes(index) ? <Typography>Selected</Typography> : null}
-                                            {/* <Checkbox sx={{width: "100%;"}}  color="black" /> */}
                                         </div>
                                     })
                                 }
@@ -107,10 +101,7 @@ export default function Dicegame() {
                     <Typography variant="h1" sx={{ fontSize: "28pt", textAlign: "center", m: "auto", mt: 2 }}>You got {gameBoard[gameBoard.length - 1].score} points :D</Typography>
                     <Button variant="contained" sx={{ height: "50px", width: "100px", m: "auto", mt: 2 }} onClick={() => {
                         let newPlayerCard = []
-                        // playerCard.forEach(score, key => {
                         for (let i = 0; i < playerCard.length; i++) {
-                            // console.log(score);
-                            // if (!playerCard[i].text.includes("score")) {
                                 newPlayerCard.push({
                                     id: i,
                                     text: playerCard[i].text,
@@ -118,17 +109,7 @@ export default function Dicegame() {
                                     isSet: false,
                                     preview: false,
                                 })
-                            // } else {
-                            //     newPlayerCard.push({
-                            //         id: i,
-                            //         isSet: false,
-                            //         preview: false,
-                            //         score: 0,
-                            //         text: playerCard[i].text
-                            //     })
-                            // }
                         };
-                        // console.log(playerCard);
                         setGameBoard(newPlayerCard)
                         setGameStatus("unstarted")
                     }}>Play Again</Button>

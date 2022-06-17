@@ -62,7 +62,22 @@ export default function Bowling() {
                         return elements
                     })
                 }
+                {/* new game button */}
             </Box>
+            <Button variant="contained"  onClick={(()=> {
+                let newBowlingCard = []
+                bowlingCard.forEach(frame => {
+                    if (frame.length == 2) {
+                        newBowlingCard.push(["",""])
+                    } else {
+                        newBowlingCard.push(["", "", ""])
+                    }
+                });
+                setBowlingScore(newBowlingCard)
+                setDisplayScore(newBowlingCard)
+                setBottomRow([])
+                setLastPoint(0)
+            })}>New Game</Button>
         </Container>
     )
 }

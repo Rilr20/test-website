@@ -44,7 +44,7 @@ export default function Bowling() {
                 }
             </Box>
 
-            <Box sx={{ display: "grid", gridTemplateColumns: "100px 100px 100px 100px 100px 100px ", gridRowGap:"1em", justifyContent: "center" }} >
+            <Box sx={{ display: "grid", gridTemplateColumns: {md:"100px 100px 100px 100px 100px 100px", xs:"100px 100px 100px"}, gridRowGap:"1em", justifyContent: "center" }} >
                 {
                     runCallback(() => {
                         const elements = []

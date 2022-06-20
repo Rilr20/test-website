@@ -16,8 +16,8 @@ $times: 1;
 
 .small {
     background-color: $BalticSea;
-    width: ($ballsize*$times)/5;
-    height: ($ballsize*$times)/5;
+    width: calc(($ballsize*$times)/5);
+    height: calc(($ballsize*$times)/5);
     box-shadow: .75px*$times .25px*$times 2px lighten($color: $BalticSea, $amount: 85%);
 }
 

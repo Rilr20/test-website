@@ -3,14 +3,15 @@ import LayoutBase from "../src/template/layoutbase";
 import BasicLayout from "../src/template/basiclayout";
 import externals from '../src/modules/externals';
 import { Container, Typography, Card, Grid, Box } from "@mui/material";
+import Customcard from '../src/components/customcard';
 
 About.PageTitle = 'About | Website'
 export async function getServerSideProps() {
     let data = null
-    data = await externals.getWeather()
+    // data = await externals.getWeather()
     // const data ="sleet"
     // const data = null;
-    if (!data instanceof Object) {
+    if (!(data instanceof Object)) {
         return {
             props: {
                 data: "error"
@@ -30,6 +31,14 @@ export default function About({ data }) {
     }, []);
     return (
         <Container sx={{ width: "96%", height: "100%", pt: 2, mt: 0.3, color:"text"}}>
+            <Box sx={{display:"flex", justifyContent:"space-between", flexDirection:"row-reverse"}}>
+                <Customcard height="400px" width="500px">
+                    <Typography variant="h1" sx={{ fontSize: "24pt" }}>About</Typography>
+                    <Typography>text about what is going on here i dont asdasknow what is happening send help :(</Typography>
+                </Customcard>
+                {/* <Card sx={{width:"350px", height:"200px", px:4, py:3}}>right</Card> */}
+                <Card sx={{width:"350px", height:"200px", px:4, py:3}}>left</Card>
+            </Box>
             <Box sx={{ backgroundColor: theme => `${theme.palette.secondary.superlight}`, width: "250px", height: "200px", position: "relative", borderTopLeftRadius: "10px", borderBottomLeftRadius: "4px", borderBottomRightRadius: "4px", borderTopRightRadius: "10px", m: "auto", mt: 2, boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)" }}>
                 <Box sx={{ backgroundColor: theme => `${theme.palette.primary.superlight}`, width: "250px", height: "170px", position: "absolute", bottom: 0, textAlign: "center", borderRadius:"8px 8px 4px 4px" }}>
                     <Typography sx={{ mt: 2 }}>

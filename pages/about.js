@@ -3,14 +3,16 @@ import LayoutBase from "../src/template/layoutbase";
 import BasicLayout from "../src/template/basiclayout";
 import externals from '../src/modules/externals';
 import { Container, Typography, Card, Grid, Box } from "@mui/material";
+import Customcard from '../src/components/Customcard';
+import Image from 'next/image';
 
 About.PageTitle = 'About | Website'
 export async function getServerSideProps() {
     let data = null
-    data = await externals.getWeather()
+    // data = await externals.getWeather()
     // const data ="sleet"
     // const data = null;
-    if (!data instanceof Object) {
+    if (!(data instanceof Object)) {
         return {
             props: {
                 data: "error"
@@ -29,9 +31,32 @@ export default function About({ data }) {
     useEffect(() => {
     }, []);
     return (
-        <Container sx={{ width: "96%", height: "100%", pt: 2, mt: 0.3, color:"text"}}>
+        <Container maxWidth="xl" sx={{ width: "auto", height: "100%", pt: 2, mt: 0.3, color: "text" }}>
+            <Box sx={{ width: "auto", height: "100vh", backgroundColor: "orange", p: 1, display: "flex", justifyContent: "space-between", flexDirection: "row-reverse" }}>
+                <Customcard width="500px" height="300px">
+                    {/* <Box sx={{ backgroundImage: `url(/img/default.avif)`, width:"100%",height:"250px"}}></Box> */}
+                    <Box sx={{ display: "flex" }}>
+                        <div>
+                            <Image className="about-img" width="200px" height="200px" src="/img/me.jpg" alt="bild<"></Image>
+                            <Typography>
+                                me irl
+                            </Typography>
+                        </div>
+                        <Box sx={{m:2, width:"300px", height:"100%"}}>
+                            <Typography variant="h1" sx={{ fontSize: "32pt", textAlign:"center" }}>About</Typography>
+                            <Typography>About what</Typography>
+                        </Box>
+                    </Box>
+                </Customcard>
+                <Customcard width="150px" height="  150px">
+                    <Typography sx={{ mt: 2 }}>
+                        To the left
+                    </Typography>
+                </Customcard>
+
+            </Box>
             <Box sx={{ backgroundColor: theme => `${theme.palette.secondary.superlight}`, width: "250px", height: "200px", position: "relative", borderTopLeftRadius: "10px", borderBottomLeftRadius: "4px", borderBottomRightRadius: "4px", borderTopRightRadius: "10px", m: "auto", mt: 2, boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)" }}>
-                <Box sx={{ backgroundColor: theme => `${theme.palette.primary.superlight}`, width: "250px", height: "170px", position: "absolute", bottom: 0, textAlign: "center", borderRadius:"8px 8px 4px 4px" }}>
+                <Box sx={{ backgroundColor: theme => `${theme.palette.primary.superlight}`, width: "250px", height: "170px", position: "absolute", bottom: 0, textAlign: "center", borderRadius: "8px 8px 4px 4px" }}>
                     <Typography sx={{ mt: 2 }}>
                         {data}
                     </Typography>
@@ -84,20 +109,7 @@ function trimResult(params) {
     return match
 }
 About.getLayout = function getLayout(page) {
-    // const currentCondition = "Sunny and the moon".toLowerCase()
-    // const currentCondition = page.props.data.current.condition.text
-    // const currentCondition = page.props.data
-    // console.log(page.props.data);
-    // const res = {
-    //     "current": {
-    //         "condition": {
-    //             text: "default"
-    //         }
-    //     }
-    // }
-    // const trimmed = trimResult(currentCondition)
     let weather;
-    // console.log(page.props.data);
     switch (page.props.data) {
         case "sunny":
         case "clear":

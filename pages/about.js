@@ -3,7 +3,7 @@ import LayoutBase from "../src/template/layoutbase";
 import BasicLayout from "../src/template/basiclayout";
 import externals from '../src/modules/externals';
 import { Container, Typography, Card, Grid, Box } from "@mui/material";
-import Customcard from '../src/components/Customcard';
+import Customcard from '../src/components/customcard';
 import Image from 'next/image';
 
 About.PageTitle = 'About | Website'
@@ -44,14 +44,17 @@ export default function About({ data }) {
                         </div>
                         <Box sx={{m:2, width:"300px", height:"100%"}}>
                             <Typography variant="h1" sx={{ fontSize: "32pt", textAlign:"center" }}>About</Typography>
-                            <Typography>About what</Typography>
+                            <Typography>Sida för skojs skull, lägger upp en massa skit. </Typography>
+                            <Typography>Gjord med Nextjs, och annat gott</Typography>
                         </Box>
                     </Box>
                 </Customcard>
-                <Customcard width="150px" height="  150px">
-                    <Typography sx={{ mt: 2 }}>
-                        To the left
+                <Customcard width="350px" height="300px">
+                    <Typography variant="h1" sx={{ mt: 2, fontSize:"32pt" }}>
+                        Olika Stiler
                     </Typography>
+                    <Typography>Denna sidan (/about) borde ändra sig beroende på vädret, med hjälp av ett väder API. Andra saker som har gjorts är ett tärningsspel, och ett poängräknare för bowling</Typography>
+
                 </Customcard>
 
             </Box>

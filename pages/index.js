@@ -52,8 +52,8 @@ Home.PageTitle = 'Home | Website'
 // Home.Layout = LayoutOne
 export default function Home({ osrs }) {
     return (
-        <Container  sx={{ width:"96%", height:"100%", pt: 2, mt:0.3, }}>
-            <Box cla sx={{justifyContent: "space-between", backgroundColor:"orange", height:"100%", p:2 }}>
+        <Container sx={{ width: "96%", height: "100%", pt: 2, mt: 0.3, }}>
+            <Box sx={{ justifyContent: "space-between", backgroundColor: theme => `${theme.palette.primary.light}`, height: "100%", p: 2 }}>
                 {/* <Box sx={{ width: {md:"50%", xs:"100%"}, backgroundColor: "", height: "auto"}}> */}
                 {/* </Box> */}
                 {/* <Box sx={{ justifyContent:"center", width: { md: "50%", xs: "100%" }, backgroundColor: "", height: "400px", margin: "0.5em", padding: "0.5em", display: {md: "flex", xs:"initial"} }}>
@@ -67,17 +67,18 @@ export default function Home({ osrs }) {
                     </Card>
 
                 </Box> */}
-                <Box sx={{width:"100%", height:"75px"}}>
-                    <Typography variant="h1" sx={{textAlign:"center", fontSize:"48pt"}}>Wowee Index </Typography>
+                <Box sx={{ width: "100%", height: "75px" }}>
+                    <Typography variant="h1" sx={{ textAlign: "center", fontSize: "36pt", color:"text.primary" }}>Min Hemsida</Typography>
                 </Box>
-                <Box sx={{ display: { md: "flex", xs: "block" }, justifyContent: "space-between", flexDirection:"row-reverse", mt:1}}>
-                    <Card sx={{ height: "auto", p: "1rem", backgroundColor: theme => `${theme.palette.secondary.superlight}`, mx: 2 }}>
+                <Box sx={{ display: { md: "flex", xs: "block" }, justifyContent: "space-between", flexDirection: "row-reverse", mt: 1 }}>
+                    <Card sx={{ height: "auto", p: "1rem", backgroundColor: theme => `${theme.palette.secondary.light}`, mx: 2 }}>
                         <Typography sx={{ mx: 1, textAlign: "center" }} variant="h5">OSRS Stats</Typography>
                         <OSRSTable osrs={osrs} />
                     </Card>
-                    <Box sx={{backgroundColor:"purple", width:"70%", p:2}}>
-                        help
-                    </Box>
+                    <Card sx={{ backgroundColor: "", width: { xs: "79%", md: "70%" }, p: 2, mx: "auto", mt: { xs: 1, md: 0 }, backgroundColor: theme => `${theme.palette.secondary.light}` }}>
+                            <Typography variant="h2" sx={{ fontSize: "36pt", textAlign: "center" }}>Help</Typography>
+                            <Typography sx={{ fontSize: "1.2rem", textAlign: "left" }}>p text</Typography>
+                    </Card>
                 </Box>
             </Box>
         </Container>

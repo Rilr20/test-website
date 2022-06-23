@@ -3,11 +3,11 @@ import { createTheme, ThemeProvider } from '@mui/material'
 const defaultTheme = createTheme({
     palette: {
         primary: {
-            superlight: "#A3A0BB",
-            light: "#8C88AA",
-            main: "#6e6994",
-            dark: "#625D83",
-            superdark: "#504C6B"
+            superlight: "#E0DEF7",
+            light: "#C1BCF0",
+            main: "#A29BE8",
+            dark: "#837AE1",
+            superdark: "#6359D9"
         },
         white: {
             main: "#EBDEE9"
@@ -27,10 +27,10 @@ const defaultTheme = createTheme({
             superdark: "#0B090B"
         },
         text: {
-            main: "#000"
+            primary: "#000",
         }
     },
-    typography: { fontFamily: "Mohave", color: "#292524" },
+    typography: { fontFamily: "Mohave" }
 })
 
 const sunTheme = createTheme({
@@ -59,9 +59,11 @@ const sunTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: "#000"
+        text: {
+            primary: "#000",
+        }
     },
-    typography: { fontFamily: "Mohave", color: "#292524" },
+    typography: { fontFamily: "Mohave" },
 })
 
 const thunderTheme = createTheme({
@@ -75,7 +77,7 @@ const thunderTheme = createTheme({
         },
         white: {
             main: "#fff"
-        }, 
+        },
         secondary: {
             superlight: "#EEDAFB",
             light: "#DEB6F6",
@@ -90,9 +92,11 @@ const thunderTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: "#000"
+        text: {
+            primary: "#000",
+        }
     },
-    typography: { fontFamily: "Mohave", color: "#292524" },
+    typography: { fontFamily: "Mohave" },
 })
 
 const cloudsTheme = createTheme({
@@ -121,9 +125,11 @@ const cloudsTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: "#000"
+        text: {
+            primary: "#000",
+        }
     },
-    typography: { fontFamily: "Mohave", color: "#292524" },
+    typography: { fontFamily: "Mohave" },
 })
 
 const greyTheme = createTheme({
@@ -152,9 +158,11 @@ const greyTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: "#fff"
+        text: {
+            primary: "#fff",
+        }
     },
-    typography: { fontFamily: "Mohave", color: "#292524" },
+    typography: { fontFamily: "Mohave" },
 })
 
 const transparentTheme = createTheme({
@@ -183,9 +191,11 @@ const transparentTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: "#000"
+        text: {
+            primary: "#000",
+        }
     },
-    typography: { fontFamily: "Mohave", color: "#292524" },
+    typography: { fontFamily: "Mohave" },
 })
 
 const blueTheme = createTheme({
@@ -214,9 +224,11 @@ const blueTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: "#fff"
+        text: {
+            primary: "#fff",
+        }
     },
-    typography: { fontFamily: "Mohave", color: "#292524" },
+    typography: { fontFamily: "Mohave" },
 })
 
 const whiteTheme = createTheme({
@@ -225,7 +237,7 @@ const whiteTheme = createTheme({
             superlight: "#E0F3F6",
             light: "#C0E6EC",
             main: "#A1DAE3",
-            dark: "#81CED9", 
+            dark: "#81CED9",
             superdark: "#62C1D0",
         },
         white: {
@@ -245,9 +257,11 @@ const whiteTheme = createTheme({
             dark: "#201B22",
             superdark: "#0B090B"
         },
-        text: "#000"
+        text: {
+            primary: "#000",
+        }
     },
-    typography: { fontFamily: "Mohave", color: "#292524" },
+    typography: { fontFamily: "Mohave" },
 })
 
 export default function LayoutBase({ children }) {
@@ -286,10 +300,9 @@ export default function LayoutBase({ children }) {
             theme = defaultTheme
             break;
     }
-
     return (
         <ThemeProvider theme={theme}>
-            <div>{children}</div>
+            <div style={{ backgroundColor: theme.palette.secondary.superlight }}>{children}</div>
         </ThemeProvider>
     )
 }

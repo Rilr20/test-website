@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../components/navbar';
 import Head from 'next/head'
+import Footer from '../components/footer';
 
 export default function BasicLayout({ children }) {
     const PageTitle = children.type.PageTitle
@@ -9,9 +10,10 @@ export default function BasicLayout({ children }) {
     const weather = getName(children.props.data)
     return (
         <>
-            {PageTitle ? (<Head><title>{PageTitle}</title></Head>) : ''}
+            {PageTitle ? (<Head><link rel="shortcut icon" href="/favicon.ico"/><title>{PageTitle}</title></Head>) : ''}
             <Navbar img={weather} />
             <div>{children}</div>
+            <Footer />
         </>
     )
 }

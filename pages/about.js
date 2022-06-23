@@ -35,7 +35,7 @@ export default function About({ data }) {
             <Box sx={{ width: "auto", height: "100vh", backgroundColor: "orange", p: 1, display: "flex", justifyContent: "space-between", flexDirection: {md:"row-reverse", xs:"column"} }}>
                 <Customcard width="500px" height="300px">
                     {/* <Box sx={{ backgroundImage: `url(/img/default.avif)`, width:"100%",height:"250px"}}></Box> */}
-                    <Box sx={{ display: "flex", mt:0.3, ml:0.3 }}>
+                    <Box sx={{ display: "flex", mt:0.5, ml:0.5 }}>
                         <div>
                             <Image className="about-img" width="200px" height="200px" src="/img/me.jpg" alt="bild<"></Image>
                             <Typography>
@@ -58,13 +58,11 @@ export default function About({ data }) {
                 </Customcard>
 
             </Box>
-            <Box sx={{ backgroundColor: theme => `${theme.palette.secondary.superlight}`, width: "250px", height: "200px", position: "relative", borderTopLeftRadius: "10px", borderBottomLeftRadius: "4px", borderBottomRightRadius: "4px", borderTopRightRadius: "10px", m: "auto", mt: 2, boxShadow: "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)" }}>
-                <Box sx={{ backgroundColor: theme => `${theme.palette.primary.superlight}`, width: "250px", height: "170px", position: "absolute", bottom: 0, textAlign: "center", borderRadius: "8px 8px 4px 4px" }}>
-                    <Typography sx={{ mt: 2 }}>
-                        {data}
-                    </Typography>
-                </Box>
-            </Box>
+            <Customcard width="250px" smallWidth="250px" height="200px">
+                <Typography sx={{ mt: 2 }}>
+                    {data}
+                </Typography>
+            </Customcard>
             <Grid sx={{ display: "grid", textAlign: "center", gridTemplateColumns: 'repeat(2, 150px)', justifyContent: "center" }}>
                 <Card sx={{ textAlign: "center", backgroundColor: theme => `${theme.palette.primary.superlight}`, height: "100px", width: "100px", mx: "auto", my: "1em" }}>
                     <Typography>superlight</Typography>

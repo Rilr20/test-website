@@ -1,5 +1,4 @@
 import { createTheme, ThemeProvider } from '@mui/material'
-// change black to neutral black Okayge
 const defaultTheme = createTheme({
     palette: {
         primary: {
@@ -145,7 +144,7 @@ const greyTheme = createTheme({
             main: "#fff"
         },
         secondary: {
-            superlight: "#7B6565",
+            superlight: "#BFB0B0",
             light: "#655353",
             main: "#4C3E3E",
             dark: "#382E2E",
@@ -211,7 +210,7 @@ const blueTheme = createTheme({
             main: "#fff"
         },
         secondary: {
-            superlight: "#496E97",
+            superlight: "#C8D5E4",
             light: "#3C5A7C",
             main: "#2E4660",
             dark: "#213245",
@@ -270,7 +269,6 @@ export default function LayoutBase({ children }) {
     switch (themeName) {
         case "sunny":
         case "clear":
-            // console.log("sunny");
             theme = sunTheme
             break;
         case "thunder":

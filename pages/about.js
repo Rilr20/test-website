@@ -35,7 +35,7 @@ export default function About({ data }) {
             <Box sx={{ width: "auto", height: "100vh", backgroundColor: "orange", p: 1, display: "flex", justifyContent: "space-between", flexDirection: {md:"row-reverse", xs:"column"} }}>
                 <Customcard width="500px" height="300px">
                     {/* <Box sx={{ backgroundImage: `url(/img/default.avif)`, width:"100%",height:"250px"}}></Box> */}
-                    <Box sx={{ display: "flex" }}>
+                    <Box sx={{ display: "flex", mt:0.3, ml:0.3 }}>
                         <div>
                             <Image className="about-img" width="200px" height="200px" src="/img/me.jpg" alt="bild<"></Image>
                             <Typography>

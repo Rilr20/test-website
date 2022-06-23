@@ -53,19 +53,31 @@ Home.PageTitle = 'Home | Website'
 export default function Home({ osrs }) {
     return (
         <Container  sx={{ width:"96%", height:"100%", pt: 2, mt:0.3, }}>
-            <Box cla sx={{ display: {md: "flex", xs:"block"}, justifyContent: "space-between" }}>
-                <Box sx={{ width: {md:"50%", xs:"100%"}, backgroundColor: "", height: "auto"}}>
+            <Box cla sx={{justifyContent: "space-between", backgroundColor:"orange", height:"100%", p:2 }}>
+                {/* <Box sx={{ width: {md:"50%", xs:"100%"}, backgroundColor: "", height: "auto"}}> */}
+                {/* </Box> */}
+                {/* <Box sx={{ justifyContent:"center", width: { md: "50%", xs: "100%" }, backgroundColor: "", height: "400px", margin: "0.5em", padding: "0.5em", display: {md: "flex", xs:"initial"} }}>
                     <Typography variant="h3" sx={{ textAlign: "center" }}>Hello</Typography>
-                </Box>
-                <Box sx={{ justifyContent:"center", width: { md: "50%", xs: "100%" }, backgroundColor: "", height: "400px", margin: "0.5em", padding: "0.5em", display: {md: "flex", xs:"initial"} }}>
-                    <Box sx={{ backgroundColor: "blue", height: "200px", minWidth:"200px", maxWidth: "100%", mx:2, flexGrow:1 }}>
                         
+                    <Box sx={{ backgroundColor: "blue", height: "200px", minWidth:"200px", maxWidth: "100%", mx:2, flexGrow:1 }}>
                     </Box>
-                    <Card sx={{ height: "auto", p: "1rem", backgroundColor: theme => `${theme.palette.secondary.main}`, mx: 2  }}>
+                    <Card sx={{ height: "auto", p: "1rem", backgroundColor: theme => `${theme.palette.secondary.superlight}`, mx: 2  }}>
                         <Typography sx={{mx:1, textAlign:"center"}} variant="h5">OSRS Stats</Typography>
                         <OSRSTable osrs={osrs} />
                     </Card>
 
+                </Box> */}
+                <Box sx={{width:"100%", height:"75px"}}>
+                    <Typography variant="h1" sx={{textAlign:"center", fontSize:"48pt"}}>Wowee Index </Typography>
+                </Box>
+                <Box sx={{ display: { md: "flex", xs: "block" }, justifyContent: "space-between", flexDirection:"row-reverse", mt:1}}>
+                    <Card sx={{ height: "auto", p: "1rem", backgroundColor: theme => `${theme.palette.secondary.superlight}`, mx: 2 }}>
+                        <Typography sx={{ mx: 1, textAlign: "center" }} variant="h5">OSRS Stats</Typography>
+                        <OSRSTable osrs={osrs} />
+                    </Card>
+                    <Box sx={{backgroundColor:"purple", width:"70%", p:2}}>
+                        help
+                    </Box>
                 </Box>
             </Box>
         </Container>

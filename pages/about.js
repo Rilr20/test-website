@@ -39,7 +39,7 @@ export default function About({ data }) {
                         <div>
                             <Image className="about-img" width="200px" height="200px" src="/img/me.jpg" alt="bild<"></Image>
                             <Typography>
-                                me irl
+                                Jag ivl
                             </Typography>
                         </div>
                         <Box sx={{m:2, width:"300px", height:"100%"}}>

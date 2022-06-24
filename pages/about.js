@@ -44,16 +44,15 @@ export default function About({ data }) {
                         </div>
                         <Box sx={{m:2, width:"300px", height:"100%"}}>
                             <Typography variant="h1" sx={{ fontSize: "32pt", textAlign:"center" }}>About</Typography>
-                            <Typography sx={{textAlign:"left"}}>Sida för skojs skull, lägger upp en massa skit. </Typography>
-                            <Typography sx={{textAlign:"left"}}>Gjord med Nextjs, och annat gott</Typography>
+                            <Typography sx={{textAlign:"left"}}></Typography>
+                            <Typography sx={{textAlign:"left"}}></Typography>
                         </Box>
                     </Box>
                 </Customcard>
                 <Customcard width="350px" height="300px">
                     <Typography variant="h1" sx={{ mt: 2, fontSize:"32pt", width:"90%", mx:"auto" }}>
-                        Olika Stiler
                     </Typography>
-                    <Typography sx={{ width: "90%", mx: "auto", textAlign:"left" }}>Denna sidan (/about) borde ändra sig beroende på vädret, med hjälp av ett väder API. Andra saker som har gjorts är ett tärningsspel, och ett poängräknare för bowling</Typography>
+                    <Typography sx={{ width: "90%", mx: "auto", textAlign:"left" }}></Typography>
 
                 </Customcard>
 

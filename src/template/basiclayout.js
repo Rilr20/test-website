@@ -5,8 +5,6 @@ import Footer from '../components/footer';
 
 export default function BasicLayout({ children }) {
     const PageTitle = children.type.PageTitle
-    // const weather = children.props.weather
-    // console.log(children);
     const weather = getName(children.props.data)
     return (
         <>
@@ -20,37 +18,37 @@ export default function BasicLayout({ children }) {
 function getName(params) {
     let weather = ""
     switch (params) {
-        case "sunny": //ljus och skön
+        case "sunny":
         case "clear":
             weather = "sunny"
             break;
 
-        case "thunder": //gul som accentfärg 
+        case "thunder":
             weather = "thunder"
             break;
 
-        case "cloudy": //ljus och mindre skön
+        case "cloudy":
             weather = "cloudy"
             break;
 
-        case "overcast": // grå och trist
+        case "overcast":
             weather = "overcast"
             break;
 
         case "fog":
-        case "mist": //transparant?
+        case "mist":
             weather = "fog"
             break;
 
         case "drizzle":
-        case "rain": //blåa färger
+        case "rain":
             weather = "rain"
             break;
 
         case "pellets":
         case "snow":
         case "sleet":
-        case "blizzard": //vita färger
+        case "blizzard":
             weather = "snow"
             break;
 

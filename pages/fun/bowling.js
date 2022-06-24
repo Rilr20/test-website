@@ -34,12 +34,7 @@ export default function Bowling() {
             <Box sx={{ display: "flex", justifyContent: "center" }}>
                 {
                     bowlingScore.map((item, key) => {
-                        let length = 2
-                        if (key == 9) {
-                            length = 3
-                        }
-                        // // console.log(bottomRow);
-                        return <BowlingFrame key={key} frames={length} total={bottomRow[key]} framePoints={displayScore[key]} />
+                        return <BowlingFrame key={key} frames={item.length} total={bottomRow[key]} framePoints={displayScore[key]} />
                     })
                 }
             </Box>
@@ -49,11 +44,8 @@ export default function Bowling() {
                     runCallback(() => {
                         const elements = []
                         for (let i = 10; i >= 0; i--) {
-                            // element = array[i];
                             elements.push(<Button key={i} disabled={10 - lastPoint >= i ? false : true} variant="contained" sx={{ mx: 1 }} onClick={((e) => {
                                 bowlinglogic.addToArray(e.target.innerText, setBowlingScore, bowlingScore, setBottomRow, setDisplayScore)
-                                // console.log(bowlingScore);
-                                // setLastPoint(parseInt(e.target.innerText == "10" ? 0 : e.target.innerText))
                                 let num = lastPoint + parseInt(e.target.innerText)
                                 setLastPoint(parseInt(num == 10 ? 0 : num))
                                 doesstuff()
@@ -68,11 +60,10 @@ export default function Bowling() {
             <Button variant="contained" sx={{m:""}}  onClick={(()=> {
                 let newBowlingCard = []
                 bowlingCard.forEach(frame => {
-                    if (frame.length == 2) {
-                        newBowlingCard.push(["",""])
-                    } else {
-                        newBowlingCard.push(["", "", ""])
-                    }
+                    newBowlingCard.push(["",""])
+                    if (frame.length == 3) {
+                        newBowlingCard[newBowlingCard.length-1].push("")
+                    } 
                 });
                 setBowlingScore(newBowlingCard)
                 setDisplayScore(newBowlingCard)

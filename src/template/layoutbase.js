@@ -270,7 +270,6 @@ export default function LayoutBase({ children }) {
     switch (themeName) {
         case "sunny":
         case "clear":
-            // console.log("sunny");
             theme = sunTheme
             break;
         case "thunder":

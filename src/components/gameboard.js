@@ -36,7 +36,7 @@ export default function GameBoard({ setGameBoard, gameBoard, setChange, dice, se
                 <Box sx={{ width: "auto" }}>
                     <Box sx={{ width: "700px", height: "88%", backgroundColor: "", position: "relative" }}>
                         <Typography sx={{ textAlign: "center", fontSize: "16pt" }}>Choose the ones to reroll</Typography>
-                        <Box sx={{ height: "25%", width: "100%", backgroundColor: "green", display: "flex", justifyContent: "space-around", pb: 2, pt: "36px" }}>
+                        <Card sx={{ height: "25%", width: "100%", backgroundColor: "primary.superlight", display: "flex", justifyContent: "space-around", pb: 2, pt: "36px" }}>
                             {
                                 dice.map((die, index) => {
                                     return <div key={index} onClick={(e) => {
@@ -52,8 +52,8 @@ export default function GameBoard({ setGameBoard, gameBoard, setChange, dice, se
                                     </div>
                                 })
                             }
-                        </Box>
-                        <Box sx={{ mt: "100%", mb: "auto", mx: "auto", position: "absolute", bottom: 0, left: "50%", transform: "translate(-50%)", display: "flex", justifyContent: "space-around", backgroundColor: "orange", width: "300px", height: "50px", display: "flex" }}>
+                        </Card>
+                        <Card sx={{ mt: "100%", mb: "auto", mx: "auto", position: "absolute", bottom: 0, left: "50%", transform: "translate(-50%)", display: "flex", justifyContent: "space-around", backgroundColor: "secondary.main", width: "300px", height: "50px", display: "flex",p:1 }}>
                             <Button variant="contained" size="medium" sx={{ height: "50px" }}
                                 onClick={() => {
                                     if (left > 0 && change.length != 0) {
@@ -67,7 +67,7 @@ export default function GameBoard({ setGameBoard, gameBoard, setChange, dice, se
                                 Roll Dice
                             </Button>
                             <Typography sx={{ py: "13px", height: "50px" }}>{left} Throws Left</Typography>
-                        </Box>
+                        </Card>
                     </Box>
                 </Box>
             </Box></>

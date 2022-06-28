@@ -1,21 +1,53 @@
 import { Box, Divider, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import React from 'react'
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import CodeIcon from '@mui/icons-material/Code';
+import ClosingCodeIcon from './svg/closecodeicon';
+import Link from 'next/link';
 
 export default function Footer() {
     let router = useRouter()
-    console.log(router);
     return (
-        <Box sx={{ color: "text.primary" }}>
-            <Divider sx={{width:"95%", m:"auto", my:2, borderColor:"primary.superdark" }} />
-            <div>Link to stuff or something idk</div>
-            <div>&copy; 2022 &gt;:)</div>
-            <div>skapad av mich</div>
-            {
-                router.locales.map((local, key) => {
-                    return <Typography key={key}>{local}</Typography>
-                })
-            }
+        <Box sx={{ color: "text.primary", fontSize: "18pt" }}>
+            <Divider sx={{ width: "95%", m: "auto", my: 2, borderColor: "primary.superdark" }} />
+            <Box sx={{ backgroundColor: "blue", width: "100%", height: "80px", display: "flex" }}>
+                {/* <Box sx={{ backgroundColor: "orange", width: "20%",m:"auto", height: "100px" }}></Box> */}
+                <Box sx={{ backgroundColor: "gray", width: "20%", m: "auto", height: "80px", fontSize: "30px" }}>
+                    <Box sx={{ height: "30px", my: "25px", display: "flex", justifyContent: "space-around" }}>
+                        <Link href="#">
+                            <a>
+                                <LinkedInIcon fontSize="20px" />
+                            </a>
+                        </Link>
+                        <Link href="#">
+                            <a>
+                                <GitHubIcon fontSize="20px" />
+                            </a>
+                        </Link>
+                        {/* <ClosingCodeIcon width="30px" height="30px" /> */}
+                    </Box>
+                </Box>
+                <Box sx={{ backgroundColor: "red", width: "35%", m: "auto", height: "80px" }}>
+                    <Box sx={{ height: "30px", my: "25px", display: "flex", justifyContent: "space-around" }}>
+                        <Typography sx={{ fontSize: "18pt" }}>&copy; 2022 &gt;:)</Typography>
+                        <Typography sx={{ fontSize: "18pt" }}>skapad av mich</Typography>
+                    </Box>
+
+                </Box>
+                <Box sx={{ backgroundColor: "green", width: "20%", m: "auto", height: "80px" }}>
+                    <Box sx={{ maxHeight: "30px", my: "25px", display: "flex", justifyContent: "space-around" }}>
+                        {
+                            router.locales.map((locale, key) => {
+                                return (
+                                    <Typography fontSize="18pt" key={key}><Link href={router.asPath} locale={locale}>{locale.toUpperCase()}</Link></Typography>
+                                )
+                            })
+                        }
+                    </Box>
+                </Box>
+            </Box>
         </Box>
     )
 }

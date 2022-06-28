@@ -5,6 +5,7 @@ import externals from '../src/modules/externals';
 import { Container, Typography, Card, Grid, Box } from "@mui/material";
 import Customcard from '../src/components/customcard';
 import Image from 'next/image';
+import useTranslation from 'next-translate/useTranslation'
 
 About.PageTitle = 'About | Website'
 export async function getServerSideProps() {
@@ -30,6 +31,7 @@ export async function getServerSideProps() {
 export default function About({ data }) {
     useEffect(() => {
     }, []);
+    const { t, lang } = useTranslation()
     return (
         <Container maxWidth="xl" sx={{ width: "auto", height: "100%", pt: 2, mt: 0.3, color: "text" }}>
             <Box sx={{ width: "auto", height: "100vh", backgroundColor: "orange", p: 1, display: "flex", justifyContent: "space-between", flexDirection: {md:"row-reverse", xs:"column"} }}>
@@ -39,7 +41,7 @@ export default function About({ data }) {
                         <div>
                             <Image className="about-img" width="200px" height="200px" src="/img/me.jpg" alt="bild<"></Image>
                             <Typography>
-                                Jag ivl
+                                {t('about:img-text')}
                             </Typography>
                         </div>
                         <Box sx={{m:2, width:"300px", height:"100%"}}>

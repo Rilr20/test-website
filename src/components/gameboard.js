@@ -3,7 +3,7 @@ import React from 'react'
 import { Typography, Card, Button, Box } from "@mui/material";
 import Dice from "./dice";
 
-export default function GameBoard({ setGameBoard, gameBoard, setChange, dice, setDice, setLeft, left, change, setGameStatus, }) {
+export default function GameBoard({ setGameBoard, gameBoard, setChange, change, dice, setDice, setLeft, left, setGameStatus }) {
     return (
         <>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>

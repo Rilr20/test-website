@@ -12,10 +12,8 @@ export default function Footer() {
     return (
         <Box sx={{ color: "text.primary", fontSize: "18pt" }}>
             <Divider sx={{ width: "95%", m: "auto", my: 2, borderColor: "primary.superdark" }} />
-            <Box sx={{ backgroundColor: "blue", width: "100%", height: "80px", display: "flex" }}>
-                {/* <Box sx={{ backgroundColor: "orange", width: "20%",m:"auto", height: "100px" }}></Box> */}
-                <Box sx={{ backgroundColor: "gray", width: "20%", m: "auto", height: "80px", fontSize: "30px" }}>
-                    <Box sx={{ height: "30px", my: "25px", display: "flex", justifyContent: "space-around" }}>
+            <Box sx={{ backgroundColor: "blue", width: "100%", height: {md:"80px", xs:"100%"}, display: "flex", flexDirection: { md: "row", xs:"column"} }}>
+                <Box sx={{ backgroundColor: "gray", width: {md:"20%", xs:"100%"}, m: "auto", fontSize: "30px", height: "30px", my: "25px", display: "flex", justifyContent: "space-around" }}>
                         <Link href="#">
                             <a>
                                 <LinkedInIcon fontSize="20px" />
@@ -27,17 +25,13 @@ export default function Footer() {
                             </a>
                         </Link>
                         {/* <ClosingCodeIcon width="30px" height="30px" /> */}
-                    </Box>
                 </Box>
-                <Box sx={{ backgroundColor: "red", width: "35%", m: "auto", height: "80px" }}>
-                    <Box sx={{ height: "30px", my: "25px", display: "flex", justifyContent: "space-around" }}>
+                <Box sx={{ backgroundColor: "red", width: { md: "35%", xs: "100%" }, m: "auto", height: "80px", height: "30px", my: "25px", display: "flex", justifyContent: "space-around" }}>
                         <Typography sx={{ fontSize: "18pt" }}>&copy; 2022 &gt;:)</Typography>
                         <Typography sx={{ fontSize: "18pt" }}>skapad av mich</Typography>
-                    </Box>
 
                 </Box>
-                <Box sx={{ backgroundColor: "green", width: "20%", m: "auto", height: "80px" }}>
-                    <Box sx={{ maxHeight: "30px", my: "25px", display: "flex", justifyContent: "space-around" }}>
+                <Box sx={{ backgroundColor: "green", width: {md:"20%", xs:"100%"}, m: "auto", height: "30px", my: "25px", display: "flex", justifyContent: "space-around"  }}>
                         {
                             router.locales.map((locale, key) => {
                                 return (
@@ -45,7 +39,6 @@ export default function Footer() {
                                 )
                             })
                         }
-                    </Box>
                 </Box>
             </Box>
         </Box>

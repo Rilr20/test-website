@@ -1,3 +1,6 @@
 {
-    "greeting": "Hej"
+    "greeting": "Hej",
+    "footer": {
+        "text": "skapad av mig"
+    }
 }

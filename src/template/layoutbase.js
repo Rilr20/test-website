@@ -27,6 +27,10 @@ const defaultTheme = createTheme({
         },
         text: {
             primary: "#000",
+        },
+        chess: {
+            white: "#D16FD6",
+            black: "#5CADEE"
         }
     },
     typography: { fontFamily: "Mohave" }

@@ -39,7 +39,10 @@ export default function About({ data }) {
                     {/* <Box sx={{ backgroundImage: `url(/img/default.avif)`, width:"100%",height:"250px"}}></Box> */}
                     <Box sx={{ display: "flex", mt:0.5, ml:0.5 }}>
                         <div>
+                            <Box sx={{width:{md:"200px", xs:"100px"}, height:{md:"200px", xs:"100px"}}}>
                             <Image className="about-img" width="200px" height="200px" src="/img/me.jpg" alt="bild<"></Image>
+
+                            </Box>
                             <Typography>
                                 {t('about:img-text')}
                             </Typography>

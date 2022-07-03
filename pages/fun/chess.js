@@ -10,7 +10,7 @@ export default function Chess() {
     let clicked = false
     return (
         <Container sx={{ width: "96%", height: "100%", pt: 2, mt: 0.3, }}>
-            <Box sx={{ m: "auto", width: "688px", height: "100%", backgroundColor:"orange"}}>
+            <Box sx={{ m: "auto", width: "400px", height: "100%", backgroundColor:"orange"}}>
                 {/* <PieceSVG piece="king" colour="white" size="55" />
                 <PieceSVG piece="king" colour="black" size="55" />
                 <PieceSVG piece="knight" colour="white" size="55" />
@@ -23,14 +23,6 @@ export default function Chess() {
                 <PieceSVG piece="pawn" colour="black" size="55" />
                 <PieceSVG piece="queen" colour="white" size="55" />
                 <PieceSVG piece="queen" colour="black" size="55" /> */}
-                <Button onClick={() => {
-                    if (!clicked) {
-                        let element = document.getElementById("a2")
-                        element = <PieceSVG piece="pawn" colour="white" size="55" />
-                    }
-                    clicked = true
-                    // console.log("hellloS");
-                }}>hej</Button>
                 <Chessboard width="45px" colour="white" pieceSize="55" piecePosition={[{piece:"pawn", position:"a2", side:"white"}]} />
             </Box>
         </Container>

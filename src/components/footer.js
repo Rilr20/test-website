@@ -13,7 +13,6 @@ import Flag from './svg/flag';
 
 export default function Footer() {
     const { t } = useTranslation()
-    console.log(t('common:footer.text'));
     let router = useRouter()
     let currYear = new Date()
     return (

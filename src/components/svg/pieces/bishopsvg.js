@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function BishopSVG(props) {
-    console.log(props.colour);
     let stroke = "#000"
     let fill = "#fff"
     if (props.colour == "black") {

@@ -45,32 +45,6 @@ export default function Chessboard(props) {
 
     return (
         <Box sx={{ display: "grid", gridTemplateColumns: gridTemplateColumns }}>
-            {/* {
-                runCallback(() => {
-                    let elements = []
-                    let colour = "chess.white"
-                    if (props.text) {
-                        for (let i = 0; i < letterArray.length; i++) {
-                            elements.push(<Box width={props.width} height={props.width}><Typography sx={{ textAlign: "center" }}>{letterArray[i]}</Typography></Box>)
-                        }
-                        elements.push(<Box width={half + "px"} height={half + "px"}></Box>)
-
-                    }
-                    for (let j = 0; j < letterArray.length; j++) {
-                        colour = colour == "chess.white" ? "chess.black" : "chess.white"
-                        for (let i = 0; i < letterArray.length; i++) {
-                            colour = colour == "chess.white" ? "chess.black" : "chess.white"
-                            elements.push(<Box id={letterArray[i] + (j + 1)} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour }}>
-                            </Box>)
-                        }
-                        if(props.text) {
-                            elements.push(<Box width={half + "px"} height={half + "px"}><Typography sx={{textAlign:"center", my:"70%"}}>{j + 1}</Typography></Box>)
-                        }
-                    }
-
-                    return elements.reverse()
-                })
-            } */}
             {
                 runCallback(()=> {
                     let colour = "chess.white"

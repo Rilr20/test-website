@@ -9,7 +9,7 @@ Chessboard.defaultProps = {
     pieceSize: 55
 }
 export default function Chessboard(props) {
-    let letterArray = ["h","g","f","e","d","c","b","a"]
+    let letterArray = ["h", "g", "f", "e", "d", "c", "b", "a"]
     let half = getHalfValue(props.width)
     let elements = []
     let gridTemplateColumns = `repeat(8, ${props.width})`
@@ -22,16 +22,6 @@ export default function Chessboard(props) {
         let half = parseInt(width[0] / 2)
 
         return half
-    }
-    function correctPiecePosition(position, pieces) {
-        pieces.forEach(piece => {
-            if (position === piece.position) {
-                console.log("pio");
-                console.log(piece);
-                return <PieceSVG piece={piece.piece} colour={piece.side} size={props.pieceSize} />
-            }
-        });
-        return <></>
     }
 
     if (props.text) {
@@ -46,20 +36,30 @@ export default function Chessboard(props) {
     return (
         <Box sx={{ display: "grid", gridTemplateColumns: gridTemplateColumns }}>
             {
-                runCallback(()=> {
+                runCallback(() => {
                     let colour = "chess.white"
+                    let position = ""
                     for (let j = 0; j < letterArray.length; j++) {
                         colour = colour == "chess.white" ? "chess.black" : "chess.white"
                         for (let i = 0; i < letterArray.length; i++) {
+                            position = letterArray[i] + (j + 1)
                             colour = colour == "chess.white" ? "chess.black" : "chess.white"
-                            elements.push(<Box key={letterArray[i] + (j + 1)} id={letterArray[i] + (j + 1)} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour }}>
+                            elements.push(<Box key={position} id={position} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour }}>
+                                {
+                                    props.piecePosition.map((piece) => {
+                                        if (position === piece.position) {
+                                            console.log("wooweeewoooweee");
+                                            return <PieceSVG piece={piece.piece} colour={piece.side} size={props.pieceSize} />
+                                        }
+                                    })
+                                }
                             </Box>)
                         }
                         if (props.text) {
-                            elements.push(<Box key={j+1} width={half + "px"} height={half + "px"}><Typography sx={{ textAlign: "center", my: "70%" }}>{j + 1}</Typography></Box>)
+                            elements.push(<Box key={j + 1} width={half + "px"} height={half + "px"}><Typography sx={{ textAlign: "center", my: "70%" }}>{j + 1}</Typography></Box>)
                         }
                     }
-                        
+
                     return elements.reverse()
                 })
             }

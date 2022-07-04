@@ -5,7 +5,7 @@ import PieceSVG from './svg/piecesvg'
 Chessboard.defaultProps = {
     text: true,
     width: "40px",
-    piecePosition: {},
+    piecePosition: [],
     pieceSize: 55
 }
 export default function Chessboard(props) {
@@ -44,11 +44,12 @@ export default function Chessboard(props) {
                         for (let i = 0; i < letterArray.length; i++) {
                             colour.reverse()
                             position = letterArray[i] + (j + 1)
-                            elements.push(<Box key={position} id={position} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour[0] }}>
+                            elements.push(<Box onClick={(e) => {
+                                console.log("i am position " + e.currentTarget.id)
+                            }} key={position} id={position} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour[0] }}>
                                 {
                                     props.piecePosition.map((piece) => {
                                         if (position === piece.position) {
-                                            console.log("wooweeewoooweee");
                                             return <PieceSVG piece={piece.piece} colour={piece.side} size={props.pieceSize} />
                                         }
                                     })

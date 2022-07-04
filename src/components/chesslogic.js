@@ -13,9 +13,9 @@ const chessLogic = {
     },
     setUpGameBoard: function () {
         let boardArray = setUpPawns()
-        // setChessBoard(boardArray)
         let kqArray = setUpKQ()
-        boardArray = boardArray.concat(kqArray)
+        let outer = setUpOuter()
+        boardArray = boardArray.concat(kqArray, outer)
         return boardArray
     },
     setUpPawns: function () {
@@ -36,7 +36,17 @@ const chessLogic = {
         let boardArray = []
         for (let i = 0; i < positions.length; i++) {
             boardArray.push({ piece: pieces[i], position: positions[i], side: "white" })
-            boardArray.push({ piece: pieces[i], position: oppositeSide(positions[positions.length-1-i]), side: "black" })
+            boardArray.push({ piece: pieces[i], position: oppositeSide(positions[positions.length - 1 - i]), side: "black" })
+        }
+        return boardArray
+    },
+    setUpOuter: function () {
+        let boardArray = []
+        let pieces = ["rook", "knight", "bishop", "bishop", "knight", "rook"]
+        let positions = ["a1", "b1", "c1", "f1", "g1", "h1"]
+        for (let i = 0; i < positions.length; i++) {
+            boardArray.push({ piece: pieces[i], position: positions[i], side: "white" })
+            boardArray.push({ piece: pieces[i], position: oppositeSide(positions[i]), side: "black" })
         }
         return boardArray
     }
@@ -45,3 +55,4 @@ export const oppositeSide = chessLogic.oppositeSide
 export const setUpPawns = chessLogic.setUpPawns
 export const setUpGameBoard = chessLogic.setUpGameBoard
 export const setUpKQ = chessLogic.setUpKQ
+export const setUpOuter = chessLogic.setUpOuter

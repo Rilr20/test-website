@@ -15,7 +15,6 @@ const chessLogic = {
         let boardArray = setUpPawns()
         // setChessBoard(boardArray)
         let kqArray = setUpKQ()
-        console.log(kqArray);
         boardArray = boardArray.concat(kqArray)
         return boardArray
     },

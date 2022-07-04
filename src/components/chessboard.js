@@ -13,6 +13,7 @@ export default function Chessboard(props) {
     let half = getHalfValue(props.width)
     let elements = []
     let gridTemplateColumns = `repeat(8, ${props.width})`
+    const colour = ["chess.white", "chess.black"];
     const runCallback = (cb) => {
         return cb();
     };
@@ -47,12 +48,11 @@ export default function Chessboard(props) {
         <Box sx={{ display: "grid", gridTemplateColumns: gridTemplateColumns }}>
             {
                 runCallback(()=> {
-                    let colour = "chess.white"
                     for (let j = 0; j < letterArray.length; j++) {
-                        colour = colour == "chess.white" ? "chess.black" : "chess.white"
+                        colour.reverse()
                         for (let i = 0; i < letterArray.length; i++) {
-                            colour = colour == "chess.white" ? "chess.black" : "chess.white"
-                            elements.push(<Box key={letterArray[i] + (j + 1)} id={letterArray[i] + (j + 1)} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour }}>
+                            colour.reverse()
+                            elements.push(<Box key={letterArray[i] + (j + 1)} id={letterArray[i] + (j + 1)} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour[0] }}>
                             </Box>)
                         }
                         if (props.text) {

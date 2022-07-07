@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LayoutBase from "../../src/template/layoutbase";
 import BasicLayout from "../../src/template/basiclayout";
 import { Box, Button, Container, Typography } from '@mui/material';
 import Chessboard from '../../src/components/chessboard';
-import PieceSVG from '../../src/components/svg/piecesvg';
 import {setUpGameBoard} from '../../src/components/chesslogic'
 
 Chess.PageTitle = 'Chess | Website'
 export default function Chess() {
-    let clicked = false
-    let piecePosition = []
-    piecePosition = setUpGameBoard()
+    const [chessBoard, setChessBoard] = useState([])
+    const [removedPieces, setRemovedPieces] = useState([])
+    useEffect(() => {
+        setChessBoard(setUpGameBoard())
+    }, []);
     return (
         <Container sx={{ width: "96%", height: "100%", pt: 2, mt: 0.3, }}>
             <Box sx={{ m: "auto", width: "400px", height: "100%", backgroundColor:"orange"}}>
@@ -26,7 +27,7 @@ export default function Chess() {
                 <PieceSVG piece="pawn" colour="black" size="55" />
                 <PieceSVG piece="queen" colour="white" size="55" />
                 <PieceSVG piece="queen" colour="black" size="55" /> */}
-                <Chessboard width="45px" colour="white" pieceSize="55" piecePosition={piecePosition} />
+                <Chessboard width="45px" colour="white" pieceSize="55" chessBoard={chessBoard} setChessBoard={setChessBoard} removedPieces={removedPieces} setRemovedPieces={setRemovedPieces} />
             </Box>
         </Container>
     )

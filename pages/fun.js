@@ -69,7 +69,7 @@ export default function Fun() {
                         </Box>
                         <Box sx={{ display: "flex", px: 1 }}>
                             <Box sx={{ minHeight: "54px", minWidth: "54px", m: "auto", }}>
-                                <Chessboard width="5.4px" text={false} />
+                                <Chessboard width="5.4px" text={false} chessBoard={[]} />
                             </Box>
 
                             <Box sx={{ flexGrow: 1, mt: "20px" }}>

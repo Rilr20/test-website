@@ -7,34 +7,35 @@ import QueenSVG from './pieces/queensvg'
 import RookSVG from './pieces/rooksvg'
 
 PieceSVG.defaultProps = {
-    size: "45px"
+    size: "45px",
+    className: ""
 }
 
 export default function PieceSVG(props) {
     switch (props.piece.toLowerCase()) {
         case "knight":
             return (
-                <KnightSVG size={props.size} colour={props.colour}/>
+                <KnightSVG className={props.className} size={props.size} colour={props.colour}/>
             )
         case "rook":
             return (
-                <RookSVG size={props.size} colour={props.colour}/>
+                <RookSVG className={props.className} size={props.size} colour={props.colour}/>
             )
         case "bishop":
             return (
-                <BishopSVG size={props.size} colour={props.colour}/>
+                <BishopSVG className={props.className} size={props.size} colour={props.colour}/>
             )
         case "queen":
             return (
-                <QueenSVG size={props.size} colour={props.colour}/>
+                <QueenSVG className={props.className} size={props.size} colour={props.colour}/>
             )
         case "king":
             return (
-                <KingSVG size={props.size} colour={props.colour}/>
+                <KingSVG className={props.className} size={props.size} colour={props.colour}/>
             )
         case "pawn":
             return (
-                <PawnSVG size={props.size} colour={props.colour}/>
+                <PawnSVG className={props.className} size={props.size} colour={props.colour}/>
             )
     }
 

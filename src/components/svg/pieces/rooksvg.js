@@ -8,7 +8,7 @@ export default function RookSVG(props) {
         fill = "#000"
     }
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width={props.size} height={props.size}>
+        <svg className={props.className} xmlns="http://www.w3.org/2000/svg" version="1.1" width={props.size} height={props.size}>
             <g style={{opacity:1, fill:fill, fillOpacity:1, fillRule:"evenodd", stroke:stroke, strokeWidth:1.5, strokeLinecap:"round",strokeLinejoin:"round",strokeMiterlimit:4, strokeDasharray:"none", strokeOpacity:1,}} transform="translate(0,0.3)">
                 <path d="M 9,39 L 36,39 L 36,36 L 9,36 L 9,39 z " style={{strokeLinecap:"butt", }}/>
                 <path d="M 12,36 L 12,32 L 33,32 L 33,36 L 12,36 z " style={{strokeLinecap:"butt", }}/>

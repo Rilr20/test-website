@@ -6,7 +6,7 @@ describe('moving pieces', () => {
     test('move piece a1 to a2', () => {
         let piece = ["a1", "pawn", "white", 1]
         let expected = { id: 1, piece: "pawn", position: "a2", side: "white" }
-        let chessBoard = [{ id: 1, piece: "pawn", position: "a1", side: "white" }, { id: 2 ,piece: "pawn", position: "a5", side: "black" }]
+        let chessBoard = [{ id: 1, piece: "pawn", position: "a1", side: "white" }, { id: 2, piece: "pawn", position: "a5", side: "black" }]
         let res = chesslogic.move(piece, "a2", testState, chessBoard, [], testState)
         expect(res[0]).toStrictEqual(expected)
         expect(chessBoard.length).toBe(2)
@@ -44,3 +44,4 @@ describe('opposite test', () => {
 
 
 });
+

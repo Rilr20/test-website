@@ -61,27 +61,33 @@ const chesslogic = {
         return boardArray
     },
     move: function (piece, toPosition, setChessBoard, chessBoard, removedPieces, setRemovedPieces) {
-        if (toPosition instanceof Array || toPosition instanceof Object) {
-            toPosition = toPosition[0]
-        }
         piece = createPieceObject(piece)
         let removedPiece = ""
         let id = piece.id
         let newChessBoard = chessBoard
-        piece.position = toPosition //check if move is possible or if it removes a piece
-        for (let i = 0; i < newChessBoard.length; i++) {
-            if (newChessBoard[i].position == toPosition) {
-                removedPiece = newChessBoard[i]
-            }
-            if (newChessBoard[i].id == id) {
-                newChessBoard[i] = piece
-            }
+
+        if (toPosition instanceof Array || toPosition instanceof Object) {
+            toPosition = toPosition[0]
         }
-        if (removedPiece !== "") {
-            newChessBoard = remove(removedPiece, chessBoard, removedPieces, setRemovedPieces)
+        let possible = isMoveValid(piece, toPosition, chessBoard)
+        console.log("aids " + possible);
+        if (possible) {
+            piece.position = toPosition //check if move is possible or if it removes a piece
+
+            for (let i = 0; i < newChessBoard.length; i++) {
+                if (newChessBoard[i].position == toPosition) {
+                    removedPiece = newChessBoard[i]
+                }
+                if (newChessBoard[i].id == id) {
+                    newChessBoard[i] = piece
+                }
+            }
+            if (removedPiece !== "") {
+                newChessBoard = remove(removedPiece, chessBoard, removedPieces, setRemovedPieces)
+            }
+            setChessBoard(newChessBoard)
+            setRemovedPieces(removedPieces)
         }
-        setChessBoard(newChessBoard)
-        setRemovedPieces(removedPieces)
 
         return [piece, removedPieces]
     },
@@ -134,24 +140,68 @@ const chesslogic = {
         }
         return false
     },
-    isMoveValid(piece, chessBoard) {
-        isValid = false
+    isMoveValid(piece, toPosition, chessBoard) {
+        let isValid = false
+        if (isSameSide(piece, toPosition, chessBoard)) {
+            return false
+        }
         switch (piece.piece) {
             case "pawn":
+                // en passant
+                // only 1 space forward
+                // attack 1 space diagonal
+                // two space forward possible on first move
+                isValid = true
                 break;
             case "knight":
+                //two space foward one space left/right
+                //can jump over pieces
+                //2x, -2x, 0.5x, -0.5x
+                let knightPositions = []
+                let currX = piece.position[0]
+                let currY = piece.position[1]
+                let toY = toPosition[0]
+                let toX = toPosition[1]
+                for (let i = 0; i < 4; i++) {
+
+                }
+                isValid = true
                 break;
             case "rook":
+                isValid = rookMove(piece, toPosition, chessBoard)
                 break;
             case "bishop":
+                //only diagonal
+                isValid = bishopMove(piece.position, toPosition, chessBoard)
                 break;
             case "queen":
+                //straight and diagonal
+                isValid = true
                 break;
             case "king":
+                //only 1 space in each direction
+                //can castle if king and rook hasn't moved
+                isValid = true
                 break;
             default:
                 break;
         }
+        return isValid
+    },
+    isSameSide: function (piece, toPosition, chessBoard) {
+        let toPiece = findPieceOnPosition(toPosition, chessBoard)
+        if (toPiece instanceof Object && piece.side == toPiece.side) {
+            return true
+        }
+        return false
+    },
+    findPieceOnPosition(position, chessBoard) {
+        for (let i = 0; i < chessBoard.length; i++) {
+            if (chessBoard[i].position == position) {
+                return chessBoard[i]
+            }
+        }
+        return null
     },
     remove: function (removePiece, chessBoard, removedPieces, setRemovedPieces) {
         for (let i = 0; i < chessBoard.length; i++) {
@@ -165,6 +215,67 @@ const chesslogic = {
         }
         setRemovedPieces(removedPieces)
         return chessBoard
+    },
+    rookMove: function (piece, toPosition, chessBoard) {
+        //kolla på nuvarande position
+        //kolla om den är blockad
+        //only straigt
+        let letters = ["a", "b", "c", "d", "e", "f", "g", "h"]
+        let y = toPosition[0]
+        let x = toPosition[1]
+        if (piece.position.includes(x) || piece.position.includes(y)) {
+            return true
+        }
+        return false
+    },
+    bishopMove: function (fromPosition, toPosition, chessBoard) {
+        let fromPositionArray = convertLetterToNumber(fromPosition)
+        let toPositionArray = convertLetterToNumber(toPosition)
+        if (fromPositionArray[0] == toPositionArray[0] || fromPositionArray[1] == toPositionArray[1]) {
+            return false
+        }
+        if (Math.abs(fromPositionArray[0] - toPositionArray[0]) == Math.abs(fromPositionArray[1] - toPositionArray[1])) {
+            return isBishopMoveBlocked(fromPositionArray, toPositionArray, chessBoard)
+        }
+        return false;
+    },
+    isBishopMoveBlocked: function(fromPosition, toPosition, chessBoard) {
+        let directionX =  toPosition[0] > fromPosition[0] ? 1 : -1
+        let directionY =  toPosition[1] > fromPosition[1] ? 1 : -1
+        let returnValue = true
+        for (let i = 1; i < Math.abs(toPosition[0] - fromPosition[0]); i++) {
+            let resfromthis = pieceOnSquare(fromPosition[0] + i * directionX, fromPosition[1] + i * directionY, chessBoard)
+            if (pieceOnSquare(fromPosition[0] + i * directionX, fromPosition[1] + i * directionY, chessBoard)) {
+                return false
+            }
+        }
+        return true
+    },
+    pieceOnSquare: function(X, Y, chessBoard) {
+        // false a piece is     on the square
+        // true  a piece is not on the square
+        //om du inte är i arrayen så betyder det att det inte finns en pjäs på den platsen
+        let chessCoordinate = convertNumberToLetter(X,Y)
+        let allPieces = getAllPiecePositions(chessBoard)
+        if (allPieces.indexOf(chessCoordinate) === -1) {
+            return false
+        }
+        return true
+    },
+    getAllPiecePositions: function (chessBoard) {
+        let positions = []
+        for (let i = 0; i < chessBoard.length; i++) {
+            positions.push(chessBoard[i].position)
+        }
+        return positions
+    },
+    convertLetterToNumber: function (position) {
+        let letters = ["a", "b", "c", "d", "e", "f", "g", "h"]
+        return [letters.indexOf(position[0]) + 1, parseInt(position[1])]
+    },
+    convertNumberToLetter: function (Xpos, Ypos) {
+        let letters = ["a", "b", "c", "d", "e", "f", "g", "h"]
+        return `${letters[Xpos-1]}${Ypos}`
     }
 }
 export default chesslogic
@@ -179,3 +290,13 @@ export const createPieceObject = chesslogic.createPieceObject
 export const duplicate = chesslogic.duplicate
 export const getRightElement = chesslogic.getRightElement
 export const remove = chesslogic.remove
+export const isMoveValid = chesslogic.isMoveValid
+export const findPieceOnPosition = chesslogic.findPieceOnPosition
+export const isSameSide = chesslogic.isSameSide
+export const rookMove = chesslogic.rookMove
+export const getAllPiecePositions = chesslogic.getAllPiecePositions
+export const bishopMove = chesslogic.bishopMove
+export const convertLetterToNumber = chesslogic.convertLetterToNumber
+export const convertNumberToLetter = chesslogic.convertNumberToLetter
+export const pieceOnSquare = chesslogic.pieceOnSquare
+export const isBishopMoveBlocked = chesslogic.isBishopMoveBlocked

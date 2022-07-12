@@ -154,18 +154,7 @@ const chesslogic = {
                 isValid = true
                 break;
             case "knight":
-                //two space foward one space left/right
-                //can jump over pieces
-                //2x, -2x, 0.5x, -0.5x
-                let knightPositions = []
-                let currX = piece.position[0]
-                let currY = piece.position[1]
-                let toY = toPosition[0]
-                let toX = toPosition[1]
-                for (let i = 0; i < 4; i++) {
-
-                }
-                isValid = true
+                isValid = knightMove(piece.position, toPosition)
                 break;
             case "rook":
                 isValid = rookMove(piece, toPosition, chessBoard)
@@ -224,6 +213,16 @@ const chesslogic = {
         let y = toPosition[0]
         let x = toPosition[1]
         if (piece.position.includes(x) || piece.position.includes(y)) {
+            return true
+        }
+        return false
+    },
+    knightMove: function(fromPosition, toPosition) {
+        let fromPositionArray = convertLetterToNumber(fromPosition)
+        let toPositionArray = convertLetterToNumber(toPosition)
+        let xDelta = Math.abs(fromPositionArray[0] - toPositionArray[0])
+        let yDelta = Math.abs(fromPositionArray[1] - toPositionArray[1])
+        if (xDelta == 2 && yDelta == 1 || xDelta == 1 && yDelta == 2) {
             return true
         }
         return false
@@ -300,3 +299,4 @@ export const convertLetterToNumber = chesslogic.convertLetterToNumber
 export const convertNumberToLetter = chesslogic.convertNumberToLetter
 export const pieceOnSquare = chesslogic.pieceOnSquare
 export const isBishopMoveBlocked = chesslogic.isBishopMoveBlocked
+export const knightMove = chesslogic.knightMove

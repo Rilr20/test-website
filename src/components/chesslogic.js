@@ -60,25 +60,23 @@ const chesslogic = {
         }
         return boardArray
     },
-    move: function (piece, toPosition, setChessBoard, chessBoard, removedPieces, setRemovedPieces) {
-        piece = createPieceObject(piece)
+    move: function (pieceId, toPosition, setChessBoard, chessBoard, removedPieces, setRemovedPieces) {
+        let piece = findPiece(pieceId, chessBoard)
         let removedPiece = ""
         let id = piece.id
         let newChessBoard = chessBoard
-
-        if (toPosition instanceof Array || toPosition instanceof Object) {
-            toPosition = toPosition[0]
+        if (typeof toPosition === "number") {
+            let toPiece = findPiece(toPosition, chessBoard)
+            toPosition = toPiece.position
         }
         let possible = isMoveValid(piece, toPosition, chessBoard)
-        console.log("aids " + possible);
         if (possible) {
-            piece.position = toPosition //check if move is possible or if it removes a piece
-
             for (let i = 0; i < newChessBoard.length; i++) {
-                if (newChessBoard[i].position == toPosition) {
+                if (newChessBoard[i].position == toPosition && newChessBoard[i].id !== id) {
                     removedPiece = newChessBoard[i]
                 }
                 if (newChessBoard[i].id == id) {
+                    piece.position = toPosition
                     newChessBoard[i] = piece
                 }
             }
@@ -91,29 +89,25 @@ const chesslogic = {
 
         return [piece, removedPieces]
     },
-    createPieceObject: function (valueArray) {
-        let object = {}
-        object.piece = valueArray[1]
-        object.position = valueArray[0]
-        object.side = valueArray[2]
-        object.id = valueArray[3]
-        return object
+    findPiece: function (pieceId, chessBoard) {
+        let returnPiece 
+        chessBoard.forEach(piece => {
+            if (piece.id == pieceId) {
+                returnPiece = piece
+            }
+        });
+        return returnPiece
     },
     buttonClick: function (event, selected, setSelected, setChessBoard, chessBoard, removedPieces, setRemovedPieces) {
         let tmpSelected = selected
-        getRightElement(event)
+        let currentElement = getRightElement(event)
         switch (tmpSelected.length) {
-
             case 1:
-                let currentElement = getRightElement(event)
-                // add the other one, and check if it is a duplicate if it then remove it
-                //if its a duplicate remove the duplicate
-                //if its another piece then add event.currenttarget.firstchild.classlist[3]
                 if (duplicate(currentElement, selected[0])) {
                     tmpSelected.pop()
                     break;
                 }
-                //if its not a duplicate add it and then run move function
+
                 tmpSelected.push(currentElement)
                 move(tmpSelected[0], tmpSelected[1], setChessBoard, chessBoard, removedPieces, setRemovedPieces)
                 tmpSelected = []
@@ -121,7 +115,7 @@ const chesslogic = {
             case 0:
                 //check if it has svg element if it don't then do nothing
                 if (event.currentTarget.firstChild instanceof SVGSVGElement) {
-                    tmpSelected.push(event.currentTarget.firstChild.classList)
+                    tmpSelected.push(currentElement)
                 }
                 break;
         }
@@ -129,9 +123,9 @@ const chesslogic = {
     },
     getRightElement: function (event) {
         if (event.currentTarget.firstChild === null) {
-            return event.currentTarget.classList[0]
+            return event.currentTarget.id
         } else {
-            return event.currentTarget.firstChild.classList
+            return parseInt(event.currentTarget.firstChild.id)
         }
     },
     duplicate: function (first, second) {
@@ -149,7 +143,7 @@ const chesslogic = {
             case "pawn":
                 // en passant
                 // only 1 space forward
-                // attack 1 space diagonal
+                // attack 1 space forward diagonal
                 // two space forward possible on first move
                 isValid = true
                 break;
@@ -169,7 +163,7 @@ const chesslogic = {
                 break;
             case "king":
                 //only 1 space in each direction
-                //can castle if king and rook hasn't moved
+                //can castle if king and rook hasn't moved and sight is clear
                 isValid = true
                 break;
             default:
@@ -209,7 +203,6 @@ const chesslogic = {
         //kolla på nuvarande position
         //kolla om den är blockad
         //only straigt
-        let letters = ["a", "b", "c", "d", "e", "f", "g", "h"]
         let y = toPosition[0]
         let x = toPosition[1]
         if (piece.position.includes(x) || piece.position.includes(y)) {
@@ -241,9 +234,7 @@ const chesslogic = {
     isBishopMoveBlocked: function(fromPosition, toPosition, chessBoard) {
         let directionX =  toPosition[0] > fromPosition[0] ? 1 : -1
         let directionY =  toPosition[1] > fromPosition[1] ? 1 : -1
-        let returnValue = true
         for (let i = 1; i < Math.abs(toPosition[0] - fromPosition[0]); i++) {
-            let resfromthis = pieceOnSquare(fromPosition[0] + i * directionX, fromPosition[1] + i * directionY, chessBoard)
             if (pieceOnSquare(fromPosition[0] + i * directionX, fromPosition[1] + i * directionY, chessBoard)) {
                 return false
             }
@@ -285,7 +276,7 @@ export const setUpGameBoard = chesslogic.setUpGameBoard
 export const setUpKQ = chesslogic.setUpKQ
 export const setUpOuter = chesslogic.setUpOuter
 export const move = chesslogic.move
-export const createPieceObject = chesslogic.createPieceObject
+export const findPiece = chesslogic.findPiece
 export const duplicate = chesslogic.duplicate
 export const getRightElement = chesslogic.getRightElement
 export const remove = chesslogic.remove

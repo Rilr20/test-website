@@ -8,7 +8,7 @@ export default function KingSVG(props) {
         fill = "#000"
     }
     return (
-        <svg className={props.className} xmlns="http://www.w3.org/2000/svg" version="1.1" width={props.size} height={props.size}>
+        <svg id={props.id} xmlns="http://www.w3.org/2000/svg" version="1.1" width={props.size} height={props.size}>
             <g style={{ fill: "none", fillOpacity: 1, fillRule: "evenodd", stroke: "#000000", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: "4", strokeDasharray: "none", strokeOpacity: "1", }}>
                 <path d="M 22.5,11.63 L 22.5,6" style={{ fill: "none", stroke: "#000000", strokeLinejoin: "miter", }} />
                 <path d="M 20,8 L 25,8" style={{ fill: "none", stroke: "#000000", strokeLinejoin: "miter" }} />

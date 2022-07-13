@@ -48,11 +48,11 @@ export default function Chessboard(props) {
                             position = letterArray[i] + (j + 1)
                             elements.push(<Box onClick={(e) => {
                                 chesslogic.buttonClick(e, selected, setSelected,props.setChessBoard, props.chessBoard, props.removedPieces, props.setRemovedPieces)
-                            }} className={position} key={position} id={position} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour[0] }}>
+                            }} key={position} id={position} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour[0] }}>
                                 {
                                     props.chessBoard.map((piece) => {
                                         if (position === piece.position) {
-                                            return <PieceSVG className={`${position} ${piece.piece} ${piece.side} ${piece.id}`} piece={piece.piece} colour={piece.side} size={props.pieceSize} />
+                                            return <PieceSVG id={piece.id} piece={piece.piece} colour={piece.side} size={props.pieceSize} />
                                         }
                                     })
                                 }

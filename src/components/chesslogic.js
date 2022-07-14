@@ -28,10 +28,12 @@ const chesslogic = {
         let boardArray = []
         let oppositePosition = ""
         pawnsPosition.forEach(position => {
-            boardArray.push({ piece: "pawn", position: position, side: "white", id: id })
+            boardArray.push({ piece: "pawn", position: position, side: "white", id: id, hasMoved: false
+})
             id++
             oppositePosition = oppositeSide(position)
-            boardArray.push({ piece: "pawn", position: oppositePosition, side: "black", id: id })
+            boardArray.push({ piece: "pawn", position: oppositePosition, side: "black", id: id, hasMoved: false
+})
             id++
         });
         return boardArray
@@ -41,9 +43,11 @@ const chesslogic = {
         let pieces = ["king", "queen"]
         let boardArray = []
         for (let i = 0; i < positions.length; i++) {
-            boardArray.push({ piece: pieces[i], position: positions[i], side: "white", id: id })
+            boardArray.push({ piece: pieces[i], position: positions[i], side: "white", id: id, hasMoved: false
+})
             id++
-            boardArray.push({ piece: pieces[i], position: oppositeSide(positions[positions.length - 1 - i]), side: "black", id: id })
+            boardArray.push({ piece: pieces[i], position: oppositeSide(positions[positions.length - 1 - i]), side: "black", id: id, hasMoved: false
+})
             id++
         }
         return boardArray
@@ -53,9 +57,9 @@ const chesslogic = {
         let pieces = ["rook", "knight", "bishop", "bishop", "knight", "rook"]
         let positions = ["a1", "b1", "c1", "f1", "g1", "h1"]
         for (let i = 0; i < positions.length; i++) {
-            boardArray.push({ piece: pieces[i], position: positions[i], side: "white", id: id })
+            boardArray.push({ piece: pieces[i], position: positions[i], side: "white", id: id, hasMoved:false })
             id++
-            boardArray.push({ piece: pieces[i], position: oppositeSide(positions[i]), side: "black", id: id })
+            boardArray.push({ piece: pieces[i], position: oppositeSide(positions[i]), side: "black", id: id, hasMoved:false })
             id++
         }
         return boardArray
@@ -77,6 +81,7 @@ const chesslogic = {
                 }
                 if (newChessBoard[i].id == id) {
                     piece.position = toPosition
+                    piece.hasMoved = true
                     newChessBoard[i] = piece
                 }
             }
@@ -206,9 +211,35 @@ const chesslogic = {
         let y = toPosition[0]
         let x = toPosition[1]
         if (piece.position.includes(x) || piece.position.includes(y)) {
-            return true
+            return isRookMoveBlocked(piece.position,toPosition, chessBoard)
         }
         return false
+    },
+    isRookMoveBlocked: function(fromPosition, toPosition, chessBoard) {
+        fromPosition = convertLetterToNumber(fromPosition) 
+        toPosition = convertLetterToNumber(toPosition)
+        let directionX = toPosition[0] > fromPosition[0] ? 1 : -1
+        let directionY = toPosition[1] > fromPosition[1] ? 1 : -1
+        let index = 0
+        if (toPosition[0] === fromPosition[0]) {
+            index = 1
+        }
+        let xPos = fromPosition[0]
+        let yPos = fromPosition[1]
+        for (let i = 1; i < Math.abs(toPosition[index] - fromPosition[index]); i++) {
+            if (toPosition[0] === fromPosition[0]) {
+                //[1]
+                //fromPosition[0] + i * directionX, fromPosition[1] + i * directionY
+                yPos = fromPosition[1] + i * directionY
+            } else {
+                //[0]
+                xPos = fromPosition[0] + i * directionX
+            }
+            if (pieceOnSquare(xPos,yPos,chessBoard)) {
+                return false
+            }
+        }
+        return true
     },
     knightMove: function(fromPosition, toPosition) {
         let fromPositionArray = convertLetterToNumber(fromPosition)
@@ -291,3 +322,4 @@ export const convertNumberToLetter = chesslogic.convertNumberToLetter
 export const pieceOnSquare = chesslogic.pieceOnSquare
 export const isBishopMoveBlocked = chesslogic.isBishopMoveBlocked
 export const knightMove = chesslogic.knightMove
+export const isRookMoveBlocked = chesslogic.isRookMoveBlocked

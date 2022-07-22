@@ -29,12 +29,12 @@ const chesslogic = {
         let oppositePosition = ""
         pawnsPosition.forEach(position => {
             boardArray.push({
-                piece: "pawn", position: position, side: "white", id: id, hasMoved: false
+                piece: "pawn", position: position, side: "white", id: id, hasMoved: false, passantable: false
             })
             id++
             oppositePosition = oppositeSide(position)
             boardArray.push({
-                piece: "pawn", position: oppositePosition, side: "black", id: id, hasMoved: false
+                piece: "pawn", position: oppositePosition, side: "black", id: id, hasMoved: false, passantable: false
             })
             id++
         });
@@ -154,26 +154,23 @@ const chesslogic = {
                 // only 1 space forward
                 // attack 1 space forward diagonal
                 // two space forward possible on first move
-                isValid = true
+                isValid = pawnMove(piece, toPosition, chessBoard)
                 break;
             case "knight":
                 isValid = knightMove(piece.position, toPosition)
                 break;
             case "rook":
-                isValid = rookMove(piece, toPosition, chessBoard)
+                isValid = rookMove(piece.position, toPosition, chessBoard)
                 break;
             case "bishop":
                 isValid = bishopMove(piece.position, toPosition, chessBoard)
                 break;
             case "queen":
                 //straight and diagonal
-                isValid = true
+                isValid = queenMove(piece.position, toPosition, chessBoard)
                 break;
             case "king":
-                //can castle if king and rook hasn't moved and sight is clear
-                //kingside - b1, g8
-                //queenside - f1, c8
-                isValid = kingMove(piece.position, toPosition, chessBoard)
+                isValid = kingMove(piece.position, toPosition, chessBoard, piece.hasMoved)
                 break;
             default:
                 break;
@@ -208,11 +205,11 @@ const chesslogic = {
         setRemovedPieces(removedPieces)
         return chessBoard
     },
-    rookMove: function (piece, toPosition, chessBoard) {
+    rookMove: function (fromPosition, toPosition, chessBoard) {
         let y = toPosition[0]
         let x = toPosition[1]
-        if (piece.position.includes(x) || piece.position.includes(y)) {
-            return isRookMoveBlocked(piece.position, toPosition, chessBoard)
+        if (fromPosition.includes(x) || fromPosition.includes(y)) {
+            return isRookMoveBlocked(fromPosition, toPosition, chessBoard)
         }
         return false
     },
@@ -270,25 +267,76 @@ const chesslogic = {
         }
         return true
     },
-    kingMove: function(fromPosition, toPosition, chessBoard) {
-        console.log("jag är kung");
+    kingMove: function (fromPosition, toPosition, chessBoard, hasMoved) {
         let fromPositionArray = convertLetterToNumber(fromPosition)
+        let castleTiles = ["b1", "g8", "f1", "c8"]
+        let castleIndex = castleTiles.indexOf(toPosition)
+
+        if (castleIndex !== -1 && !hasMoved) {
+            let rookPositions = ["a1", "h8", "h1", "a8"]
+            let newPositions = ["c1", "f8", "e1", "d8"]
+            let rookPosition = rookPositions[castleIndex]
+            let rook = findPieceOnPosition(rookPosition, chessBoard)
+            if (rook !== null && !rook.hasMoved && isRookMoveBlocked(fromPosition, rookPosition, chessBoard)) {
+                //move rook to new position
+                rook.position = newPositions[castleIndex]
+                rook.hasMoved = true
+                for (let i = 0; i < chessBoard; i++) {
+                    if (chessBoard[i].id === rook.id) {
+                        chessBoard[i] = rook
+                    }
+                }
+                return true
+            }
+            return false
+        }
         let toPositionArray = convertLetterToNumber(toPosition)
         let xDelta = Math.abs(fromPositionArray[0] - toPositionArray[0])
         let yDelta = Math.abs(fromPositionArray[1] - toPositionArray[1])
-        console.log(xDelta);
-        console.log(yDelta);
-        console.log(xDelta - yDelta);
-        if(yDelta <= 1 && xDelta <= 1) {
+        if (yDelta <= 1 && xDelta <= 1) {
             return true
         }
 
         return false
     },
+    queenMove: function (fromPosition, toPosition, chessBoard) {
+        let y = toPosition[0]
+        let x = toPosition[1]
+
+        // return true
+        //straight
+        if (fromPosition.includes(x) || fromPosition.includes(y)) {
+            // return isRookMoveBlocked(fromPosition, toPosition, chessBoard)
+            return isRookMoveBlocked(fromPosition, toPosition, chessBoard)
+        }
+        //diagonal
+        if (bishopMove(fromPosition, toPosition, chessBoard)) {
+            return isBishopMoveBlocked(fromPosition, toPosition, chessBoard)
+        }
+    },
+    pawnMove: function (piece, toPosition, chessBoard) {
+        let yValue = piece.position[1]
+        let yDelta = piece.side == "white" ? toPosition[1] - yValue : yValue - toPosition[1]
+        let moveValue = piece.side == "white" ? 1 : -1
+        let toPositionNumber = convertLetterToNumber(toPosition)
+        let fromPositionNumber = convertLetterToNumber(piece.position)
+        if (!piece.hasMoved && yDelta <= 2 && yDelta > 0 || yDelta < 2 && yDelta > 0) {
+            let piecePositions = getAllPiecePositions(chessBoard)
+            piece.passantable = yDelta === 2 ? true : false
+            let toTheLeft = convertNumberToLetter(fromPositionNumber[0] - 1, parseInt(toPosition[1]))
+            let toTheRight = convertNumberToLetter(fromPositionNumber[0] + 1, parseInt(toPosition[1]))
+
+            if (piecePositions.indexOf(toTheLeft) !== -1 && toPosition == toTheLeft || piecePositions.indexOf(toTheRight) !== -1 && toPosition == toTheRight) {
+                return piecePositions.indexOf(toPosition) == -1 ? false : true
+            } else if (yDelta <= 2 && piece.position[0] == toPosition[0]) {
+                return piecePositions.indexOf(toPosition) == -1 ? true : false
+            }
+        }
+        return false
+    },
     pieceOnSquare: function (X, Y, chessBoard) {
         // false a piece is     on the square
         // true  a piece is not on the square
-        //om du inte är i arrayen så betyder det att det inte finns en pjäs på den platsen
         let chessCoordinate = convertNumberToLetter(X, Y)
         let allPieces = getAllPiecePositions(chessBoard)
         if (allPieces.indexOf(chessCoordinate) === -1) {
@@ -337,3 +385,5 @@ export const isBishopMoveBlocked = chesslogic.isBishopMoveBlocked
 export const knightMove = chesslogic.knightMove
 export const isRookMoveBlocked = chesslogic.isRookMoveBlocked
 export const kingMove = chesslogic.kingMove
+export const pawnMove = chesslogic.pawnMove
+export const queenMove = chesslogic.queenMove

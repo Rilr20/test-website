@@ -148,13 +148,16 @@ const chesslogic = {
         if (isSameSide(piece, toPosition, chessBoard)) {
             return false
         }
+        let id= null
         switch (piece.piece) {
             case "pawn":
                 // en passant
                 // only 1 space forward
                 // attack 1 space forward diagonal
                 // two space forward possible on first move
-                isValid = pawnMove(piece, toPosition, chessBoard)
+                let pawnReturn = pawnMove(piece, toPosition, chessBoard)
+                isValid = pawnReturn[0]
+                id = pawnReturn[1]
                 break;
             case "knight":
                 isValid = knightMove(piece.position, toPosition)
@@ -175,6 +178,7 @@ const chesslogic = {
             default:
                 break;
         }
+        clearEnPassantable(chessBoard, id)
         return isValid
     },
     isSameSide: function (piece, toPosition, chessBoard) {
@@ -315,6 +319,7 @@ const chesslogic = {
         }
     },
     pawnMove: function (piece, toPosition, chessBoard) {
+        let id = null
         let yValue = piece.position[1]
         let yDelta = piece.side == "white" ? toPosition[1] - yValue : yValue - toPosition[1]
         let moveValue = piece.side == "white" ? 1 : -1
@@ -325,14 +330,21 @@ const chesslogic = {
             piece.passantable = yDelta === 2 ? true : false
             let toTheLeft = convertNumberToLetter(fromPositionNumber[0] - 1, parseInt(toPosition[1]))
             let toTheRight = convertNumberToLetter(fromPositionNumber[0] + 1, parseInt(toPosition[1]))
+            let inFront = convertNumberToLetter(toPositionNumber[0], parseInt(toPositionNumber[1]) - moveValue)
+            let getPieceInFront = findPieceOnPosition(inFront, chessBoard)
+            console.log(getPieceInFront);
+            if (getPieceInFront !== null && getPieceInFront.id !== piece.id && piecePositions.indexOf(toPosition) === -1) {
+                //remove the pawn
+                return [getPieceInFront.passantable, piece.id]
+            }
 
             if (piecePositions.indexOf(toTheLeft) !== -1 && toPosition == toTheLeft || piecePositions.indexOf(toTheRight) !== -1 && toPosition == toTheRight) {
-                return piecePositions.indexOf(toPosition) == -1 ? false : true
+                return [piecePositions.indexOf(toPosition) == -1 ? false : true, id]
             } else if (yDelta <= 2 && piece.position[0] == toPosition[0]) {
-                return piecePositions.indexOf(toPosition) == -1 ? true : false
+                return [piecePositions.indexOf(toPosition) == -1 ? true : false, piece.id]
             }
         }
-        return false
+        return [false, id]
     },
     pieceOnSquare: function (X, Y, chessBoard) {
         // false a piece is     on the square
@@ -358,6 +370,14 @@ const chesslogic = {
     convertNumberToLetter: function (Xpos, Ypos) {
         let letters = ["a", "b", "c", "d", "e", "f", "g", "h"]
         return `${letters[Xpos - 1]}${Ypos}`
+    },
+    clearEnPassantable(chessBoard, id=null) {
+        for (let i = 0; i < chessBoard.length; i++) {
+            if (chessBoard[i].id !== id && chessBoard[i].piece === "pawn") {
+                chessBoard[i].passantable = false 
+            }
+        }
+        return chessBoard
     }
 }
 export default chesslogic
@@ -386,4 +406,5 @@ export const knightMove = chesslogic.knightMove
 export const isRookMoveBlocked = chesslogic.isRookMoveBlocked
 export const kingMove = chesslogic.kingMove
 export const pawnMove = chesslogic.pawnMove
+export const clearEnPassantable = chesslogic.clearEnPassantable
 export const queenMove = chesslogic.queenMove

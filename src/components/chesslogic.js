@@ -332,7 +332,6 @@ const chesslogic = {
             let toTheRight = convertNumberToLetter(fromPositionNumber[0] + 1, parseInt(toPosition[1]))
             let inFront = convertNumberToLetter(toPositionNumber[0], parseInt(toPositionNumber[1]) - moveValue)
             let getPieceInFront = findPieceOnPosition(inFront, chessBoard)
-            console.log(getPieceInFront);
             if (getPieceInFront !== null && getPieceInFront.id !== piece.id && piecePositions.indexOf(toPosition) === -1) {
                 //remove the pawn
                 return [getPieceInFront.passantable, piece.id]

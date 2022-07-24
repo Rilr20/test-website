@@ -42,7 +42,7 @@ const chesslogic = {
     },
     setUpKQ: function (id) {
         let positions = ["d1", "e1"]
-        let pieces = ["king", "queen"]
+        let pieces = ["queen", "king"]
         let boardArray = []
         for (let i = 0; i < positions.length; i++) {
             boardArray.push({
@@ -50,7 +50,7 @@ const chesslogic = {
             })
             id++
             boardArray.push({
-                piece: pieces[i], position: oppositeSide(positions[positions.length - 1 - i]), side: "black", id: id, hasMoved: false
+                piece: pieces[i], position: oppositeSide(positions[i]), side: "black", id: id, hasMoved: false
             })
             id++
         }
@@ -77,7 +77,7 @@ const chesslogic = {
             let toPiece = findPiece(toPosition, chessBoard)
             toPosition = toPiece.position
         }
-        let possible = isMoveValid(piece, toPosition, chessBoard)
+        let possible = isMoveValid(piece, toPosition, chessBoard, removedPieces, setRemovedPieces)
         if (possible) {
             for (let i = 0; i < newChessBoard.length; i++) {
                 if (newChessBoard[i].position == toPosition && newChessBoard[i].id !== id) {
@@ -143,7 +143,7 @@ const chesslogic = {
         }
         return false
     },
-    isMoveValid(piece, toPosition, chessBoard) {
+    isMoveValid(piece, toPosition, chessBoard, removedPieces, setRemovedPieces) {
         let isValid = false
         if (isSameSide(piece, toPosition, chessBoard)) {
             return false
@@ -155,7 +155,7 @@ const chesslogic = {
                 // only 1 space forward
                 // attack 1 space forward diagonal
                 // two space forward possible on first move
-                let pawnReturn = pawnMove(piece, toPosition, chessBoard)
+                let pawnReturn = pawnMove(piece, toPosition, chessBoard, removedPieces, setRemovedPieces)
                 isValid = pawnReturn[0]
                 id = pawnReturn[1]
                 break;
@@ -273,12 +273,12 @@ const chesslogic = {
     },
     kingMove: function (fromPosition, toPosition, chessBoard, hasMoved) {
         let fromPositionArray = convertLetterToNumber(fromPosition)
-        let castleTiles = ["b1", "g8", "f1", "c8"]
+        let castleTiles = ["c1", "g8", "g1", "c8"]
         let castleIndex = castleTiles.indexOf(toPosition)
 
         if (castleIndex !== -1 && !hasMoved) {
             let rookPositions = ["a1", "h8", "h1", "a8"]
-            let newPositions = ["c1", "f8", "e1", "d8"]
+            let newPositions = ["d1", "f8", "f1", "d8"]
             let rookPosition = rookPositions[castleIndex]
             let rook = findPieceOnPosition(rookPosition, chessBoard)
             if (rook !== null && !rook.hasMoved && isRookMoveBlocked(fromPosition, rookPosition, chessBoard)) {
@@ -318,7 +318,7 @@ const chesslogic = {
             return isBishopMoveBlocked(fromPosition, toPosition, chessBoard)
         }
     },
-    pawnMove: function (piece, toPosition, chessBoard) {
+    pawnMove: function (piece, toPosition, chessBoard, removedPieces, setRemovedPieces) {
         let id = null
         let yValue = piece.position[1]
         let yDelta = piece.side == "white" ? toPosition[1] - yValue : yValue - toPosition[1]
@@ -334,6 +334,8 @@ const chesslogic = {
             let getPieceInFront = findPieceOnPosition(inFront, chessBoard)
             if (getPieceInFront !== null && getPieceInFront.id !== piece.id && piecePositions.indexOf(toPosition) === -1) {
                 //remove the pawn
+                removedPieces.push(getPieceInFront)
+                setRemovedPieces(removedPieces)
                 return [getPieceInFront.passantable, piece.id]
             }
 

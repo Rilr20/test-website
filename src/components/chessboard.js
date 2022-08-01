@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import PieceSVG from './svg/piecesvg'
-import chesslogic from "./chesslogic";
+import chesslogic, { findPieceOnPosition } from "./chesslogic";
 
 Chessboard.defaultProps = {
     text: true,
@@ -26,6 +26,15 @@ export default function Chessboard(props) {
         let half = parseInt(width[0] / 2)
 
         return half
+    }
+
+    function drawPiece(chessBoard, position) {
+        let piece = findPieceOnPosition(position, chessBoard)
+        try {
+            return <PieceSVG id={piece.id} piece={piece.piece} colour={piece.side} size={props.pieceSize} />
+        } catch (error) {
+            return null
+        }
     }
 
     if (props.text) {
@@ -53,11 +62,7 @@ export default function Chessboard(props) {
                                 chesslogic.buttonClick(e, selected, setSelected, props.setChessBoard, props.chessBoard, props.removedPieces, props.setRemovedPieces, currentPlayer, setCurrentPlayer)
                             }} key={position} id={position} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour[0] }}>
                                 {
-                                    props.chessBoard.map((piece) => {
-                                        if (position === piece.position) {
-                                            return <PieceSVG id={piece.id} piece={piece.piece} colour={piece.side} size={props.pieceSize} />
-                                        }
-                                    })
+                                    drawPiece(props.chessBoard, position)
                                 }
                             </Box>)
                         }

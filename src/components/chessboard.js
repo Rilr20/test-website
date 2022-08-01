@@ -15,6 +15,7 @@ export default function Chessboard(props) {
     let elements = []
     let gridTemplateColumns = `repeat(8, ${props.width})`
     const colour = ["chess.white", "chess.black"];
+    const [currentPlayer, setCurrentPlayer] = useState(["white", "black"])
     const [selected, setSelected] = useState([]);
     const runCallback = (cb) => {
         return cb();
@@ -37,35 +38,37 @@ export default function Chessboard(props) {
     }
 
     return (
-        <Box sx={{ display: "grid", gridTemplateColumns: gridTemplateColumns }}>
-            {
-                runCallback(() => {
-                    let position = ""
-                    for (let j = 0; j < letterArray.length; j++) {
-                        colour.reverse()
-                        for (let i = 0; i < letterArray.length; i++) {
+        <>
+            <Typography sx={{ textAlign: "center" }}>Turn: {currentPlayer[0]}</Typography>
+            <Box sx={{ display: "grid", gridTemplateColumns: gridTemplateColumns }}>
+                {
+                    runCallback(() => {
+                        let position = ""
+                        for (let j = 0; j < letterArray.length; j++) {
                             colour.reverse()
-                            position = letterArray[i] + (j + 1)
-                            elements.push(<Box onClick={(e) => {
-                                chesslogic.buttonClick(e, selected, setSelected, props.setChessBoard, props.chessBoard, props.removedPieces, props.setRemovedPieces, props.currentPlayer, props.setCurrentPlayer)
-                            }} key={position} id={position} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour[0] }}>
-                                {
-                                    props.chessBoard.map((piece) => {
-                                        if (position === piece.position) {
-                                            return <PieceSVG id={piece.id} piece={piece.piece} colour={piece.side} size={props.pieceSize} />
-                                        }
-                                    })
-                                }
-                            </Box>)
+                            for (let i = 0; i < letterArray.length; i++) {
+                                colour.reverse()
+                                position = letterArray[i] + (j + 1)
+                                elements.push(<Box onClick={(e) => {
+                                    chesslogic.buttonClick(e, selected, setSelected, props.setChessBoard, props.chessBoard, props.removedPieces, props.setRemovedPieces, currentPlayer, setCurrentPlayer)
+                                }} key={position} id={position} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour[0] }}>
+                                    {
+                                        props.chessBoard.map((piece) => {
+                                            if (position === piece.position) {
+                                                return <PieceSVG id={piece.id} piece={piece.piece} colour={piece.side} size={props.pieceSize} />
+                                            }
+                                        })
+                                    }
+                                </Box>)
+                            }
+                            if (props.text) {
+                                elements.push(<Box key={j + 1} width={half + "px"} height={half + "px"}><Typography sx={{ textAlign: "center", my: "70%" }}>{j + 1}</Typography></Box>)
+                            }
                         }
-                        if (props.text) {
-                            elements.push(<Box key={j + 1} width={half + "px"} height={half + "px"}><Typography sx={{ textAlign: "center", my: "70%" }}>{j + 1}</Typography></Box>)
-                        }
-                    }
 
-                    return elements.reverse()
-                })
-            }
-            </Box>
+                        return elements.reverse()
+                    })
+                }
+            </Box></>
     )
 }

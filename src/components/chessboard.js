@@ -15,6 +15,7 @@ export default function Chessboard(props) {
     let elements = []
     let gridTemplateColumns = `repeat(8, ${props.width})`
     const colour = ["chess.white", "chess.black"];
+    const [currentPlayer, setCurrentPlayer] = useState(["white", "black"])
     const [selected, setSelected] = useState([]);
     const runCallback = (cb) => {
         return cb();
@@ -37,9 +38,11 @@ export default function Chessboard(props) {
     }
 
     return (
+        <>
+        <Typography sx={{textAlign:"center"}}>Turn: {currentPlayer[0]}</Typography>
         <Box sx={{ display: "grid", gridTemplateColumns: gridTemplateColumns }}>
             {
-                runCallback(()=> {
+                runCallback(() => {
                     let position = ""
                     for (let j = 0; j < letterArray.length; j++) {
                         colour.reverse()
@@ -47,7 +50,7 @@ export default function Chessboard(props) {
                             colour.reverse()
                             position = letterArray[i] + (j + 1)
                             elements.push(<Box onClick={(e) => {
-                                chesslogic.buttonClick(e, selected, setSelected,props.setChessBoard, props.chessBoard, props.removedPieces, props.setRemovedPieces)
+                                chesslogic.buttonClick(e, selected, setSelected, props.setChessBoard, props.chessBoard, props.removedPieces, props.setRemovedPieces, currentPlayer, setCurrentPlayer)
                             }} key={position} id={position} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour[0] }}>
                                 {
                                     props.chessBoard.map((piece) => {
@@ -66,6 +69,6 @@ export default function Chessboard(props) {
                     return elements.reverse()
                 })
             }
-        </Box>
+            </Box></>
     )
 }

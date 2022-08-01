@@ -96,7 +96,7 @@ const chesslogic = {
             setRemovedPieces(removedPieces)
         }
 
-        return [piece, removedPieces]
+        return [possible, removedPieces]
     },
     findPiece: function (pieceId, chessBoard) {
         let returnPiece
@@ -107,23 +107,28 @@ const chesslogic = {
         });
         return returnPiece
     },
-    buttonClick: function (event, selected, setSelected, setChessBoard, chessBoard, removedPieces, setRemovedPieces) {
+    buttonClick: function (event, selected, setSelected, setChessBoard, chessBoard, removedPieces, setRemovedPieces, currentPlayer, setCurrentPlayer) {
         let tmpSelected = selected
         let currentElement = getRightElement(event)
+        let player = ""
+        console.log(currentElement);
         switch (tmpSelected.length) {
             case 1:
                 if (duplicate(currentElement, selected[0])) {
                     tmpSelected.pop()
                     break;
                 }
-
                 tmpSelected.push(currentElement)
-                move(tmpSelected[0], tmpSelected[1], setChessBoard, chessBoard, removedPieces, setRemovedPieces)
+                let res = move(tmpSelected[0], tmpSelected[1], setChessBoard, chessBoard, removedPieces, setRemovedPieces)
                 tmpSelected = []
+                if (res[0]) {
+                    setCurrentPlayer(currentPlayer.reverse())
+                }
                 break;
             case 0:
-                //check if it has svg element if it don't then do nothing
-                if (event.currentTarget.firstChild instanceof SVGSVGElement) {
+                //check if it has svg element if it don't then do nothing twitter is a 
+                let piece = findPiece(currentElement, chessBoard)
+                if (event.currentTarget.firstChild instanceof SVGSVGElement && piece.side == currentPlayer[0]) {
                     tmpSelected.push(currentElement)
                 }
                 break;
@@ -325,13 +330,15 @@ const chesslogic = {
         let moveValue = piece.side == "white" ? 1 : -1
         let toPositionNumber = convertLetterToNumber(toPosition)
         let fromPositionNumber = convertLetterToNumber(piece.position)
+
         if (!piece.hasMoved && yDelta <= 2 && yDelta > 0 || yDelta < 2 && yDelta > 0) {
             let piecePositions = getAllPiecePositions(chessBoard)
-            piece.passantable = yDelta === 2 ? true : false
             let toTheLeft = convertNumberToLetter(fromPositionNumber[0] - 1, parseInt(toPosition[1]))
             let toTheRight = convertNumberToLetter(fromPositionNumber[0] + 1, parseInt(toPosition[1]))
             let inFront = convertNumberToLetter(toPositionNumber[0], parseInt(toPositionNumber[1]) - moveValue)
             let getPieceInFront = findPieceOnPosition(inFront, chessBoard)
+
+            piece.passantable = yDelta === 2 ? true : false
             if (getPieceInFront !== null && getPieceInFront.id !== piece.id && piecePositions.indexOf(toPosition) === -1) {
                 //remove the pawn
                 removedPieces.push(getPieceInFront)
@@ -340,8 +347,10 @@ const chesslogic = {
             }
 
             if (piecePositions.indexOf(toTheLeft) !== -1 && toPosition == toTheLeft || piecePositions.indexOf(toTheRight) !== -1 && toPosition == toTheRight) {
+                //take piece
                 return [piecePositions.indexOf(toPosition) == -1 ? false : true, id]
             } else if (yDelta <= 2 && piece.position[0] == toPosition[0]) {
+                //move forward
                 return [piecePositions.indexOf(toPosition) == -1 ? true : false, piece.id]
             }
         }

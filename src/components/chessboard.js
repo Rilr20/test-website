@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import PieceSVG from './svg/piecesvg'
-import chesslogic, { findPieceOnPosition } from "./chesslogic";
+import chesslogic from "./chesslogic";
 
 Chessboard.defaultProps = {
     text: true,
@@ -15,7 +15,6 @@ export default function Chessboard(props) {
     let elements = []
     let gridTemplateColumns = `repeat(8, ${props.width})`
     const colour = ["chess.white", "chess.black"];
-    const [currentPlayer, setCurrentPlayer] = useState(["white", "black"])
     const [selected, setSelected] = useState([]);
     const runCallback = (cb) => {
         return cb();
@@ -28,15 +27,6 @@ export default function Chessboard(props) {
         return half
     }
 
-    function drawPiece(chessBoard, position) {
-        let piece = findPieceOnPosition(position, chessBoard)
-        try {
-            return <PieceSVG id={piece.id} piece={piece.piece} colour={piece.side} size={props.pieceSize} />
-        } catch (error) {
-            return null
-        }
-    }
-
     if (props.text) {
         gridTemplateColumns = `${half}px repeat(8, ${props.width})`
 
@@ -47,8 +37,6 @@ export default function Chessboard(props) {
     }
 
     return (
-        <>
-        <Typography sx={{textAlign:"center"}}>Turn: {currentPlayer[0]}</Typography>
         <Box sx={{ display: "grid", gridTemplateColumns: gridTemplateColumns }}>
             {
                 runCallback(() => {
@@ -59,10 +47,14 @@ export default function Chessboard(props) {
                             colour.reverse()
                             position = letterArray[i] + (j + 1)
                             elements.push(<Box onClick={(e) => {
-                                chesslogic.buttonClick(e, selected, setSelected, props.setChessBoard, props.chessBoard, props.removedPieces, props.setRemovedPieces, currentPlayer, setCurrentPlayer)
+                                chesslogic.buttonClick(e, selected, setSelected, props.setChessBoard, props.chessBoard, props.removedPieces, props.setRemovedPieces, props.currentPlayer, props.setCurrentPlayer)
                             }} key={position} id={position} width={props.width} height={props.width} sx={{ borderTop: "1px solid black", borderLeft: "1px solid black", backgroundColor: colour[0] }}>
                                 {
-                                    drawPiece(props.chessBoard, position)
+                                    props.chessBoard.map((piece) => {
+                                        if (position === piece.position) {
+                                            return <PieceSVG id={piece.id} piece={piece.piece} colour={piece.side} size={props.pieceSize} />
+                                        }
+                                    })
                                 }
                             </Box>)
                         }
@@ -74,6 +66,6 @@ export default function Chessboard(props) {
                     return elements.reverse()
                 })
             }
-            </Box></>
+            </Box>
     )
 }

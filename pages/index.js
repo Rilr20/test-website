@@ -8,7 +8,6 @@ import externals from "../src/modules/externals";
 import { placeholder } from '../src/components/consts'
 import useTranslation from 'next-translate/useTranslation'
 
-
 function addToDict(params) {
     // console.log("params")
     // console.log(params)
@@ -48,6 +47,7 @@ export async function getServerSideProps() {
         }
     }
 }
+
 Home.PageTitle = 'Home | Website'
 // Home.Layout = LayoutOne
 export default function Home({ osrs }) {
@@ -60,13 +60,12 @@ export default function Home({ osrs }) {
                     <Typography variant="h1" sx={{ textAlign: "center", fontSize: "36pt", color: "text.primary" }}>{t('common:greeting')}</Typography>
                 </Box>
                 <Box sx={{ display: { md: "flex", xs: "block" }, justifyContent: "space-between", flexDirection: "row-reverse", mt: 1 }}>
-                    <Card sx={{ height: "auto", p: "1rem", backgroundColor: theme => `${theme.palette.secondary.light}`, mx: 2 }}>
+                    <Card sx={{ width: {md:"auto", xs:"50%"},m:{xs:"auto"}, height: "auto", p: "1rem", backgroundColor: theme => `${theme.palette.secondary.light}`, mx: 2 }}>
                         <Typography sx={{ mx: 1, textAlign: "center" }} variant="h5">OSRS Stats</Typography>
                         <OSRSTable osrs={osrs} />
                     </Card>
                     <Card sx={{ backgroundColor: "", width: { xs: "79%", md: "70%" }, p: 2, mx: "auto", mt: { xs: 1, md: 0 }, backgroundColor: theme => `${theme.palette.secondary.light}` }}>
-                        <Typography variant="h2" sx={{ fontSize: "36pt", textAlign: "center" }}>Help</Typography>
-                        <Typography sx={{ fontSize: "1.2rem", textAlign: "left" }}>p text</Typography>
+                        <Typography variant="h2" sx={{ fontSize: "28pt", textAlign: "center" }}>Rubrik</Typography>
                     </Card>
                 </Box>
             </Box>

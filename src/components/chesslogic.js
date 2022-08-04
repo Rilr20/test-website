@@ -346,7 +346,7 @@ const chesslogic = {
                 return [getPieceInFront.passantable, piece.id]
             }
 
-            if (piecePositions.indexOf(toTheLeft) !== -1 && toPosition == toTheLeft || piecePositions.indexOf(toTheRight) !== -1 && toPosition == toTheRight) {
+            if (yDelta == 1 && (piecePositions.indexOf(toTheLeft) !== -1 && toPosition == toTheLeft || piecePositions.indexOf(toTheRight) !== -1 && toPosition == toTheRight)) {
                 //take piece
                 return [piecePositions.indexOf(toPosition) == -1 ? false : true, id]
             } else if (yDelta <= 2 && piece.position[0] == toPosition[0]) {

@@ -153,7 +153,7 @@ const chesslogic = {
         if (isSameSide(piece, toPosition, chessBoard)) {
             return false
         }
-        let id= null
+        let id = null
         switch (piece.piece) {
             case "pawn":
                 // en passant
@@ -337,10 +337,11 @@ const chesslogic = {
             let toTheRight = convertNumberToLetter(fromPositionNumber[0] + 1, parseInt(toPosition[1]))
             let inFront = convertNumberToLetter(toPositionNumber[0], parseInt(toPositionNumber[1]) - moveValue)
             let getPieceInFront = findPieceOnPosition(inFront, chessBoard)
-
             piece.passantable = yDelta === 2 ? true : false
             if (getPieceInFront !== null && getPieceInFront.id !== piece.id && piecePositions.indexOf(toPosition) === -1) {
                 //remove the pawn
+                // console.log(getPieceInFront);
+                removePiece(chessBoard, getPieceInFront.id)
                 removedPieces.push(getPieceInFront)
                 setRemovedPieces(removedPieces)
                 return [getPieceInFront.passantable, piece.id]
@@ -381,13 +382,20 @@ const chesslogic = {
         let letters = ["a", "b", "c", "d", "e", "f", "g", "h"]
         return `${letters[Xpos - 1]}${Ypos}`
     },
-    clearEnPassantable(chessBoard, id=null) {
+    clearEnPassantable(chessBoard, id = null) {
         for (let i = 0; i < chessBoard.length; i++) {
             if (chessBoard[i].id !== id && chessBoard[i].piece === "pawn") {
-                chessBoard[i].passantable = false 
+                chessBoard[i].passantable = false
             }
         }
         return chessBoard
+    },
+    removePiece: function(chessBoard, id) {
+        for (let i = 0; i < chessBoard.length; i++) {
+            if (chessBoard[i].id === id) {
+                chessBoard.splice(i, 1); 
+            }
+        }
     }
 }
 export default chesslogic
@@ -418,3 +426,4 @@ export const kingMove = chesslogic.kingMove
 export const pawnMove = chesslogic.pawnMove
 export const clearEnPassantable = chesslogic.clearEnPassantable
 export const queenMove = chesslogic.queenMove
+export const removePiece = chesslogic.removePiece
